@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 //import { DaycareComponent } from './application/app.component';
-//import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 // import { ParentComponent } from './parent/parent.component';
 // import { EducatorComponent } from './educator/educator.component';
 // import { DaycareAdminComponent } from './daycareadmin/daycareadmin.component';
@@ -14,7 +14,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
     { path: '', redirectTo: 'daycare/login', pathMatch: 'full' },
-    // { path: 'daycare/login', component: LoginComponent },
+    { path: 'daycare/login', component: LoginComponent },
     // { path: 'daycare/:idDaycare', component: DaycareComponent },
     // { path: 'daycare/:idDaycare/parent/:idParent', component: ParentComponent },
     // { path: 'daycare/:idDaycare/educator/:idEducator', component: EducatorComponent },

@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
+
 import { routing } from './components/app.routing';
-
-
-
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/application/app.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +23,9 @@ import { AppComponent } from './app.component';
     routing
 
   ],
-  providers: [],
+  providers: [ { provide: LocationStrategy, useClass: HashLocationStrategy, },
+    { provide: APP_BASE_HREF, useValue: '/', },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
