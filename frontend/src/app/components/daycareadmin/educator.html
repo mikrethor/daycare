@@ -1,0 +1,24 @@
+<div class="col-md-6 col-md-offset-3">
+    <h1>{{daycare.name}}</h1>
+    <h2>Administration Educator</h2>
+    <md-list>
+        <h3 md-header>Educators</h3>
+        <md-list-item *ngFor="let e of educators; let i = index;">
+            <md-icon md-list-avatar color="primary">face</md-icon>
+            <h4 md-line>{{e.firstName}} {{ e.lastName}}</h4>
+            <!--<p md-line> dsdsd </p>-->
+            <button md-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/:idDaycare/admin/:idAdmin/educators/edit']">
+                <md-icon>edit</md-icon>
+            </button>
+            <button md-icon-button color="primary" (click)="remove(i)">
+                <md-icon>remove</md-icon>
+            </button>
+        </md-list-item>
+    </md-list>
+    <button md-fab color="primary" [routerLink]="['/daycare/:idDaycare/admin/:idAdmin/educators/create']">
+        <md-icon>add</md-icon>
+    </button>
+    <button md-icon-button color="primary" [disabled]="loading" [routerLink]="['/daycareadmin']">
+        <md-icon>cancel</md-icon>
+    </button>
+</div>

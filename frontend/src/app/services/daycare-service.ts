@@ -6,8 +6,6 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class DaycareService implements IDaycareService{
-
-
   // Resolve HTTP using the constructor
   constructor(private http: Http, private jsonp: Jsonp, private constantService: ConstantsService) {
   }

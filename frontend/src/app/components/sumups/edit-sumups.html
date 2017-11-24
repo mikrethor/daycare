@@ -1,0 +1,35 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>
+        <md-icon color="primary">face</md-icon> {{ child.firstName }} {{ child.lastName }}
+    </h2>
+    <div>
+        <h4>Sumup : {{ sumup.day | date:'EEEE d MMMM'}}</h4>
+        <div>Appetite :
+            <md-radio-group>
+                <md-radio-button value="{{value}}" *ngFor="let value of appetites; let i = index; "><img src="/images/{{ getImage(value) }}"></md-radio-button>
+            </md-radio-group>
+        </div>
+        <div>Mood :
+            <md-radio-group>
+                <md-radio-button value="{{value}}" *ngFor="let value of moods; let i = index; "><img src="/images/{{ getImage(value) }}"></md-radio-button>
+            </md-radio-group>
+        </div>
+        <div>Sleep :
+            <md-radio-group>
+                <md-radio-button value="{{value}}" *ngFor="let value of sleeps; let i = index; "><img src="/images/{{ getImage(value) }}"></md-radio-button>
+            </md-radio-group>
+        </div>
+        <div>
+            Comment : {{sumup.comment}}
+        </div>
+    </div>
+    <button md-fab color="primary">
+        <md-icon>keyboard_arrow_left</md-icon>
+    </button>
+    <button md-fab color="primary">
+        <md-icon>save</md-icon>
+    </button>
+    <button md-fab color="primary">
+        <md-icon>keyboard_arrow_right</md-icon>
+    </button>
+</div>
