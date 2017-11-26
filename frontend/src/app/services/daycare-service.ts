@@ -133,21 +133,13 @@ export class DaycareService implements IDaycareService{
 
   errorSubscribe(error) { console.log("Error happened :" + error) }
   completed() { console.log("the subscription is completed") }
-
-
-
 }
-
-
-
 
 export class Daycare {
   constructor(
     public id: number,
     public name: string
   ) { }
-
-
 }
 
 export class Child {
@@ -157,8 +149,6 @@ export class Child {
     public lastName: string,
     public daycare: number
   ) { }
-
-
 }
 
 export class Educator {
@@ -190,8 +180,6 @@ export class Sumups {
     public educator: number,
     public day: number
   ) { }
-
-
 }
 
 export class User {
@@ -203,8 +191,6 @@ export class User {
     public login: string,
     public idDaycare: number
   ) { }
-
-
 }
 
 export interface IDaycareService {
