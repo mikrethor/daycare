@@ -14,22 +14,17 @@ export class ParentComponent implements OnInit {
     private user: User;
     private parent: Parent = new Parent(0, "", "", null);
     private children: Child[] = [];
-    private child: Array;
+    private child= {
+        selectedMoodId: 'health-80plus.svg',
+        selectedSleepId: 'health-80plus.svg',
+        selectedAppetiteId: 'health-80plus.svg'
+    }
     private sumup: Sumups = new Sumups(0, 0, 0, 0, 0, "", 0, 0);
     private idDayCare: number = -61;
     private idParent: number = -61;
 
     constructor(private service: DaycareService, private route: ActivatedRoute
-    ) {
-        this.child = {
-            selectedMoodId: 'health-80plus.svg',
-            selectedSleepId: 'health-80plus.svg',
-            selectedAppetiteId: 'health-80plus.svg'
-        }
-
-
-
-    }
+    ) {}
 
     ngOnInit() {
         this.user= new User(0, 0, 0, 0, "", 0);
@@ -61,9 +56,9 @@ export class ParentComponent implements OnInit {
                 this.sumup = new Sumups(
                     jsonSumup.id,
                     jsonSumup.child,
-                    jsonSumup.mood.level,
-                    jsonSumup.sleep.level,
-                    jsonSumup.appetite.level,
+                    jsonSumup.mood,
+                    jsonSumup.sleep,
+                    jsonSumup.appetite,
                     jsonSumup.comment,
                     jsonSumup.educator,
                     jsonSumup.day

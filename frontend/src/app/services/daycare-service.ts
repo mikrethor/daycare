@@ -6,11 +6,12 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class DaycareService implements IDaycareService{
+
   // Resolve HTTP using the constructor
   constructor(private http: Http, private jsonp: Jsonp, private constantService: ConstantsService) {
   }
 
-  getDaycare(id: number): Observable<Array<Daycare>> {
+  getDaycare(id: number): Observable<Daycare> {
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id)
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -25,12 +26,12 @@ export class DaycareService implements IDaycareService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getEducator(idDaycare: number, idEducator: number): Observable<Array<Educator>> {
+  getEducator(idDaycare: number, idEducator: number): Observable<Educator> {
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator)
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getParent(idDaycare: number, idParent: number): Observable<Array<Parent>> {
+  getParent(idDaycare: number, idParent: number): Observable<Parent> {
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent)
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -51,7 +52,7 @@ export class DaycareService implements IDaycareService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Array<Sumups>> {
+  getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups> {
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/day/" + daySumup)
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -78,7 +79,7 @@ export class DaycareService implements IDaycareService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteParent(idDaycare: number, idParent: number): Observable<Array<String>> {
+  deleteParent(idDaycare: number, idParent: number): Observable<Boolean> {
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent;
 
@@ -110,7 +111,7 @@ export class DaycareService implements IDaycareService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteEducator(idDaycare: number, idEducator: number): Observable<Array<String>> {
+  deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean> {
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator;
 
@@ -120,7 +121,7 @@ export class DaycareService implements IDaycareService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteChild(idDaycare: number, idChild: number): Observable<Array<String>> {
+  deleteChild(idDaycare: number, idChild: number): Observable<Boolean> {
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild;
 
@@ -207,20 +208,20 @@ export class User {
 }
 
 export interface IDaycareService {
-  getDaycare(id: number): Observable<Array<Daycare>>;
+  getDaycare(id: number): Observable<Daycare>;
   getChildren(id: number): Observable<Array<Child>>;
   getEducators(id: number): Observable<Array<Educator>>;
-  getEducator(idDaycare: number, idEducator: number): Observable<Array<Educator>>;
-  getParent(idDaycare: number, idParent: number): Observable<Array<Parent>>;
+  getEducator(idDaycare: number, idEducator: number): Observable<Educator>;
+  getParent(idDaycare: number, idParent: number): Observable<Parent>;
   getParents(idDaycare: number): Observable<Array<Parent>>;
   getChildrenByParentId(idDaycare: number, idParent: number): Observable<Array<Child>>;
   getSumups(idDaycare: number, idChild: number): Observable<Array<Sumups>>;
-  getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Array<Sumups>>;
+  getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups>;
   createChild(idDaycare: number, child: Child): Observable<Array<Child>>
   createParent(idDaycare: number, parent: Parent): Observable<Array<Parent>>;
-  deleteParent(idDaycare: number, idParent: number): Observable<Array<String>>;
+  deleteParent(idDaycare: number, idParent: number): Observable<Boolean>;
   createSumup(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>>;
   createEducator(idDaycare: number, educator: Educator): Observable<Array<Educator>>;
-  deleteEducator(idDaycare: number, idEducator: number): Observable<Array<String>>;
-  deleteChild(idDaycare: number, idChild: number): Observable<Array<String>>;
+  deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean>;
+  deleteChild(idDaycare: number, idChild: number): Observable<Boolean>;
 }

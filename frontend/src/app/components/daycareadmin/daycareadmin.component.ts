@@ -40,7 +40,7 @@ export class DaycareAdminComponent implements OnInit {
             .subscribe(
             (json) => {
                 for (let child of json) {
-                    this.children.push(new Child(child.id, child.firstName, child.lastName,json.daycare));
+                    this.children.push(new Child(child.id, child.firstName, child.lastName,child.daycare));
                 }
             },
             this.service.errorSubscribe,

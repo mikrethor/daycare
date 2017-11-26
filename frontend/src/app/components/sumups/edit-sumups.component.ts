@@ -8,7 +8,7 @@ import { User } from '../../services/daycare-service';
 
 @Component({
     selector: 'edit-sumups',
-    templateUrl: './edit-sumups.html',
+    templateUrl: '.$/edit-sumups.html',
 })
 export class EditSumupsComponent implements OnInit {
     private user: User;
@@ -16,18 +16,18 @@ export class EditSumupsComponent implements OnInit {
     private sumup: Sumups = new Sumups(0, 0, 0, 0, 0, "", 0, 0);
     private idDayCare: number = 1;
     private idParent: number = 1;
-    private displaySumup: Array;
+    private displaySumup= {
+        selectedMoodId: 'health-80plus.svg',
+        selectedSleepId: 'health-80plus.svg',
+        selectedAppetiteId: 'health-80plus.svg'
+    }
     private appetites: number[] = [0, 5, 10];
     private moods: number[] = [0, 5, 10];
     private sleeps: number[] = [0, 5, 10];
 
     constructor(private service: DaycareService, private route: ActivatedRoute
     ) {
-        this.displaySumup = {
-            selectedMoodId: 'health-80plus.svg',
-            selectedSleepId: 'health-80plus.svg',
-            selectedAppetiteId: 'health-80plus.svg'
-        }
+       
     }
 
     ngOnInit() {
@@ -41,9 +41,9 @@ export class EditSumupsComponent implements OnInit {
                 this.sumup = new Sumups(
                     jsonSumup.id,
                     jsonSumup.child,
-                    jsonSumup.mood.level,
-                    jsonSumup.sleep.level,
-                    jsonSumup.appetite.level,
+                    jsonSumup.mood,
+                    jsonSumup.sleep,
+                    jsonSumup.appetite,
                     jsonSumup.comment,
                     jsonSumup.educator,
                     jsonSumup.day
