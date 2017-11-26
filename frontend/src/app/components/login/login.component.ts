@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     connected = false;
 
-
     constructor(
         private route: ActivatedRoute,
         private router: Router,

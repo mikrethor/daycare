@@ -26,9 +26,7 @@ export class EditSumupsComponent implements OnInit {
     private sleeps: number[] = [0, 5, 10];
 
     constructor(private service: DaycareService, private route: ActivatedRoute
-    ) {
-       
-    }
+    ) {}
 
     ngOnInit() {
         this.user = new User(0, 0, 0, 0, "", 0);

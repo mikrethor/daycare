@@ -14,11 +14,6 @@ export class NavbarComponent {
       { "id": 2, "name": "Parents", "image": "/Images/dashboard_on.gif", "link": "/daycare/:idDaycare/admin/:idAdmin/parents", },
     ]
   };
-
-
-
-  constructor() {
-
-  }
-
+  
+  constructor() { }
 }
