@@ -1,10 +1,10 @@
-<md-menu #appMenu="mdMenu" x-position="before" y-position="below">
-  <button *ngFor="let item of menuData.menu; let i = index;" md-menu-item [routerLink]="[item.link]"> {{item.name}} </button>
-</md-menu>
-<md-toolbar color="primary">
+<mat-menu #appMenu="matMenu" x-position="before" y-position="below">
+  <button *ngFor="let item of menuData.menu; let i = index;" mat-menu-item [routerLink]="[item.link]"> {{item.name}} </button>
+</mat-menu>
+<mat-toolbar color="primary">
   <span [routerLink]="['/']"> Daycare</span>
   <span class="spacer"></span>
-  <button md-icon-button [md-menu-trigger-for]="appMenu" style="background-color:#26a69a;border-color:#26a69a;">
-   <md-icon>menu</md-icon>
+  <button mat-icon-button [mat-menu-trigger-for]="appMenu" style="background-color:#26a69a;border-color:#26a69a;">
+   <mat-icon>menu</mat-icon>
 </button>
-</md-toolbar>
+</mat-toolbar>

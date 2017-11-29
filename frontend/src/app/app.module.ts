@@ -9,10 +9,11 @@ import { LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/
 import { routing } from './components/app.routing';
 import { AppComponent } from './components/application/app.component';
 import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent
+    AppComponent,LoginComponent,NavbarComponent
   ],
   imports: [
     BrowserModule,
