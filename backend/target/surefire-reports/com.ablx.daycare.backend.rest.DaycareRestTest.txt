@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.ablx.daycare.backend.rest.DaycareRestTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 12.124 sec - in com.ablx.daycare.backend.rest.DaycareRestTest

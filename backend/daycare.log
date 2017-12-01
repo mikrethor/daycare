@@ -1,0 +1,55 @@
+20:46:50.128 [background-preinit] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+20:46:50.131 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.3.6.Final
+20:46:54.785 [main] INFO  c.a.d.b.r.DaycareRepositoryTest - Starting DaycareRepositoryTest on MacBook-Pro-de-Xavier.local with PID 692 (started by xbouclet in /Users/xbouclet/Sources/daycare/backend)
+20:46:54.786 [main] DEBUG c.a.d.b.r.DaycareRepositoryTest - Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+20:46:54.787 [main] INFO  c.a.d.b.r.DaycareRepositoryTest - No active profile set, falling back to default profiles: default
+20:46:55.940 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+20:46:56.032 [main] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.12.Final}
+20:46:56.033 [main] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+20:46:56.035 [main] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+20:46:56.076 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+20:46:56.250 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+20:46:57.281 [main] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+20:46:57.310 [main] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+20:46:57.934 [main] INFO  c.a.d.b.r.DaycareRepositoryTest - Started DaycareRepositoryTest in 18.573 seconds (JVM running for 19.586)
+20:47:08.532 [main] INFO  c.a.d.b.DaycareWsApplicationTests - Starting DaycareWsApplicationTests on MacBook-Pro-de-Xavier.local with PID 692 (started by xbouclet in /Users/xbouclet/Sources/daycare/backend)
+20:47:08.534 [main] DEBUG c.a.d.b.DaycareWsApplicationTests - Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+20:47:08.535 [main] INFO  c.a.d.b.DaycareWsApplicationTests - No active profile set, falling back to default profiles: default
+20:47:09.534 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+20:47:09.539 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+20:47:09.580 [main] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+20:47:09.593 [main] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+20:47:09.595 [main] WARN  o.h.j.i.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (default) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+20:47:11.110 [main] INFO  c.a.d.b.DaycareWsApplicationTests - Started DaycareWsApplicationTests in 12.623 seconds (JVM running for 32.762)
+20:47:21.185 [main] INFO  c.a.d.backend.rest.DaycareRestTest - Starting DaycareRestTest on MacBook-Pro-de-Xavier.local with PID 692 (started by xbouclet in /Users/xbouclet/Sources/daycare/backend)
+20:47:21.186 [main] DEBUG c.a.d.backend.rest.DaycareRestTest - Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+20:47:21.186 [main] INFO  c.a.d.backend.rest.DaycareRestTest - No active profile set, falling back to default profiles: default
+20:47:21.755 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+20:47:21.757 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.23
+20:47:21.869 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+20:47:22.093 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+20:47:22.097 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+20:47:22.144 [main] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+20:47:22.160 [main] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+20:47:22.167 [main] WARN  o.h.j.i.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (default) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+20:47:22.779 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+20:47:22.789 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+20:47:22.815 [main] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+20:47:22.835 [main] INFO  c.a.d.backend.rest.DaycareRestTest - Started DaycareRestTest in 11.696 seconds (JVM running for 44.486)
+20:47:22.846 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring FrameworkServlet ''
+20:47:22.934 [main] INFO  o.h.h.i.QueryTranslatorFactoryInitiator - HHH000397: Using ASTQueryTranslatorFactory
+20:47:23.243 [main] DEBUG c.j.j.internal.path.CompiledPath - Evaluating path: $['_embedded']['daycares']
+20:47:23.248 [main] DEBUG c.j.j.internal.path.CompiledPath - Evaluating path: $['_embedded']['daycares'][0]['name']
+20:47:23.249 [main] DEBUG c.j.j.internal.path.CompiledPath - Evaluating path: $['_embedded']['daycares'][0]['id']
+20:47:23.255 [Thread-2] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+20:47:23.259 [Thread-8] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+20:47:23.260 [Thread-5] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+20:47:23.266 [Thread-2] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+20:47:23.267 [Thread-8] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+20:47:23.269 [Thread-5] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
