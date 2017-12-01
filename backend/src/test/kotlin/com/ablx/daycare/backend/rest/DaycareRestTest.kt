@@ -37,7 +37,7 @@ class DaycareRestTest{
 
     @Before
     fun setUp() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx!!).build()
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build()
     }
 
     @Ignore
