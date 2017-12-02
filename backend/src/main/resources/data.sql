@@ -1,3 +1,15 @@
+INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES (1, 'STANDARD_USER', 'Standard User - Has no admin rights');
+INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES (2, 'ADMIN_USER', 'Admin User - Has permission to perform admin tasks');
+
+-- USER
+-- non-encrypted password: jwtpass
+INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME") VALUES (1, 'John', 'Doe', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'john.doe');
+INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME") VALUES (2, 'Admin', 'Admin', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'admin.admin');
+
+INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(1,1);
+INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(2,1);
+INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(2,2);
+
 insert into DAYCARE("ID", "NAME") values (1, 'Ma garderie');
 --insert into ADMIN("ID") values (1);
 insert into PARENT("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (1,1,'Xavier','B');
