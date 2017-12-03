@@ -11,6 +11,8 @@ import { AppComponent } from './components/application/app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+import { LoginService } from './services/login-service';
+
 @NgModule({
   declarations: [
     AppComponent,LoginComponent,NavbarComponent
