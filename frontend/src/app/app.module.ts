@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { LoginService } from './services/login-service';
+import { ConstantsService } from 'app/services/constants-service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { LoginService } from './services/login-service';
     routing
 
   ],
-  providers: [ { provide: LocationStrategy, useClass: HashLocationStrategy, },
+  providers: [LoginService,ConstantsService, { provide: LocationStrategy, useClass: HashLocationStrategy, },
     { provide: APP_BASE_HREF, useValue: '/', },
   ],
   bootstrap: [AppComponent]

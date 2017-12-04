@@ -6,6 +6,7 @@ import { LoginService} from '../../services/login-service';
 @Component({
     selector: 'login',
     templateUrl: './login.html',
+    // providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
     model: any = {};
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        // private loginService: LoginService,
+        private loginService: LoginService,
 
 ) { }
 
@@ -26,6 +27,6 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        // console.log(this.loginService.login("john.doe","jwtpass"));
+        console.log(+this.loginService.login("john.doe","jwtpass"));
     }
 }
