@@ -10,10 +10,12 @@ import 'rxjs/Rx';
 export class LoginService {
   private authUrl = this.constantService.API_ENDPOINT + "/oauth/token";
   private headers = new Headers({'Content-Type': 'application/json',
-
-  'Access-Control-Allow-Origin': '*'
+  'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")
+  // 'Access-Control-Allow-Origin': '*'
 
 });
+
+// new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")});
 
   // Resolve HTTP using the constructor
   constructor(
@@ -48,8 +50,9 @@ export class LoginService {
     params.append('username',login);
     params.append('password',password);    
     params.append('grant_type','password');
-    params.append('client_id','fooClientIdPassword');
-    // let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("fooClientIdPassword:secret")});
+    params.append('client_id','testjwtclientid');
+   //1 params.append('client_secret','XY7kmzoNzl100');
+    // let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")});
     let options = new RequestOptions({ headers: this.headers });
      
     this.http.post(this.authUrl, params.toString(), options)
