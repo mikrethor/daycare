@@ -15,9 +15,9 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.hibernate" level="INFO" />
-	<logger name="org.hibernate.type" level="INFO" />
-	<logger name="org.springframework" level="OFF" />
+	<logger name="org.hibernate" level="OFF" />
+	<logger name="org.hibernate.type" level="OFF" />
+	<logger name="org.springframework" level="DEBUG" />
 
 	<root level="DEBUG">
 		<appender-ref ref="CONSOLE" />

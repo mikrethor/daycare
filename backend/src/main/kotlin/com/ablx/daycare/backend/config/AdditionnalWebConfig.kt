@@ -3,10 +3,11 @@ package com.ablx.daycare.backend.config
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
-
+@CrossOrigin(origins = arrayOf("*"))
 @Configuration
 class AdditionnalWebConfig {
     /**
@@ -23,6 +24,7 @@ class AdditionnalWebConfig {
         config.addAllowedOrigin("*")
         config.addAllowedHeader("*")
         config.addAllowedMethod("*")
+        config.allowedOrigins= listOf("*")
         source.registerCorsConfiguration("/**", config)
         val bean = CorsFilter(source)
         //FilterRegistrationBean
