@@ -28,5 +28,6 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         console.log(+this.loginService.login("john.doe","jwtpass"));
+       // console.log(+this.loginService.login("testjwtclientid","XY7kmzoNzl100"));
     }
 }

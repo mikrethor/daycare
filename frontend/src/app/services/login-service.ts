@@ -9,11 +9,8 @@ import 'rxjs/Rx';
 @Injectable()
 export class LoginService {
   private authUrl = this.constantService.API_ENDPOINT + "/oauth/token";
-  private headers = new Headers({'Content-Type': 'application/json',
-  'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")
-  // 'Access-Control-Allow-Origin': '*'
-
-});
+  private headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+'Access-Control-Allow-Origin': 'Allow'});
 
 // new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")});
 
@@ -51,15 +48,15 @@ export class LoginService {
     params.append('password',password);    
     params.append('grant_type','password');
     params.append('client_id','testjwtclientid');
-   //1 params.append('client_secret','XY7kmzoNzl100');
+    params.append('client_secret','XY7kmzoNzl100');
     // let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")});
     let options = new RequestOptions({ headers: this.headers });
      
     this.http.post(this.authUrl, params.toString(), options)
-      .map(res => res.json())
+      .map(res => {console.log(res);res.json();})
       .subscribe(
         data => this.saveToken(data),
-        err => {alert('Invalid Credentials')}); 
+        err => {console.log(err.json());alert('Invalid Credentials')}); 
   }
  
   saveToken(token){
