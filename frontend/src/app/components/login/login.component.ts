@@ -13,11 +13,14 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
     connected = false;
+    // model: any = {};
+    
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private loginService: LoginService,
+     
 
 ) { }
 
@@ -27,7 +30,8 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        console.log("login : "+this.loginService.login("john.doe","jwtpass"));
+        // console.log("login : "+this.model.username+this.model.password);
+        console.log("login : "+this.loginService.login(this.model.username,this.model.password));
        // console.log(+this.loginService.login("testjwtclientid","XY7kmzoNzl100"));
     }
 }

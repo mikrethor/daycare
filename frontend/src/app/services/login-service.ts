@@ -39,9 +39,9 @@ export class LoginService {
      'Allow-Control-Allow-Origin': '*' 
   });
     let options = new RequestOptions({ headers: headers });
-     console.log('params :'+params.toString());
+    //  console.log('params :'+params.toString());
     this.http.post(this.authUrl, params.toString(), options)
-      .map(res => {console.log("res: ");console.log(res.json());res.json();})
+      .map(res => {console.log("res: ");console.log(res.json().access_token);return res.json().access_token;})
       .subscribe(
         data => {console.log("data:"+data);this.saveToken(data)},
         err => {console.log("err: "+err);console.log(err.json());alert('Invalid Credentials'+err)}); 
