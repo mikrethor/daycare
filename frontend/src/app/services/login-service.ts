@@ -43,7 +43,7 @@ export class LoginService {
     this.http.post(this.authUrl, params.toString(), options)
       .map(res => {console.log("res: ");console.log(res.json());res.json();})
       .subscribe(
-        data => this.saveToken(data),
+        data => {console.log("data:"+data);this.saveToken(data)},
         err => {console.log("err: "+err);console.log(err.json());alert('Invalid Credentials'+err)}); 
   }
  

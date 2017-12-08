@@ -17,7 +17,7 @@
 
 	<logger name="org.hibernate" level="OFF" />
 	<logger name="org.hibernate.type" level="OFF" />
-	<logger name="org.springframework" level="DEBUG" />
+	<logger name="org.springframework" level="OFF" />
 
 	<root level="INFO">
 		<appender-ref ref="CONSOLE" />
