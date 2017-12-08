@@ -30,7 +30,7 @@ class ResourceServerConfig : ResourceServerConfigurerAdapter() {
                 .requestMatchers()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/actuator/**", "/api-docs/**","/oauth/**","/oauth/token").anonymous()
-                .antMatchers("/**").anonymous()
+                .antMatchers("/actuator/**", "/api-docs/**","/oauth/**","/oauth/token").permitAll()
+                .antMatchers("/**").authenticated()
     }
 }

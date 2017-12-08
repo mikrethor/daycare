@@ -26,9 +26,9 @@ class AdditionnalWebConfig {
         config.addAllowedMethod("*")
         config.allowedOrigins= listOf("*")
         source.registerCorsConfiguration("/**", config)
-        val bean = CorsFilter(source)
+//        val bean = CorsFilter(source)
         //FilterRegistrationBean
         //bean.order = 0
-        return bean
+        return CorsFilter(source)
     }
 }

@@ -9,8 +9,8 @@ import 'rxjs/Rx';
 @Injectable()
 export class LoginService {
   private authUrl = this.constantService.API_ENDPOINT + "/oauth/token";
-  private headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-'Access-Control-Allow-Origin': 'Allow'});
+//   private headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+// 'Access-Control-Allow-Origin': 'Allow'});
 
 // new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")});
 
@@ -24,39 +24,27 @@ export class LoginService {
     ) { console.log('LoginService');
   }
 
-  // login(login: string, password: string): Observable<boolean> {
-
-  //   let url: string = this.constantService.API_ENDPOINT + "/login";
-  //   let body = JSON.stringify({ login: login, password: password });
-  //   let headers = new Headers({ 'Content-Type': 'application/json' });
-  //   let options = new RequestOptions({ headers: headers });
-  //   return this.http.post(url, body, options
-  //   )
-  //     .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-
-
-  // }
-
-  // logout(): Observable<boolean> {
-  //   return this.http.post(this.constantService.API_ENDPOINT + "/logout", JSON.stringify({ password: "ss" }))
-  //     .map((response) => response.json());
-  // }
+//username=john.doe&password=jwtpass&client_id=testjwtclientid&client_secret=XY7kmzoNzl100&grant_type=password
+//username=john.doe&password=jwtpass&client_id=testjwtclientid&client_secret=XY7kmzoNzl100&grant_type=password
 
   login(login: string, password: string){
     let params = new URLSearchParams();
     params.append('username',login);
     params.append('password',password);    
-    params.append('grant_type','password');
     params.append('client_id','testjwtclientid');
     params.append('client_secret','XY7kmzoNzl100');
-    // let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")});
-    let options = new RequestOptions({ headers: this.headers });
-     
+    params.append('grant_type','password');
+    let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded',
+     'Authorization': 'Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=',
+     'Allow-Control-Allow-Origin': '*' 
+  });
+    let options = new RequestOptions({ headers: headers });
+     console.log('params :'+params.toString());
     this.http.post(this.authUrl, params.toString(), options)
-      .map(res => {console.log(res);res.json();})
+      .map(res => {console.log("res: ");console.log(res.json());res.json();})
       .subscribe(
         data => this.saveToken(data),
-        err => {console.log(err.json());alert('Invalid Credentials')}); 
+        err => {console.log("err: "+err);console.log(err.json());alert('Invalid Credentials'+err)}); 
   }
  
   saveToken(token){
