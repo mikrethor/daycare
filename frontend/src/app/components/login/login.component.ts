@@ -30,10 +30,11 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         //route vers la page en fonction du profil
-        this.logged = this.loginService.login(this.model.username,this.model.password);
+        this.loginService.login(this.model.username,this.model.password);
         this.loading = false;
         console.log("Logged ? :"+this.logged);
-       console.log( this.daycareService.getDaycare(1));
+       console.log( "login daycare : ")
+       console.log(this.daycareService.getDaycare(this.loginService.token(),1));
 
     }
 }

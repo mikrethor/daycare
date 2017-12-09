@@ -9,7 +9,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class LoginService {
   private authUrl = this.constantService.API_ENDPOINT + "/oauth/token";
-  private logged = false;
+  private myToken : String;
 
   constructor(
     private http: Http,
@@ -18,6 +18,10 @@ export class LoginService {
    
    
     ) { console.log('LoginService');
+  }
+
+  token():String{
+    return this.myToken;
   }
 
   login(login: string, password: string){
@@ -36,8 +40,8 @@ export class LoginService {
     this.http.post(this.authUrl, params.toString(), options)
       .map(
         res => {
-          console.log("res: "+res.json().access_token);
-          return res.json().access_token;
+          this.myToken=res.json().access_token;
+          return this.myToken;
         })
       .subscribe(
         data => {
@@ -45,13 +49,13 @@ export class LoginService {
         },
         err => {
           alert('Invalid Credentials :'+err)
-        });
-    return this.logged;     
+        });     
   }
  
   saveToken(token){
     var expireDate = new Date().getTime() + (1000 * token.expires_in);
     Cookie.set("access_token", token.access_token, expireDate);
+    this.myToken=token;
   }
  
 //   getResource(resourceUrl) : Observable<MyToken>{
