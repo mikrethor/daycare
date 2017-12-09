@@ -52,7 +52,6 @@ export class LoginService {
   saveToken(token){
     var expireDate = new Date().getTime() + (1000 * token.expires_in);
     Cookie.set("access_token", token.access_token, expireDate);
-    // this.router.navigate(['/']);
   }
  
 //   getResource(resourceUrl) : Observable<MyToken>{

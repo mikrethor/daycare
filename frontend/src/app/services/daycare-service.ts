@@ -2,18 +2,26 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams, Jsonp } from '@angular/http';
 import { ConstantsService } from './constants-service';
 import { Observable } from 'rxjs/Rx';
+import { Cookie } from 'ng2-cookies';
 import 'rxjs/Rx';
 
 @Injectable()
 export class DaycareService implements IDaycareService{
 
   // Resolve HTTP using the constructor
-  constructor(private http: Http, private jsonp: Jsonp, private constantService: ConstantsService) {
+  constructor(private http: Http, private constantService: ConstantsService) {
   }
 
   getDaycare(id: number): Observable<Daycare> {
-    return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id)
-      .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    let headers = new Headers({
+      // 'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer '+ Cookie.get('access_token')
+    });
+    console.log("tets"+Cookie.get('access_token'));
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id, options)
+      .map((response) => {let test=response.json();console.log(test)}).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getChildren(id: number): Observable<Array<Child>> {

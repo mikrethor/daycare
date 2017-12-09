@@ -1,5 +1,4 @@
 import { Routes, RouterModule } from '@angular/router';
-//import { DaycareComponent } from './application/app.component';
 import { LoginComponent } from './login/login.component';
 // import { ParentComponent } from './parent/parent.component';
 // import { EducatorComponent } from './educator/educator.component';

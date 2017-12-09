@@ -25,6 +25,6 @@ internal data class User (
          * they are a fairly small collection of items for this example.
          */
         @ManyToMany(fetch = FetchType.EAGER)
-        @JoinTable(name = "user_role", joinColumns = arrayOf(JoinColumn(name = "user_id", referencedColumnName = "id")), inverseJoinColumns = arrayOf(JoinColumn(name = "role_id", referencedColumnName = "id")))
+        @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")], inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")])
         var roles: List<Role> = emptyList()
 )
