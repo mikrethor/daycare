@@ -9,23 +9,16 @@ import 'rxjs/Rx';
 @Injectable()
 export class LoginService {
   private authUrl = this.constantService.API_ENDPOINT + "/oauth/token";
-//   private headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-// 'Access-Control-Allow-Origin': 'Allow'});
+  private logged = false;
 
-// new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("XY7kmzoNzl100:secret")});
-
-  // Resolve HTTP using the constructor
   constructor(
     private http: Http,
-    // private jsonp: Jsonp,
     private constantService: ConstantsService,
     private router: Router
    
+   
     ) { console.log('LoginService');
   }
-
-//username=john.doe&password=jwtpass&client_id=testjwtclientid&client_secret=XY7kmzoNzl100&grant_type=password
-//username=john.doe&password=jwtpass&client_id=testjwtclientid&client_secret=XY7kmzoNzl100&grant_type=password
 
   login(login: string, password: string){
     let params = new URLSearchParams();
@@ -34,23 +27,32 @@ export class LoginService {
     params.append('client_id','testjwtclientid');
     params.append('client_secret','XY7kmzoNzl100');
     params.append('grant_type','password');
-    let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded',
-     'Authorization': 'Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=',
-     'Allow-Control-Allow-Origin': '*' 
-  });
+    let headers = new Headers({
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=',
+      'Allow-Control-Allow-Origin': '*' 
+    });
     let options = new RequestOptions({ headers: headers });
-    //  console.log('params :'+params.toString());
     this.http.post(this.authUrl, params.toString(), options)
-      .map(res => {console.log("res: ");console.log(res.json().access_token);return res.json().access_token;})
+      .map(
+        res => {
+          console.log("res: "+res.json().access_token);
+          return res.json().access_token;
+        })
       .subscribe(
-        data => {console.log("data:"+data);this.saveToken(data)},
-        err => {console.log("err: "+err);console.log(err.json());alert('Invalid Credentials'+err)}); 
+        data => {
+          this.saveToken(data);
+        },
+        err => {
+          alert('Invalid Credentials :'+err)
+        });
+    return this.logged;     
   }
  
   saveToken(token){
     var expireDate = new Date().getTime() + (1000 * token.expires_in);
     Cookie.set("access_token", token.access_token, expireDate);
-    this.router.navigate(['/']);
+    // this.router.navigate(['/']);
   }
  
 //   getResource(resourceUrl) : Observable<MyToken>{
@@ -61,25 +63,16 @@ export class LoginService {
 //                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 //   }
  
-//   checkCredentials(){
-//     // if (!Cookie.check('access_token')){
-//     if (Cookie.get('access_token').length != 0){
-//       this.router.navigate(['/login']);
-//     }
-//   } 
+  checkCredentials(){
+    // if (!Cookie.check('access_token')){
+    if (Cookie.get('access_token').length != 0){
+      this.router.navigate(['/login']);
+    }
+  } 
  
-//   logout() {
-//     Cookie.delete('access_token');
-//     this.router.navigate(['/login']);
-//   }
-
-
-
-// }
-
-// export class MyToken {
-//   constructor(
-//     public id: number,
-//     public name: string) { }
+  logout() {
+    Cookie.delete('access_token');
+    this.router.navigate(['/login']);
+  }
 } 
 

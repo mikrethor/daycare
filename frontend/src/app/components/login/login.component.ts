@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
     connected = false;
-    // model: any = {};
+    logged = false;
     
 
     constructor(
@@ -30,8 +30,9 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        // console.log("login : "+this.model.username+this.model.password);
-        console.log("login : "+this.loginService.login(this.model.username,this.model.password));
-       // console.log(+this.loginService.login("testjwtclientid","XY7kmzoNzl100"));
+        //route vers la page en fonction du profil
+        this.logged = this.loginService.login(this.model.username,this.model.password);
+        this.loading = false;
+        console.log("Logged ? :"+this.logged);
     }
 }
