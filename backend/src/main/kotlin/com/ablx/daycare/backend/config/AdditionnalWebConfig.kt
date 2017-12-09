@@ -40,7 +40,7 @@ class AdditionnalWebConfig {
         val config = CorsConfiguration()
         config.allowCredentials = true
         config.allowedOrigins = listOf("http://localhost:4200")
-        config.allowedMethods = listOf("GET", "POST", "PATCH");
+        config.allowedMethods = listOf("GET", "POST", "PATCH")
         config.allowedHeaders = listOf("*")
         source.registerCorsConfiguration("/**", config)
         val bean = FilterRegistrationBean(CorsFilter(source))
