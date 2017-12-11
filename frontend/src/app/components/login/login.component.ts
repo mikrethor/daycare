@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     connected = false;
     logged = false;
-    
+    dataToken: String;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -27,14 +28,26 @@ export class LoginComponent implements OnInit {
 //        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
+    test(){
+        console.log("Token :"+this.loginService.token());
+    }
+
     login() {
         this.loading = true;
         //route vers la page en fonction du profil
-        this.loginService.login(this.model.username,this.model.password);
+       this.loginService.login(this.model.username,this.model.password)      .subscribe(
+        data => {
+            this.loginService.saveToken(data);
+            this.dataToken=data;
+        },
+        err => {
+          alert('Invalid Credentials :'+err)
+        }); ;
         this.loading = false;
         console.log("Logged ? :"+this.logged);
-       console.log( "login daycare : ")
-       console.log(this.daycareService.getDaycare(this.loginService.token(),1));
+        console.log( "login daycare : "+this.loginService.token());
+        console.log( "fin token");
+        //    console.log(this.daycareService.getDaycare(1).subscribe(data => {console.log(data);return data;}));
 
     }
 }

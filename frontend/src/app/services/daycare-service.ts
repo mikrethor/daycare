@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams, Jsonp } from '@angular/http';
 import { ConstantsService } from './constants-service';
+import { LoginService } from './login-service';
 import { Observable } from 'rxjs/Rx';
 import { Cookie } from 'ng2-cookies';
 import 'rxjs/Rx';
@@ -9,13 +10,13 @@ import 'rxjs/Rx';
 export class DaycareService implements IDaycareService{
 
   // Resolve HTTP using the constructor
-  constructor(private http: Http, private constantService: ConstantsService) {
+  constructor(private http: Http, private constantService: ConstantsService, private loginService: LoginService) {
   }
 
-  getDaycare(token:String,id: number)
-  // : Observable<Daycare> 
+  getDaycare(id: number)
+  : Observable<Daycare> 
   {
-
+let token = this.loginService.token();
     console.log('token : '+token)
     let headers = new Headers({
       // 'Content-type': 'application/hal+json;charset=UTF-8',
@@ -28,14 +29,9 @@ export class DaycareService implements IDaycareService{
       .map((response) => 
         {return response.json();}
       )
-      .subscribe(
-        function(response) { console.log("Success Response");
-        console.log(response)},
-        function(error) { console.log("Error happened" + error)},
-        function() { console.log("the subscription is completed")}
-    );
-      // .catch(
-      //   (error: any) => Observable.throw(error.json()|| 'Server error'));
+     
+      .catch(
+        (error: any) => Observable.throw(error.json()|| 'Server error'));
   }
 
   getChildren(id: number): Observable<Array<Child>> {
@@ -216,8 +212,7 @@ export class User {
 }
 
 export interface IDaycareService {
-  getDaycare(token:String,id: number);
-  // : Observable<Daycare>;
+  getDaycare(id: number) : Observable<Daycare>;
   getChildren(id: number): Observable<Array<Child>>;
   getEducators(id: number): Observable<Array<Educator>>;
   getEducator(idDaycare: number, idEducator: number): Observable<Educator>;

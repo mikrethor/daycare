@@ -24,7 +24,7 @@ export class LoginService {
     return this.myToken;
   }
 
-  login(login: string, password: string){
+  login(login: string, password: string):Observable<String>{
     let params = new URLSearchParams();
     params.append('username',login);
     params.append('password',password);    
@@ -37,19 +37,12 @@ export class LoginService {
       'Allow-Control-Allow-Origin': '*' 
     });
     let options = new RequestOptions({ headers: headers });
-    this.http.post(this.authUrl, params.toString(), options)
+    return  this.http.post(this.authUrl, params.toString(), options)
       .map(
         res => {
           this.myToken=res.json().access_token;
           return this.myToken;
-        })
-      .subscribe(
-        data => {
-          this.saveToken(data);
-        },
-        err => {
-          alert('Invalid Credentials :'+err)
-        });     
+        })    
   }
  
   saveToken(token){
