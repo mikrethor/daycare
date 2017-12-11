@@ -149,6 +149,22 @@ let token = this.loginService.token();
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getUser(username:String):Observable<User>{
+    let url: string = this.constantService.API_ENDPOINT + "/users/search/findByUsername?username=" + username;
+    let token = this.loginService.token();
+    // if(token==null){
+    //   token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiam9obi5kb2UiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTEzMDA4MDI4LCJhdXRob3JpdGllcyI6WyJTVEFOREFSRF9VU0VSIl0sImp0aSI6ImQ2YWM1MjljLTkzZjAtNDQxZC05OGQyLTJlNTYzY2Q5Mzk3MCIsImNsaWVudF9pZCI6InRlc3Rqd3RjbGllbnRpZCJ9.YQTQCVZI11jCEzEagruTtVpjTpnkOXFv48n9wuQjs0s";
+    // }
+    console.log('token : '+token)
+    let headers = new Headers({
+      // 'Content-type': 'application/hal+json;charset=UTF-8',
+      'Authorization': 'Bearer '+token
+    });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(url,options)
+    .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
   errorSubscribe(error) { console.log("Error happened :" + error) }
   completed() { console.log("the subscription is completed") }
 }
@@ -203,6 +219,9 @@ export class Sumups {
 export class User {
   constructor(
     public id: number,
+    public username: String,
+    public firstName: String,
+    public lastName: String,
     public parent: number,
     public educator: number,
     public admin: number,
@@ -228,4 +247,5 @@ export interface IDaycareService {
   createEducator(idDaycare: number, educator: Educator): Observable<Array<Educator>>;
   deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean>;
   deleteChild(idDaycare: number, idChild: number): Observable<Boolean>;
+  getUser(username:String): Observable<User>;
 }

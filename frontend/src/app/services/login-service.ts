@@ -17,7 +17,7 @@ export class LoginService {
     private router: Router
    
    
-    ) { console.log('LoginService');
+    ) { console.log('LoginService'+this.myToken);
   }
 
   token():String{

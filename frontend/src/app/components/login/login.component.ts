@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 ) { }
 
     ngOnInit() {
-//        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     test(){
@@ -39,15 +39,14 @@ export class LoginComponent implements OnInit {
         data => {
             this.loginService.saveToken(data);
             this.dataToken=data;
+            this.router.navigateByUrl('/daycare/user/'+this.model.username);
         },
         err => {
           alert('Invalid Credentials :'+err)
         }); ;
         this.loading = false;
-        console.log("Logged ? :"+this.logged);
-        console.log( "login daycare : "+this.loginService.token());
-        console.log( "fin token");
         //    console.log(this.daycareService.getDaycare(1).subscribe(data => {console.log(data);return data;}));
-
+        // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/daycare/user';
+       
     }
 }
