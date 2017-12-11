@@ -17,7 +17,7 @@ class MyUserDetailsService : UserDetailsService {
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(s: String): UserDetails {
-        val user = userRepository.findByUsername(s) ?: throw UsernameNotFoundException(String.format("The username %s doesn't exist", s))
+        val user = userRepository.findByUsername(s)
 
         val authorities = ArrayList<GrantedAuthority>()
         user.roles.forEach { role -> authorities.add(SimpleGrantedAuthority(role.name)) }
