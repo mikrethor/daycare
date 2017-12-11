@@ -28,10 +28,6 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    test(){
-        console.log("Token :"+this.loginService.token());
-    }
-
     login() {
         this.loading = true;
         //route vers la page en fonction du profil
@@ -43,7 +39,7 @@ export class LoginComponent implements OnInit {
         },
         err => {
           alert('Invalid Credentials :'+err)
-        }); ;
+        }); 
         this.loading = false;
         //    console.log(this.daycareService.getDaycare(1).subscribe(data => {console.log(data);return data;}));
         // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/daycare/user';

@@ -13,19 +13,9 @@ export class DaycareService implements IDaycareService{
   constructor(private http: Http, private constantService: ConstantsService, private loginService: LoginService) {
   }
 
-  getDaycare(id: number)
-  : Observable<Daycare> 
+  getDaycare(id: number): Observable<Daycare> 
   {
-let token = this.loginService.token();
-    console.log('token : '+token)
-    let headers = new Headers({
-      // 'Content-type': 'application/hal+json;charset=UTF-8',
-      'Authorization': 'Bearer '+token
-    });
-   
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id, options)
+    return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id, this.loginService.getBearerToken())
       .map((response) => 
         {return response.json();}
       )
@@ -151,17 +141,7 @@ let token = this.loginService.token();
 
   getUser(username:String):Observable<User>{
     let url: string = this.constantService.API_ENDPOINT + "/users/search/findByUsername?username=" + username;
-    let token = this.loginService.token();
-    // if(token==null){
-    //   token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiam9obi5kb2UiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTEzMDA4MDI4LCJhdXRob3JpdGllcyI6WyJTVEFOREFSRF9VU0VSIl0sImp0aSI6ImQ2YWM1MjljLTkzZjAtNDQxZC05OGQyLTJlNTYzY2Q5Mzk3MCIsImNsaWVudF9pZCI6InRlc3Rqd3RjbGllbnRpZCJ9.YQTQCVZI11jCEzEagruTtVpjTpnkOXFv48n9wuQjs0s";
-    // }
-    console.log('token : '+token)
-    let headers = new Headers({
-      // 'Content-type': 'application/hal+json;charset=UTF-8',
-      'Authorization': 'Bearer '+token
-    });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(url,options)
+    return this.http.get(url,this.loginService.getBearerToken())
     .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 

@@ -17,33 +17,46 @@ export class LoginService {
     private router: Router
    
    
-    ) { console.log('LoginService'+this.myToken);
-  }
-
-  token():String{
-    return this.myToken;
-  }
+    ) {}
 
   login(login: string, password: string):Observable<String>{
-    let params = new URLSearchParams();
-    params.append('username',login);
-    params.append('password',password);    
-    params.append('client_id','testjwtclientid');
-    params.append('client_secret','XY7kmzoNzl100');
-    params.append('grant_type','password');
-    let headers = new Headers({
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=',
-      'Allow-Control-Allow-Origin': '*' 
-    });
-    let options = new RequestOptions({ headers: headers });
-    return  this.http.post(this.authUrl, params.toString(), options)
+    return  this.http.post(this.authUrl, this.getParamsToAuthenticate(login,password), this.getBasicToken())
       .map(
         res => {
           this.myToken=res.json().access_token;
           return this.myToken;
         })    
   }
+
+  getParamsToAuthenticate(login:string,password:string):String{
+    let params = new URLSearchParams();
+    params.append('username',login);
+    params.append('password',password);    
+    params.append('client_id','testjwtclientid');
+    params.append('client_secret','XY7kmzoNzl100');
+    params.append('grant_type','password');
+    return params.toString();
+
+  }
+
+  getBasicToken():RequestOptions{
+    let headers = new Headers({
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=',
+      'Allow-Control-Allow-Origin': '*' 
+    });
+    let options = new RequestOptions({ headers: headers });
+    return options;
+  }
+  
+  getBearerToken():RequestOptions{
+    let headers = new Headers({
+      'Authorization': 'Bearer '+this.myToken
+    });
+    let options = new RequestOptions({ headers: headers });
+    return options;
+  }
+
  
   saveToken(token){
     var expireDate = new Date().getTime() + (1000 * token.expires_in);
