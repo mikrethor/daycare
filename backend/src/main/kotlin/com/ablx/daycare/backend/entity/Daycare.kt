@@ -1,6 +1,7 @@
 package com.ablx.daycare.backend.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonTypeId
 
 import javax.persistence.*
 

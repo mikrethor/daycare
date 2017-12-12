@@ -140,7 +140,7 @@ export class DaycareService implements IDaycareService{
   }
 
   getUser(username:String):Observable<User>{
-    let url: string = this.constantService.API_ENDPOINT + "/users/search/findByUsername?username=" + username;
+    let url: string = this.constantService.API_ENDPOINT + "/users/" + username;
     return this.http.get(url,this.loginService.getBearerToken())
     .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -203,7 +203,7 @@ export class User {
     public firstName: String,
     public lastName: String,
     public roles:Array<Role>,
-    public idDaycare: number
+    public daycare: Daycare
   ) { }
 }
 

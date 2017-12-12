@@ -1,5 +1,6 @@
 package com.ablx.daycare.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference
 import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
@@ -27,8 +28,8 @@ internal data class User (
         @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")], inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")])
         var roles: List<Role> = emptyList(),
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "daycare")
+        @ManyToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "daycare", referencedColumnName = "id")
         var daycare : Daycare=Daycare()
 
 )
