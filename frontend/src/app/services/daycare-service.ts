@@ -202,11 +202,15 @@ export class User {
     public username: String,
     public firstName: String,
     public lastName: String,
-    public parent: number,
-    public educator: number,
-    public admin: number,
-    public login: string,
+    public roles:Array<Role>,
     public idDaycare: number
+  ) { }
+}
+
+export class Role {
+  constructor(
+    public name: String,
+    public description: String
   ) { }
 }
 

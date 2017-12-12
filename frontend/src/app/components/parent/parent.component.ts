@@ -27,7 +27,7 @@ export class ParentComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.user= new User(0, 0, 0, 0, "", 0);
+        this.user = new User(0, "", "", "", null,0);
         this.idDayCare = this.route.snapshot.params['idDaycare'];
         this.idParent = this.route.snapshot.params['idParent'];
 

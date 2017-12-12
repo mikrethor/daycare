@@ -1,16 +1,20 @@
-INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES (1, 'STANDARD_USER', 'Standard User - Has no admin rights');
-INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES (2, 'ADMIN_USER', 'Admin User - Has permission to perform admin tasks');
+insert into DAYCARE("ID", "NAME") values (1, 'Ma garderie');
+
+INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES (1, 'EDUCATOR', 'Daycare educator');
+INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES (2, 'ADMIN', 'Daycare admin');
+INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES (3, 'PARENT', 'Daycare parent');
 
 -- USER
 -- non-encrypted password: jwtpass
-INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME") VALUES (1, 'John', 'Doe', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'john.doe');
-INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME") VALUES (2, 'Admin', 'Admin', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'admin.admin');
+INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME", "DAYCARE") VALUES (1, 'John', 'Doe', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'john.doe',1);
+INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME", "DAYCARE") VALUES (2, 'Admin', 'Admin', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'admin.admin',1);
+INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME", "DAYCARE") VALUES (3, 'Par', 'Ent', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'parent',1);
 
 INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(1,1);
 INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(2,1);
 INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(2,2);
+INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(3,3);
 
-insert into DAYCARE("ID", "NAME") values (1, 'Ma garderie');
 --insert into ADMIN("ID") values (1);
 insert into PARENT("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (1,1,'Xavier','B');
 insert into PARENT("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (2,1,'Bérengère','B');

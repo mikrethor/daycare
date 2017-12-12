@@ -5,6 +5,8 @@ spring:
     console:
       enabled: true
       path: /console/
+  jackson:
+    default-property-inclusion: non_null
 
 security:
   oauth2:

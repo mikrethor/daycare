@@ -16,8 +16,8 @@ class MyUserDetailsService : UserDetailsService {
     private lateinit var  userRepository: UserRepository
 
     @Throws(UsernameNotFoundException::class)
-    override fun loadUserByUsername(s: String): UserDetails {
-        val user = userRepository.findByUsername(s)
+    override fun loadUserByUsername(username: String): UserDetails {
+        val user = userRepository.findByUsername(username)
 
         val authorities = ArrayList<GrantedAuthority>()
         user.roles.forEach { role -> authorities.add(SimpleGrantedAuthority(role.name)) }
