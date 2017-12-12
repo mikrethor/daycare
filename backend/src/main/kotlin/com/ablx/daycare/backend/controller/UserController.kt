@@ -15,15 +15,9 @@ internal class UserController{
     @Autowired
     lateinit var userRepository:UserRepository
 
-
-    @GetMapping("/users")
-    fun users() =
-            listOf<User>(User(1L, "xbouclet","","Xavier","Bouclet", emptyList(), Daycare()))
-
-
     //Name can't contain .
     @GetMapping("/users/{name}")
-    fun findById(@PathVariable(value="name")name: String) =
+    fun findByName(@PathVariable(value="name")name: String) =
             userRepository.findByUsername(name)
 
 }

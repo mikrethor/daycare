@@ -29,7 +29,7 @@ export class EditSumupsComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.user = new User(0, "", "", "", null,0);
+        this.user = new User(0, "", "", "", null,null);
         this.idDayCare = 1;//this.route.snapshot.params['idDaycare'];
         this.idParent = 1;//this.route.snapshot.params['idParent'];
 
