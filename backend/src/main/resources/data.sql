@@ -16,12 +16,12 @@ INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(2,2);
 INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES(3,3);
 
 --insert into ADMIN("ID") values (1);
-insert into PARENT("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (1,1,'Xavier','B');
-insert into PARENT("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (2,1,'Bérengère','B');
+--insert into PARENT("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (1,1,'Xavier','B');
+--insert into PARENT("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (2,1,'Bérengère','B');
 
-insert into EDUCATOR("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (1,1,'Marie-Josée', 'YMCA');
-insert into EDUCATOR("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (2,1,'Bérengère', 'CB');
-insert into EDUCATOR("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (3,1,'Joe', 'Tribiani');
+--insert into EDUCATOR("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (1,1,'Marie-Josée', 'YMCA');
+--insert into EDUCATOR("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (2,1,'Bérengère', 'CB');
+--insert into EDUCATOR("ID","DAYCARE","FIRSTNAME", "LASTNAME") values (3,1,'Joe', 'Tribiani');
 
 --insert into USER("ID", "LOGIN", "PASSWORD","SALT", "DAYCARE_ID","ADMIN_ID","EDUCATOR_ID","PARENT_ID") values (3, 'test@admin','test','salt',1,1,NULL,NULL);
 --insert into USER("ID", "LOGIN", "PASSWORD","SALT", "DAYCARE_ID","ADMIN_ID","EDUCATOR_ID","PARENT_ID") values (2, 'test@educator','test','salt',1,NULL,1,NULL);

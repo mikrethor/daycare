@@ -1,7 +1,5 @@
 package com.ablx.daycare.backend.controller
 
-import com.ablx.daycare.backend.entity.Daycare
-import com.ablx.daycare.backend.entity.User
 import com.ablx.daycare.backend.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
