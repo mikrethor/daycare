@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams, Jsonp } from '@angular/http';
 import { ConstantsService } from './constants-service';
 import { LoginService } from './login-service';
+import { Daycare,Role,User,Sumups,Child,Educator,Parent } from '../pojo/pojo';
 import { Observable } from 'rxjs/Rx';
 import { Cookie } from 'ng2-cookies';
 import 'rxjs/Rx';
@@ -147,71 +148,6 @@ export class DaycareService implements IDaycareService{
 
   errorSubscribe(error) { console.log("Error happened :" + error) }
   completed() { console.log("the subscription is completed") }
-}
-
-export class Daycare {
-  constructor(
-    public id: number,
-    public name: string
-  ) { }
-}
-
-export class Child {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string,
-    public daycare: number
-  ) { }
-}
-
-export class Educator {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string,
-    public daycare: number
-  ) { }
-}
-
-export class Parent {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string,
-    public daycare: number
-  ) { }
-}
-
-export class Sumups {
-  constructor(
-    public id: number,
-    public child: number,
-    public mood: number,
-    public sleep: number,
-    public appetite: number,
-    public comment: string,
-    public educator: number,
-    public day: number
-  ) { }
-}
-
-export class User {
-  constructor(
-    public id: number,
-    public username: String,
-    public firstName: String,
-    public lastName: String,
-    public roles:Array<Role>,
-    public daycare: Daycare
-  ) { }
-}
-
-export class Role {
-  constructor(
-    public name: String,
-    public description: String
-  ) { }
 }
 
 export interface IDaycareService {

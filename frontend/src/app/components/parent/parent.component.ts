@@ -2,8 +2,8 @@ import { Component, Output, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../services/login-service';
 import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService, Parent, Child, Sumups } from '../../services/daycare-service';
-import { User } from '../../services/daycare-service';
+import { DaycareService, } from '../../services/daycare-service';
+import { User, Child, Parent, Sumups } from '../../pojo/pojo';
 
 
 @Component({

@@ -2,7 +2,8 @@ import { Component, Output, OnInit, OnChanges, SimpleChanges, NgZone } from '@an
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../services/login-service';
 import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService, Educator, Child, Daycare } from '../../services/daycare-service';
+import { DaycareService} from '../../services/daycare-service';
+import { Educator, Child, Daycare } from '../../pojo/pojo';
 
 
 @Component({
