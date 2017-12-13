@@ -4,25 +4,23 @@ import { ConstantsService } from './constants-service';
 import { LoginService } from './login-service';
 import { Daycare,Role,User,Sumups,Child,Educator,Parent } from '../pojo/pojo';
 import { Observable } from 'rxjs/Rx';
-import { Cookie } from 'ng2-cookies';
 import 'rxjs/Rx';
 
 @Injectable()
 export class DaycareService implements IDaycareService{
-
+  private daycare:Daycare;
   // Resolve HTTP using the constructor
   constructor(private http: Http, private constantService: ConstantsService, private loginService: LoginService) {
   }
 
-  getDaycare(id: number): Observable<Daycare> 
-  {
+  getDaycare(id: number): Observable<Daycare> {
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id, this.loginService.getBearerToken())
       .map((response) => 
         {return response.json();}
       )
-     
       .catch(
-        (error: any) => Observable.throw(error.json()|| 'Server error'));
+        (error: any) => Observable.throw(error.json()|| 'Server error')
+      );
   }
 
   getChildren(id: number): Observable<Array<Child>> {
@@ -54,7 +52,6 @@ export class DaycareService implements IDaycareService{
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent + "/childs")
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
-
 
   getSumups(idDaycare: number, idChild: number): Observable<Array<Sumups>> {
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/")

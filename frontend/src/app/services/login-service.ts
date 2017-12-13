@@ -10,6 +10,8 @@ import 'rxjs/Rx';
 export class LoginService {
   private authUrl = this.constantService.API_ENDPOINT + "/oauth/token";
   private myToken : String;
+  private clientId="testjwtclientid";
+  private clientSecret="XY7kmzoNzl100";
 
   constructor(
     private http: Http,
@@ -32,17 +34,21 @@ export class LoginService {
     let params = new URLSearchParams();
     params.append('username',login);
     params.append('password',password);    
-    params.append('client_id','testjwtclientid');
-    params.append('client_secret','XY7kmzoNzl100');
+    params.append('client_id',this.clientId);
+    params.append('client_secret',this.clientSecret);
     params.append('grant_type','password');
     return params.toString();
 
   }
 
+  getClientIdClientSecret():string{
+    return 'Basic '+btoa(this.clientId+":"+this.clientSecret);
+  }
+
   getBasicToken():RequestOptions{
     let headers = new Headers({
       'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=',
+      'Authorization': this.getClientIdClientSecret(),
       'Allow-Control-Allow-Origin': '*' 
     });
     let options = new RequestOptions({ headers: headers });
@@ -56,21 +62,12 @@ export class LoginService {
     let options = new RequestOptions({ headers: headers });
     return options;
   }
-
  
   saveToken(token){
     var expireDate = new Date().getTime() + (1000 * token.expires_in);
     Cookie.set("access_token", token.access_token, expireDate);
     this.myToken=token;
   }
- 
-//   getResource(resourceUrl) : Observable<MyToken>{
-//     var headers = new Headers({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Bearer '+Cookie.get('access_token')});
-//     var options = new RequestOptions({ headers: headers });
-//     return this.http.get(resourceUrl, options)
-//                    .map((res:Response) => res.json())
-//                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-//   }
  
   checkCredentials(){
     // if (!Cookie.check('access_token')){
