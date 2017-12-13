@@ -59,7 +59,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .and()
                 .csrf()
                 .disable()
-
     }
 
     @Bean
@@ -82,6 +81,4 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         defaultTokenServices.setSupportRefreshToken(true)
         return defaultTokenServices
     }
-
-
 }
