@@ -38,17 +38,20 @@ export class LoginService {
     params.append('client_secret',this.clientSecret);
     params.append('grant_type','password');
     return params.toString();
-
   }
 
-  getClientIdClientSecret():string{
+  getBasicAuthorization():string{
     return 'Basic '+btoa(this.clientId+":"+this.clientSecret);
+  }
+
+  getBearerAuthorization():string{
+    return 'Bearer '+this.myToken
   }
 
   getBasicToken():RequestOptions{
     let headers = new Headers({
       'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': this.getClientIdClientSecret(),
+      'Authorization': this.getBasicAuthorization(),
       'Allow-Control-Allow-Origin': '*' 
     });
     let options = new RequestOptions({ headers: headers });
@@ -57,7 +60,7 @@ export class LoginService {
   
   getBearerToken():RequestOptions{
     let headers = new Headers({
-      'Authorization': 'Bearer '+this.myToken
+      'Authorization': this.getBearerAuthorization(),
     });
     let options = new RequestOptions({ headers: headers });
     return options;
