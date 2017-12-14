@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.html',
 })
 export class NavbarComponent {
-
+  //TODO the menu has to be generated with ROLES
   //Admin
   menuData = {
     "menu": [
