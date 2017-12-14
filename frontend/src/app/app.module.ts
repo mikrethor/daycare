@@ -10,6 +10,8 @@ import { routing } from './components/app.routing';
 import { AppComponent } from './components/application/app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
+import { EducatorComponent } from './components/educator/educator.component';
+import { DaycareAdminComponent } from './components/daycareadmin/daycareadmin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { LoginService } from './services/login-service';
@@ -18,7 +20,7 @@ import { DaycareService } from 'app/services/daycare-service';
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent,UserComponent,NavbarComponent
+    AppComponent,LoginComponent,UserComponent,EducatorComponent,DaycareAdminComponent,NavbarComponent
   ],
   imports: [
     BrowserModule,

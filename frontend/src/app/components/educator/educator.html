@@ -1,15 +1,15 @@
 <div class="col-md-6 col-md-offset-3">
     <h1>{{daycare.name}}</h1>
-    <md-list>
-        <h2 md-header>Sumups</h2>
-        <md-list-item *ngFor="let c of children; let i = index;">
-            <md-icon md-list-avatar color="primary">face</md-icon>
-            <h4 md-line>{{c.firstName}} {{ c.lastName}}</h4>
+    <mat-list>
+        <h2 mat-header>Sumups</h2>
+        <mat-list-item *ngFor="let c of children; let i = index;">
+            <mat-icon mat-list-avatar color="primary">face</mat-icon>
+            <h4 mat-line>{{c.firstName}} {{ c.lastName}}</h4>
             <!--<p md-line> dsdsd </p>-->
-            <button md-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/:idDaycare/children/:idChildren/sumups/:idSumups']">
-                <md-icon>mode_edit</md-icon>
+            <button mat-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/:idDaycare/children/:idChildren/sumups/:idSumups']">
+                <mat-icon>mode_edit</mat-icon>
             </button>
 
-        </md-list-item>
-    </md-list>
+        </mat-list-item>
+    </mat-list>
 </div>
