@@ -81,6 +81,7 @@ export class LoginService {
  
   logout() {
     Cookie.delete('access_token');
+    this.myToken="";
     this.router.navigate(['/login']);
   }
 } 

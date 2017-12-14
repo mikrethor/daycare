@@ -9,6 +9,7 @@ import { LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/
 import { routing } from './components/app.routing';
 import { AppComponent } from './components/application/app.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { UserComponent } from './components/user/user.component';
 import { EducatorComponent } from './components/educator/educator.component';
 import { ParentComponent } from './components/parent/parent.component';
@@ -21,7 +22,7 @@ import { DaycareService } from 'app/services/daycare-service';
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent,UserComponent,EducatorComponent,ParentComponent,DaycareAdminComponent,NavbarComponent
+    AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,DaycareAdminComponent,NavbarComponent
   ],
   imports: [
     BrowserModule,
