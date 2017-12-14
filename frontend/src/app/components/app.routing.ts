@@ -15,6 +15,7 @@ import { DaycareAdminComponent } from './daycareadmin/daycareadmin.component';
 const routes: Routes = [
     { path: '', redirectTo: 'daycare/login', pathMatch: 'full' },
     { path: 'daycare/login', component: LoginComponent },
+    { path: 'daycare/logout', component: LoginComponent },
     { path: 'daycare/user/:username', component: UserComponent },
     // { path: 'daycare/:idDaycare', component: DaycareComponent },
     { path: 'daycare/:idDaycare/parent/:idParent', component: ParentComponent },
