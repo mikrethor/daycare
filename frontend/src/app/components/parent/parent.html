@@ -5,18 +5,18 @@
             {{ child.firstName }} {{ child.lastName }}
         </li>
     </ul>
-    <md-list>
+    <mat-list>
         <h2 md-header>Children</h2>
-        <md-list-item *ngFor="let c of children; let i = index;">
-            <md-icon md-list-avatar color="primary">face</md-icon>
-            <h4 md-line>{{c.firstName}} {{ c.lastName}}</h4>
+        <mat-list-item *ngFor="let c of children; let i = index;">
+            <mat-icon md-list-avatar color="primary">face</mat-icon>
+            <h4 mat-line>{{c.firstName}} {{ c.lastName}}</h4>
             <!--<p md-line> dsdsd </p>-->
-            <button md-icon-button color="primary" (click)="select(i)" [routerLink]="['/daycare/:idDaycare/children/:idChildren/sumups/:idSumups']">
-                <md-icon>mode_edit</md-icon>
+            <button mat-icon-button color="primary" (click)="select(i)" [routerLink]="['/daycare/:idDaycare/children/:idChildren/sumups/:idSumups']">
+                <mat-icon>mode_edit</mat-icon>
             </button>
 
-        </md-list-item>
-    </md-list>
+        </mat-list-item>
+    </mat-list>
 
 
     <div>
@@ -40,10 +40,10 @@
             Comment : {{sumup.comment}}
         </div>
     </div>
-    <button md-fab color="primary">
-        <md-icon>keyboard_arrow_left</md-icon>
+    <button mat-fab color="primary">
+        <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <button md-fab color="primary">
-        <md-icon>keyboard_arrow_right</md-icon>
+    <button mat-fab color="primary">
+        <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
 </div>

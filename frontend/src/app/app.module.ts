@@ -11,6 +11,7 @@ import { AppComponent } from './components/application/app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { EducatorComponent } from './components/educator/educator.component';
+import { ParentComponent } from './components/parent/parent.component';
 import { DaycareAdminComponent } from './components/daycareadmin/daycareadmin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
@@ -20,7 +21,7 @@ import { DaycareService } from 'app/services/daycare-service';
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent,UserComponent,EducatorComponent,DaycareAdminComponent,NavbarComponent
+    AppComponent,LoginComponent,UserComponent,EducatorComponent,ParentComponent,DaycareAdminComponent,NavbarComponent
   ],
   imports: [
     BrowserModule,

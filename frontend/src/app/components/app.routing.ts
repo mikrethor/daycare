@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
-// import { ParentComponent } from './parent/parent.component';
+import { ParentComponent } from './parent/parent.component';
 import { EducatorComponent } from './educator/educator.component';
 import { DaycareAdminComponent } from './daycareadmin/daycareadmin.component';
 // import { AdminEducatorComponent } from './daycareadmin/educator.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'daycare/login', component: LoginComponent },
     { path: 'daycare/user/:username', component: UserComponent },
     // { path: 'daycare/:idDaycare', component: DaycareComponent },
-    // { path: 'daycare/:idDaycare/parent/:idParent', component: ParentComponent },
+    { path: 'daycare/:idDaycare/parent/:idParent', component: ParentComponent },
     { path: 'daycare/:idDaycare/educator/:idEducator', component: EducatorComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin', component: DaycareAdminComponent },
     // { path: 'daycare/:idDaycare/admin/:idAdmin/children', component: AdminChildComponent },
