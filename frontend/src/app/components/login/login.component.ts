@@ -2,12 +2,10 @@ import { Component, Output, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { LoginService} from '../../services/login-service';
-import { DaycareService} from '../../services/daycare-service';
 
 @Component({
     selector: 'login',
     templateUrl: './login.html',
-    // providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
     model: any = {};
@@ -21,7 +19,6 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private loginService: LoginService,
-        private daycareService: DaycareService,
 ) { }
 
     ngOnInit() {
@@ -30,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        //route vers la page en fonction du profil
+        //route to role page
        this.loginService.login(this.model.username,this.model.password)      .subscribe(
         data => {
             this.loginService.saveToken(data);
@@ -41,8 +38,5 @@ export class LoginComponent implements OnInit {
           alert('Invalid Credentials :'+err)
         }); 
         this.loading = false;
-        //    console.log(this.daycareService.getDaycare(1).subscribe(data => {console.log(data);return data;}));
-        // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/daycare/user';
-       
     }
 }
