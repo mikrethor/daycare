@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { LoginService} from '../../services/login-service';
 import { DaycareService, } from '../../services/daycare-service';
+import { UserService, } from '../../services/user-service';
 import { Role, Daycare, User} from '../../pojo/pojo';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -24,6 +25,7 @@ export class UserComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private daycareService: DaycareService,
+        private userService: UserService,
 ) { }
 
     ngOnInit() {
@@ -38,9 +40,13 @@ export class UserComponent implements OnInit {
                 this.roles=data.roles;
                 this.daycare=data.daycare;
                 this.user=new User(data.id,data.username,data.firstName,data.lastName,data.roles,data.daycare);
+            
             },
             this.daycareService.errorSubscribe,
             this.daycareService.completed); 
+
+            // this.userService.set(this.user);
+            // console.log(this.userService.isEducator());       
     }
     
 }
