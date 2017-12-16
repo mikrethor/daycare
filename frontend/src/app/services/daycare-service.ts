@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 @Injectable()
-export class DaycareService implements IDaycareService{
+export class DaycareServiceImpl implements DaycareService{
   private daycare:Daycare;
   // Resolve HTTP using the constructor
   constructor(private http: Http, private constantService: ConstantsService, private loginService: LoginService) {
@@ -147,22 +147,25 @@ export class DaycareService implements IDaycareService{
   completed() { console.log("the subscription is completed") }
 }
 
-export interface IDaycareService {
-  getDaycare(id: number) : Observable<Daycare>;
-  getChildren(id: number): Observable<Array<Child>>;
-  getEducators(id: number): Observable<Array<Educator>>;
-  getEducator(idDaycare: number, idEducator: number): Observable<Educator>;
-  getParent(idDaycare: number, idParent: number): Observable<Parent>;
-  getParents(idDaycare: number): Observable<Array<Parent>>;
-  getChildrenByParentId(idDaycare: number, idParent: number): Observable<Array<Child>>;
-  getSumups(idDaycare: number, idChild: number): Observable<Array<Sumups>>;
-  getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups>;
-  createChild(idDaycare: number, child: Child): Observable<Array<Child>>
-  createParent(idDaycare: number, parent: Parent): Observable<Array<Parent>>;
-  deleteParent(idDaycare: number, idParent: number): Observable<Boolean>;
-  createSumup(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>>;
-  createEducator(idDaycare: number, educator: Educator): Observable<Array<Educator>>;
-  deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean>;
-  deleteChild(idDaycare: number, idChild: number): Observable<Boolean>;
-  getUser(username:String): Observable<User>;
+@Injectable()
+export abstract class DaycareService {
+  abstract getDaycare(id: number) : Observable<Daycare>;
+  abstract getChildren(id: number): Observable<Array<Child>>;
+  abstract getEducators(id: number): Observable<Array<Educator>>;
+  abstract getEducator(idDaycare: number, idEducator: number): Observable<Educator>;
+  abstract getParent(idDaycare: number, idParent: number): Observable<Parent>;
+  abstract getParents(idDaycare: number): Observable<Array<Parent>>;
+  abstract getChildrenByParentId(idDaycare: number, idParent: number): Observable<Array<Child>>;
+  abstract getSumups(idDaycare: number, idChild: number): Observable<Array<Sumups>>;
+  abstract getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups>;
+  abstract createChild(idDaycare: number, child: Child): Observable<Array<Child>>
+  abstract createParent(idDaycare: number, parent: Parent): Observable<Array<Parent>>;
+  abstract deleteParent(idDaycare: number, idParent: number): Observable<Boolean>;
+  abstract createSumup(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>>;
+  abstract createEducator(idDaycare: number, educator: Educator): Observable<Array<Educator>>;
+  abstract deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean>;
+  abstract deleteChild(idDaycare: number, idChild: number): Observable<Boolean>;
+  abstract getUser(username:String): Observable<User>;
+  abstract errorSubscribe(error);
+  abstract completed();
 }

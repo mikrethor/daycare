@@ -18,7 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { LoginService } from './services/login-service';
 import { ConstantsService } from 'app/services/constants-service';
-import { DaycareService } from 'app/services/daycare-service';
+import { DaycareServiceImpl ,DaycareService } from 'app/services/daycare-service';
 import { UserService } from 'app/services/user-service';
 
 @NgModule({
@@ -34,8 +34,10 @@ import { UserService } from 'app/services/user-service';
     routing
 
   ],
-  providers: [LoginService,ConstantsService,UserService,DaycareService, { provide: LocationStrategy, useClass: HashLocationStrategy, },
+  providers: [LoginService,ConstantsService,UserService, 
+    { provide: LocationStrategy, useClass: HashLocationStrategy, },
     { provide: APP_BASE_HREF, useValue: '/', },
+    { provide : DaycareService, useClass:DaycareServiceImpl},
   ],
   bootstrap: [AppComponent]
 })
