@@ -37,4 +37,27 @@ class UserRepositoryTest {
         val parent=users.toTypedArray()[2]
         Assert.assertEquals("parent",parent.username)
     }
+
+
+    @Test
+    fun findAllByDaycareAndRole() {
+        var users=userRepository.findAllByDaycareAndRole(1L,3L)
+        Assert.assertNotNull(users)
+        Assert.assertEquals(1,users.size)
+
+        val parent=users.toTypedArray()[0]
+        Assert.assertEquals("parent",parent.username)
+
+        users=userRepository.findAllByDaycareAndRole(1L,1L)
+        Assert.assertNotNull(users)
+        Assert.assertEquals(2,users.size)
+
+
+        val educator1=users.toTypedArray()[0]
+        Assert.assertEquals("johndoe",educator1.username)
+
+        val educator2=users.toTypedArray()[1]
+        Assert.assertEquals("admin",educator2.username)
+
+    }
 }
