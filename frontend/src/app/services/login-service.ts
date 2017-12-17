@@ -17,8 +17,6 @@ export class LoginService {
     private http: Http,
     private constantService: ConstantsService,
     private router: Router
-   
-   
     ) {}
 
   login(login: string, password: string):Observable<String>{

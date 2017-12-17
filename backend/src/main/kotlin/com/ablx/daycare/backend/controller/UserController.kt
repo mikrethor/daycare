@@ -18,4 +18,8 @@ internal class UserController{
     fun findByName(@PathVariable(value="name")name: String) =
             userRepository.findByUsername(name)
 
+    @GetMapping("/users/role/{idRole}/daycare/{idDaycare}")
+    fun findByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="idRole")idRole: Long) =
+            userRepository.findAllByDaycareAndRole(idDaycare,idRole)
+
 }

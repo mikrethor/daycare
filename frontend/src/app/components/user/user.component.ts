@@ -40,11 +40,9 @@ export class UserComponent implements OnInit {
                 this.roles=data.roles;
                 this.daycare=data.daycare;
                 this.user=new User(data.id,data.username,data.firstName,data.lastName,data.roles,data.daycare);
-            
             },
             this.daycareService.errorSubscribe,
-            this.daycareService.completed); 
-
+            this.daycareService.completed);
             // this.userService.set(this.user);
             // console.log(this.userService.isEducator());       
     }
