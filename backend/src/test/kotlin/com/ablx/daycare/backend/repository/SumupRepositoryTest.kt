@@ -1,6 +1,7 @@
 package com.ablx.daycare.backend.repository
 
 import org.assertj.core.api.Assertions
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,12 +13,31 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 class SumupRepositoryTest {
 
     @Autowired
-    private lateinit var daycareRepository: DaycareRepository
+    private lateinit var sumupRepository: SumupRepository
+
+    @Autowired
+    private lateinit var childRepository: ChildRepository
+
 
     @Test
     fun findOne() {
-        val daycare=daycareRepository.findOne(1L)
-        Assertions.assertThat("Ma garderie")
-                .isEqualTo(daycare.name)
+        val sumup=sumupRepository.findOne(1L)
+        Assertions.assertThat("comment 1")
+                .isEqualTo(sumup.comment)
+    }
+
+    @Test
+    fun findAllByOrderByDayDesc() {
+        val child=childRepository.findOne(1L)
+        val sumups=sumupRepository.findAllByChildOrderByDayDesc(child)
+        Assertions.assertThat(sumups.size)
+                .isEqualTo(10)
+
+
+        val sumup1=sumups.toTypedArray()[0]
+        Assert.assertEquals("comment 1",sumup1.comment)
+
+        val sumup10=sumups.toTypedArray()[9]
+        Assert.assertEquals("comment 10",sumup10.comment)
     }
 }

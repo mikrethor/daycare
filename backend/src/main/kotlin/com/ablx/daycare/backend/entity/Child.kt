@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 internal data class Child(
-        @field: Id @field: GeneratedValue var Id: Long = 0, //Primary Key
+        @field: Id @field: GeneratedValue var id: Long = 0, //Primary Key
         var firstname: String = "",
         var lastname: String = "",
         @ManyToOne(fetch = FetchType.EAGER)

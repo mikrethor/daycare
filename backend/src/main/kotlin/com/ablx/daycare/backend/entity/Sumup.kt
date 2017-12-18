@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 internal data class Sumup(
-        @field: Id @field: GeneratedValue var Id : Long = 0, //Primary Key
+        @field: Id @field: GeneratedValue var id : Long = 0, //Primary Key
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "ID_CHILD", referencedColumnName = "ID")
         var child:Child=Child(),
