@@ -21,9 +21,13 @@ internal class ChildController {
     fun findAll() =
             childrenRepository.findAll()
 
-    @GetMapping("/daycares/{idDaycare}/children")
+    @GetMapping("/daycares/{idDaycare}/childs")
     fun findAllByDaycare(@PathVariable(value="idDaycare")idDaycare:Long) =
             childrenRepository.findAllByDaycare(idDaycare)
+
+    @GetMapping("/daycares/{idDaycare}/childs/{id}")
+    fun findOneByIdByDaycare(@PathVariable(value="idDaycare")id:Long,@PathVariable(value="idDaycare")idDaycare:Long) =
+            childrenRepository.findOneByIdByDaycare(id,idDaycare)
 
 
 }
