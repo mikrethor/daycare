@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-internal class ChildrenController {
+internal class ChildController {
 
     @Autowired
     lateinit var childrenRepository: ChildRepository
@@ -21,7 +21,7 @@ internal class ChildrenController {
     fun findAll() =
             childrenRepository.findAll()
 
-    @GetMapping("/daycres/{idDaycare}/children")
+    @GetMapping("/daycares/{idDaycare}/children")
     fun findAllByDaycare(@PathVariable(value="idDaycare")idDaycare:Long) =
             childrenRepository.findAllByDaycare(idDaycare)
 
