@@ -7,7 +7,9 @@ import org.springframework.data.repository.query.Param
 
 internal interface ChildRepository : JpaRepository<Child, Long>{
 
-
     @Query("select c from Child c where c.daycare.id=:idDaycare")
     fun findAllByDaycare(@Param("idDaycare") id: Long): List<Child>
+
+    @Query("select c from Child c where c.id=:id and c.daycare.id=:idDaycare")
+    fun findOneByIdByDaycare(@Param("id") id: Long,@Param("idDaycare") idDaycare: Long): Child
 }
