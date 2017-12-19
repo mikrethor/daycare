@@ -54,9 +54,9 @@ class DaycareRestTest{
     fun getAllDaycares() {
         mockMvc!!.perform(get("/daycares"))
                 .andExpect(status().isOk)
-                .andExpect(content().contentType(contentTypeHal))
-                .andExpect(jsonPath("$._embedded.daycares", hasSize<Any>(1)))
-                .andExpect(jsonPath("$._embedded.daycares[0].name", equalTo("Ma garderie")))
-                .andExpect(jsonPath("$._embedded.daycares[0].id", equalTo(1)))
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$", hasSize<Any>(1)))
+                .andExpect(jsonPath("$[0].name", equalTo("Ma garderie")))
+                .andExpect(jsonPath("$[0].id", equalTo(1)))
     }
 }

@@ -16,4 +16,8 @@ internal interface UserRepository : JpaRepository<User, Long>{
     @Query("select u from User u, Role r where u.daycare.id=:idDaycare and r.id=:idRole and " +
             "r member of u.roles")
     fun findAllByDaycareAndRole(@Param("idDaycare") id: Long, @Param("idRole") idRole: Long): List<User>
+
+    @Query("select u from User u, Role r where u.daycare.id=:idDaycare and r.id=:idRole and " +
+            "r member of u.roles and u.id=:id")
+    fun findOneByIdByDaycareAndRole(@Param("id") id: Long,@Param("idDaycare") idDaycare: Long, @Param("idRole") idRole: Long): User
 }
