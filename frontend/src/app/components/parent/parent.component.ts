@@ -43,7 +43,7 @@ export class ParentComponent implements OnInit {
         this.service.getChildrenByParentId(this.idDayCare, this.idParent).subscribe(
             (jsonChildren) => {
                 for (let child of jsonChildren) {
-                    this.children.push(new Child(child.id, child.firstName, child.lastName, this.idDayCare));
+                    this.children.push(new Child(child.id, child.firstname, child.lastname, this.idDayCare));
                 }
             },
             this.service.errorSubscribe,

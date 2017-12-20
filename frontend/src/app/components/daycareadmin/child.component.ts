@@ -40,7 +40,7 @@ export class AdminChildComponent implements OnInit {
             .subscribe(
             (json) => {
                 for (let child of json) {
-                    this.children.push(new Child(child.id, child.firstName, child.lastName, child.daycare));
+                    this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
                 }
             },
             this.service.errorSubscribe,
@@ -67,7 +67,7 @@ export class AdminChildComponent implements OnInit {
         this.service.getChildren(this.idDayCare).subscribe(
             (jsonChild) => {
                 for (let child of jsonChild) {
-                    this.children.push(new Child(child.id, child.firstName, child.lastName, child.daycare));
+                    this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
 
                 }
             },

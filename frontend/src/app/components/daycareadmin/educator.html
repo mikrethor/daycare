@@ -5,7 +5,7 @@
         <h3 md-header>Educators</h3>
         <md-list-item *ngFor="let e of educators; let i = index;">
             <md-icon md-list-avatar color="primary">face</md-icon>
-            <h4 md-line>{{e.firstName}} {{ e.lastName}}</h4>
+            <h4 md-line>{{e.firstname}} {{ e.lastname}}</h4>
             <!--<p md-line> dsdsd </p>-->
             <button md-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/:idDaycare/admin/:idAdmin/educators/edit']">
                 <md-icon>edit</md-icon>

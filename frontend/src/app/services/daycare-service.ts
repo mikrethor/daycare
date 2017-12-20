@@ -14,8 +14,11 @@ export class DaycareServiceImpl implements DaycareService{
   }
 
   getDaycare(id: number): Observable<Daycare> {
-    var url = this.constantService.API_ENDPOINT;
-    return this.http.get( url+ "/daycares/" + id, this.loginService.getBearerToken())
+    var endpoint = this.constantService.API_ENDPOINT;
+    var url = endpoint+"/daycares/"+id;
+
+ 
+    return this.http.get( url, this.loginService.getBearerToken())
       .map((response) => 
         {return response.json();}
       )
@@ -32,7 +35,7 @@ export class DaycareServiceImpl implements DaycareService{
 
   getEducators(id: number): Observable<Array<Educator>> {
     
-    return this.http.get(this.constantService.API_ENDPOINT + "/users/role/1/daycare/" + id, this.loginService.getBearerToken())
+    return this.http.get(this.constantService.API_ENDPOINT + "/users/role/1/daycares/" + id, this.loginService.getBearerToken())
 
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -50,7 +53,7 @@ export class DaycareServiceImpl implements DaycareService{
   getParents(idDaycare: number): Observable<Array<Parent>> {
     // return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/",this.loginService.getBearerToken())
     //   .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-      return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycare/" + idDaycare, this.loginService.getBearerToken())
+      return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
       
             .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
         }
@@ -150,7 +153,7 @@ export class DaycareServiceImpl implements DaycareService{
     .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  errorSubscribe(error) { console.log("Error happened :" + error) }
+  errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
   completed() { console.log("the subscription is completed") }
 }
 

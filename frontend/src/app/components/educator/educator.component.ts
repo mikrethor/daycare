@@ -43,6 +43,7 @@ export class EducatorComponent implements OnInit {
             .subscribe(
             (json) => {
                 for (let child of json) {
+                    console.log(child.firstname+" "+child.lastname);
                     this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
                 }
             },

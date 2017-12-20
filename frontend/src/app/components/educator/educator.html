@@ -4,7 +4,7 @@
         <h2 mat-header>Sumups</h2>
         <mat-list-item *ngFor="let c of children; let i = index;">
             <mat-icon mat-list-avatar color="primary">face</mat-icon>
-            <h4 mat-line>{{c.firstName}} {{ c.lastName}}</h4>
+            <h4 mat-line>{{c.firstname}} {{ c.lastname}}</h4>
             <!--<p md-line> dsdsd </p>-->
             <button mat-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/:idDaycare/children/:idChildren/sumups/:idSumups']">
                 <mat-icon>mode_edit</mat-icon>

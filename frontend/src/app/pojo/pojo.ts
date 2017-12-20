@@ -8,8 +8,8 @@ export class Daycare {
   export class Child {
     constructor(
       public id: number,
-      public firstName: string,
-      public lastName: string,
+      public firstname: string,
+      public lastname: string,
       public daycare: number
     ) { }
   }
