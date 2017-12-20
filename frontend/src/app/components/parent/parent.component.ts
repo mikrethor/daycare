@@ -34,7 +34,7 @@ export class ParentComponent implements OnInit {
 
         this.service.getParent(this.idDayCare, this.idParent).subscribe(
             (jsonParent) => {
-                this.parent = new Parent(jsonParent.id, jsonParent.firstName, jsonParent.lastName, jsonParent.daycare);
+                this.parent = new Parent(jsonParent.id, jsonParent.firstname, jsonParent.lastname, jsonParent.daycare);
             },
             this.service.errorSubscribe,
             this.service.completed

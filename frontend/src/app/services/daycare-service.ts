@@ -51,8 +51,6 @@ export class DaycareServiceImpl implements DaycareService{
   }
 
   getParents(idDaycare: number): Observable<Array<Parent>> {
-    // return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/",this.loginService.getBearerToken())
-    //   .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
       return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
       
             .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
