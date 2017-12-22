@@ -52,28 +52,28 @@ export class EducatorComponent implements OnInit {
             );
     }
 
-    // selectChild(index: number) {
-    //     this.selectedChild = this.children[index];
-    //     this.sumups = [];
-    //     this.service.getSumups(this.idDayCare, this.selectedChild.id).subscribe(
-    //         (json) => {
-    //             for (let sumup of json) {
-    //                 this.sumups.push(new Sumups(
-    //                     sumup.id,
-    //                     sumup.child,
-    //                     sumup.mood,
-    //                     sumup.sleep,
-    //                     sumup.appetite,
-    //                     sumup.comment,
-    //                     sumup.educator,
-    //                     sumup.day
-    //                 ));
-    //             }
-    //         },
-    //         this.service.errorSubscribe,
-    //         this.service.completed
-    //     );
-    // }
+    selectChild(index: number) {
+        this.selectedChild = this.children[index];
+        this.sumups = [];
+        this.service.getSumups(this.idDayCare, this.selectedChild.id).subscribe(
+            (json) => {
+                for (let sumup of json) {
+                    this.sumups.push(new Sumups(
+                        sumup.id,
+                        sumup.child,
+                        sumup.mood,
+                        sumup.sleep,
+                        sumup.appetite,
+                        sumup.comment,
+                        sumup.educator,
+                        sumup.day
+                    ));
+                }
+            },
+            this.service.errorSubscribe,
+            this.service.completed
+        );
+    }
 
     add(index:number){}
     edit(index:number){}

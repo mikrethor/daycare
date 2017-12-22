@@ -8,7 +8,7 @@ import { User, Child, Parent, Sumups } from '../../pojo/pojo';
 
 @Component({
     selector: 'edit-sumups',
-    templateUrl: '.$/edit-sumups.html',
+    templateUrl: './edit-sumups.html',
 })
 export class EditSumupsComponent implements OnInit {
     private user: User;
@@ -34,7 +34,7 @@ export class EditSumupsComponent implements OnInit {
         this.idParent = 1;//this.route.snapshot.params['idParent'];
 
         //TODO determiner date du jour
-        this.service.getSumup(this.idDayCare, this.idParent, "2017-03-08").subscribe(
+        this.service.getSumup(this.idDayCare, this.idParent, "2017-12-21").subscribe(
             (jsonSumup) => {
                 this.sumup = new Sumups(
                     jsonSumup.id,

@@ -14,9 +14,14 @@ internal class ParentController {
     @Autowired
     lateinit var userRepository: UserRepository
 
-    @GetMapping("/daycare/{idDaycare}/parents")
-    fun findByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long) =
+    @GetMapping("/daycares/{idDaycare}/parents")
+    fun findAllByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long) =
             userRepository.findAllByDaycareAndRole(idDaycare, Role.PARENT.value)
+
+    @GetMapping("/daycares/{idDaycare}/parents/{idParent}")
+    fun findOneByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long,
+                             @PathVariable(value="idParent")id: Long) =
+            userRepository.findOneByIdByDaycareAndRole(id,idDaycare, Role.PARENT.value)
 
 
 }

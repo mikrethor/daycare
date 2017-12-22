@@ -15,6 +15,7 @@ import { EducatorComponent } from './components/educator/educator.component';
 import { ParentComponent } from './components/parent/parent.component';
 import { DaycareAdminComponent } from './components/daycareadmin/daycareadmin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { EditSumupsComponent } from './components/sumups/edit-sumups.component';
 
 import { LoginService } from './services/login-service';
 import { ConstantsService } from 'app/services/constants-service';
@@ -23,7 +24,8 @@ import { UserService } from 'app/services/user-service';
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,DaycareAdminComponent,NavbarComponent
+    AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,
+    DaycareAdminComponent,NavbarComponent,EditSumupsComponent
   ],
   imports: [
     BrowserModule,
