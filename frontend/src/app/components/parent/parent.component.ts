@@ -51,7 +51,7 @@ export class ParentComponent implements OnInit {
         );
 
         //TODO determiner date du jour
-        this.service.getSumup(this.idDayCare, this.idParent, "2017-03-26").subscribe(
+        this.service.getSumup(this.idDayCare, this.idParent, "2017-12-21").subscribe(
             (jsonSumup) => {
                 this.sumup = new Sumups(
                     jsonSumup.id,

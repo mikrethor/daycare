@@ -14,6 +14,7 @@ export class DaycareServiceImpl implements DaycareService{
   }
 
   getDaycare(id: number): Observable<Daycare> {
+    console.log("getDaycare " +id);
     var endpoint = this.constantService.API_ENDPOINT;
     var url = endpoint+"/daycares/"+id;
 
@@ -29,44 +30,51 @@ export class DaycareServiceImpl implements DaycareService{
 //parent 3 
 //admin 2
   getChildren(id: number): Observable<Array<Child>> {
+    console.log("getChildren " +id);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id + "/childs",this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getEducators(id: number): Observable<Array<Educator>> {
-    
+    console.log("getEducators " +id);
     return this.http.get(this.constantService.API_ENDPOINT + "/users/role/1/daycares/" + id, this.loginService.getBearerToken())
 
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getEducator(idDaycare: number, idEducator: number): Observable<Educator> {
+    console.log("getEducator " +idDaycare+" "+idEducator);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getParent(idDaycare: number, idParent: number): Observable<Parent> {
+    console.log("getEducator " +idDaycare+" "+idParent)
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getParents(idDaycare: number): Observable<Array<Parent>> {
+    console.log("getParents " +idDaycare);
       return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
       
             .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
         }
 
   getChildrenByParentId(idDaycare: number, idParent: number): Observable<Array<Parent>> {
+    console.log("getChildrenByParentId " +idDaycare+" "+idParent);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent + "/childs",this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getSumups(idDaycare: number, idChild: number): Observable<Array<Sumups>> {
+    console.log("getSumups " +idDaycare+" "+idChild);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/",this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups> {
+    console.log("getSumup " +idDaycare+" "+idChild+" "+daySumup);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/day/" + daySumup,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

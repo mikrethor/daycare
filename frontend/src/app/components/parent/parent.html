@@ -2,14 +2,14 @@
     <h2>Children</h2>
     <ul>
         <li *ngFor="let child of children; let i = index; ">
-            {{ child.firstName }} {{ child.lastName }}
+            {{ child.firstname }} {{ child.lastname }}
         </li>
     </ul>
     <mat-list>
         <h2 md-header>Children</h2>
         <mat-list-item *ngFor="let c of children; let i = index;">
             <mat-icon md-list-avatar color="primary">face</mat-icon>
-            <h4 mat-line>{{c.firstName}} {{ c.lastName}}</h4>
+            <h4 mat-line>{{c.firstname}} {{ c.lastname}}</h4>
             <!--<p md-line> dsdsd </p>-->
             <button mat-icon-button color="primary" (click)="select(i)" [routerLink]="['/daycare/:idDaycare/children/:idChildren/sumups/:idSumups']">
                 <mat-icon>mode_edit</mat-icon>
