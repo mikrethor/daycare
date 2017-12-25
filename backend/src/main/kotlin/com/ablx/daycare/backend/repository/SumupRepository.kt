@@ -11,6 +11,6 @@ internal interface SumupRepository : JpaRepository<Sumup, Long> {
 
     fun findAllByChildOrderByDayDesc(child:Child): List<Sumup>
 
-    @Query("select s from Sumup s where c.day=:day and c.child.id=:idChild")
+    @Query("select s from Sumup s where s.day=:day and s.child.id=:idChild")
     fun findOneByChildAndDay(@Param("idChild")idChild:Long,@Param("day") day: Calendar):Sumup
 }

@@ -75,6 +75,7 @@ export class DaycareServiceImpl implements DaycareService{
 
   getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups> {
     console.log("getSumup " +idDaycare+" "+idChild+" "+daySumup);
+    console.log(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/day/" + daySumup);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/day/" + daySumup,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

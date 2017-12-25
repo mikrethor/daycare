@@ -34,7 +34,7 @@ export class EditSumupsComponent implements OnInit {
         this.idParent = 1;//this.route.snapshot.params['idParent'];
 
         //TODO determiner date du jour
-        this.service.getSumup(this.idDayCare, this.idParent, "2017-12-21").subscribe(
+        this.service.getSumup(this.idDayCare, this.idParent, "2017-12-26").subscribe(
             (jsonSumup) => {
                 this.sumup = new Sumups(
                     jsonSumup.id,
