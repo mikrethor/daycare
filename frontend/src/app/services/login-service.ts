@@ -58,7 +58,9 @@ export class LoginService {
   
   getBearerToken():RequestOptions{
     let headers = new Headers({
+      'Content-Type': 'application/json',
       'Authorization': this.getBearerAuthorization(),
+      // 'Allow-Control-Allow-Origin': '*'
     });
     let options = new RequestOptions({ headers: headers });
     return options;

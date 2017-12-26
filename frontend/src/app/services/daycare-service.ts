@@ -116,9 +116,8 @@ export class DaycareServiceImpl implements DaycareService{
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups";
     let body = JSON.stringify(sumup);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(url, body, options
+
+    return this.http.post(url, body, this.loginService.getBearerToken()
     )
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -127,29 +126,19 @@ export class DaycareServiceImpl implements DaycareService{
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators";
     let body = JSON.stringify(educator);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(url, body, options
-    )
+    return this.http.post(url, body, this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean> {
-
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator;
-
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions({ headers: headers });
-    return this.http.delete(url)
+    return this.http.delete(url,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   deleteChild(idDaycare: number, idChild: number): Observable<Boolean> {
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild;
-
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions({ headers: headers });
     return this.http.delete(url)
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

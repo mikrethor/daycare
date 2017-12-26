@@ -1,5 +1,6 @@
 package com.ablx.daycare.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -9,5 +10,8 @@ internal data class Child(
         var lastname: String = "",
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "daycare")
-        var daycare: Daycare = Daycare()
+        var daycare: Daycare = Daycare(),
+        @get:JsonIgnore
+        @OneToMany(mappedBy = "child", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+        var sumups: List<Sumup> = emptyList()
 )
