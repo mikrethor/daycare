@@ -1,5 +1,7 @@
 package com.ablx.daycare.backend.objects
 
+import com.fasterxml.jackson.annotation.JsonValue
+
 enum class Level(val level: Int ) {
     GOOD(10),
     MEDIUM(5),
@@ -14,5 +16,10 @@ enum class Level(val level: Int ) {
                     else ->
                         Error("Invalid level $level")
                 }
+    }
+
+    @JsonValue
+    fun level(): Int {
+        return level
     }
 }

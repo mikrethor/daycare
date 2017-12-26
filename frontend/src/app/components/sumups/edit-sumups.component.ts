@@ -13,17 +13,17 @@ import { User, Child, Parent, Sumups } from '../../pojo/pojo';
 export class EditSumupsComponent implements OnInit {
     private user: User;
     private child: Child = new Child(1, "Jean", "Valgeant", 1);
-    private sumup: Sumups = new Sumups(0, 0, "BAD", "BAD", "BAD", "", 0, 0);
+    private sumup: Sumups = new Sumups(0, new Child(0,"","",0), 0, 0, 0, "", 0, 0);
     private idDayCare: number = 1;
     private idParent: number = 1;
     private displaySumup= {
-        selectedMoodId: 'BAD',
-        selectedSleepId: 'BAD',
-        selectedAppetiteId: 'BAD'
+        selectedMoodId: 0,
+        selectedSleepId: 0,
+        selectedAppetiteId: 0
     }
-    private appetites: string[] = ["BAD", "MEDIUM", "GOOD"];
-    private moods: string[] = ["BAD", "MEDIUM", "GOOD"];
-    private sleeps: string[] = ["BAD", "MEDIUM", "GOOD"];
+    private appetites: number[] = [0, 5, 10];
+    private moods: number[] = [0, 5, 10];
+    private sleeps: number[] = [0, 5, 10];
 
     constructor(private service: DaycareService, private route: ActivatedRoute
     ) {}
@@ -36,7 +36,6 @@ export class EditSumupsComponent implements OnInit {
         //TODO determiner date du jour
         this.service.getSumup(this.idDayCare, this.idParent, "2017-12-26").subscribe(
             (jsonSumup) => {
-                console.log(jsonSumup);
                 this.sumup = new Sumups(
                     jsonSumup.id,
                     jsonSumup.child,
@@ -47,6 +46,9 @@ export class EditSumupsComponent implements OnInit {
                     jsonSumup.educator,
                     jsonSumup.day
                 );
+
+                this.child=this.sumup.child;
+
                 this.displaySumup = {
                     selectedMoodId: this.sumup.mood,
                     selectedSleepId: this.sumup.sleep,
@@ -58,18 +60,18 @@ export class EditSumupsComponent implements OnInit {
         );
     }
 
-    getImage(level: string) {
+    getImage(level: number) {
         
         switch (level) {
-            case "BAD":
+            case 0:
                 return '/assets/scalableVectorGraphics/health-40to59.svg';
-            case "MEDIUM":
+            case 5:
                 return '/assets/scalableVectorGraphics/health-60to79.svg';
-            case "GOOD":
+            case 10:
                 return '/assets/scalableVectorGraphics/health-80plus.svg';
             default:
-            console.log("default")+level;
-                return "";
+
+                return -1;
         }
     }
 }

@@ -15,11 +15,11 @@ export class ParentComponent implements OnInit {
     private parent: Parent = new Parent(0, "", "", null);
     private children: Child[] = [];
     private child= {
-        selectedMoodId: 'health-80plus.svg',
-        selectedSleepId: 'health-80plus.svg',
-        selectedAppetiteId: 'health-80plus.svg'
+        selectedMoodId: 0,
+        selectedSleepId: 0,
+        selectedAppetiteId: 0
     }
-    private sumup: Sumups = new Sumups(0, 0, "BAD", "BAD", "BAD", "", 0, 0);
+    private sumup: Sumups = new Sumups(0, 0, 0, 0, 0, "", 0, 0);
     private idDayCare: number = -61;
     private idParent: number = -61;
 
@@ -64,9 +64,9 @@ export class ParentComponent implements OnInit {
                     jsonSumup.day
                 );
                 this.child = {
-                    selectedMoodId: this.getImage(this.sumup.mood),
-                    selectedSleepId: this.getImage(this.sumup.sleep),
-                    selectedAppetiteId: this.getImage(this.sumup.appetite)
+                    selectedMoodId: this.sumup.mood,
+                    selectedSleepId: this.sumup.sleep,
+                    selectedAppetiteId: this.sumup.appetite
                 }
             },
             this.service.errorSubscribe,
@@ -74,22 +74,37 @@ export class ParentComponent implements OnInit {
         );
     }
 
-    getImage(level: string) {
-
+    getImage(level: number) {
+        
         switch (level) {
-            case "BAD":
-                return 'health-40to59.svg';
-            case "MEDIUM":
-                return 'health-60to79.svg';
-            case "GOOD":
-                return 'health-80plus.svg';
-
+            case 0:
+                return '/assets/scalableVectorGraphics/health-40to59.svg';
+            case 5:
+                return '/assets/scalableVectorGraphics/health-60to79.svg';
+            case 10:
+                return '/assets/scalableVectorGraphics/health-80plus.svg';
             default:
+            console.log("default")+level;
                 return "";
         }
     }
 
     select(index:number){
 
+    }
+
+    getPosition(level: string) {
+        
+        switch (level) {
+            case "BAD":
+                return 0;
+            case "MEDIUM":
+                return 1;
+            case "GOOD":
+                return 2;
+            default:
+            console.log("default")+level;
+                return -1;
+        }
     }
 }
