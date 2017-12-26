@@ -19,7 +19,9 @@ import { EditSumupsComponent } from './components/sumups/edit-sumups.component';
 import { AdminChildComponent } from './components/daycareadmin/child.component';
 import { AdminEducatorComponent } from './components/daycareadmin/educator.component';
 import { AdminParentComponent } from './components/daycareadmin/parent.component';
-
+import { AdminEditChildComponent } from './components/daycareadmin/edit-child.component';
+import { AdminEditEducatorComponent } from './components/daycareadmin/edit-educator.component';
+import { AdminEditParentComponent } from './components/daycareadmin/edit-parent.component';
 import { LoginService } from './services/login-service';
 import { ConstantsService } from 'app/services/constants-service';
 import { DaycareServiceImpl ,DaycareService } from 'app/services/daycare-service';
@@ -29,7 +31,7 @@ import { UserService } from 'app/services/user-service';
   declarations: [
     AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,
     DaycareAdminComponent,NavbarComponent,EditSumupsComponent,AdminChildComponent,AdminEducatorComponent,
-    AdminParentComponent
+    AdminParentComponent,AdminEditChildComponent,AdminEditEducatorComponent,AdminEditParentComponent
   ],
   imports: [
     BrowserModule,

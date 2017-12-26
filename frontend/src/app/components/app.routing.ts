@@ -8,9 +8,9 @@ import { DaycareAdminComponent } from './daycareadmin/daycareadmin.component';
 import { AdminEducatorComponent } from './daycareadmin/educator.component';
 import { AdminParentComponent } from './daycareadmin/parent.component';
 import { AdminChildComponent } from './daycareadmin/child.component';
-// import { AdminEditEducatorComponent } from './daycareadmin/edit-educator.component';
-// import { AdminEditChildComponent } from './daycareadmin/edit-child.component';
-// import { AdminEditParentComponent } from './daycareadmin/edit-parent.component';
+import { AdminEditEducatorComponent } from './daycareadmin/edit-educator.component';
+import { AdminEditChildComponent } from './daycareadmin/edit-child.component';
+import { AdminEditParentComponent } from './daycareadmin/edit-parent.component';
 import { EditSumupsComponent } from './sumups/edit-sumups.component';
 
 const routes: Routes = [
@@ -23,14 +23,14 @@ const routes: Routes = [
     { path: 'daycare/:idDaycare/educator/:idEducator', component: EducatorComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin', component: DaycareAdminComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/children', component: AdminChildComponent },
-    // { path: 'daycare/:idDaycare/admin/:idAdmin/children/create', component: AdminEditChildComponent },
-    // { path: 'daycare/:idDaycare/admin/:idAdmin/children/edit', component: AdminEditChildComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/children/create', component: AdminEditChildComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/children/edit', component: AdminEditChildComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/educators', component: AdminEducatorComponent },
-    // { path: 'daycare/:idDaycare/admin/:idAdmin/educators/create', component: AdminEditEducatorComponent },
-    // { path: 'daycare/:idDaycare/admin/:idAdmin/educators/edit', component: AdminEditEducatorComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/educators/create', component: AdminEditEducatorComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/educators/edit', component: AdminEditEducatorComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/parents', component: AdminParentComponent },
-    // { path: 'daycare/:idDaycare/admin/:idAdmin/parents/create', component: AdminEditParentComponent },
-    // { path: 'daycare/:idDaycare/admin/:idAdmin/parents/edit', component: AdminEditParentComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/parents/create', component: AdminEditParentComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/parents/edit', component: AdminEditParentComponent },
     { path: 'daycare/:idDaycare/children/:idChildren/sumups/:idSumups', component: EditSumupsComponent },
 
 ];
