@@ -40,7 +40,8 @@ export class AdminParentComponent implements OnInit {
         this.service.getParents(this.idDayCare).subscribe(
             (jsonParent) => {
                 for (let parent of jsonParent) {
-                    this.parents.push(new Parent(parent.id, parent.firstname, parent.lastname, parent.daycare));
+                    console.log(parent)
+                    this.parents.push(new Parent(parent.id, parent.firstName, parent.lastName, parent.daycare));
 
                 }
             },

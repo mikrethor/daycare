@@ -19,7 +19,7 @@ export class ParentComponent implements OnInit {
         selectedSleepId: 0,
         selectedAppetiteId: 0
     }
-    private sumup: Sumups = new Sumups(0, 0, 0, 0, 0, "", 0, 0);
+    private sumup: Sumups = new Sumups(0, new Child(0,"","",0), 0, 0, 0, "", 0, 0);
     private idDayCare: number = -61;
     private idParent: number = -61;
 
@@ -34,7 +34,7 @@ export class ParentComponent implements OnInit {
 
         this.service.getParent(this.idDayCare, this.idParent).subscribe(
             (jsonParent) => {
-                this.parent = new Parent(jsonParent.id, jsonParent.firstname, jsonParent.lastname, jsonParent.daycare);
+                this.parent = new Parent(jsonParent.id, jsonParent.firstName, jsonParent.lastName, jsonParent.daycare);
             },
             this.service.errorSubscribe,
             this.service.completed
@@ -84,7 +84,6 @@ export class ParentComponent implements OnInit {
             case 10:
                 return '/assets/scalableVectorGraphics/health-80plus.svg';
             default:
-            console.log("default")+level;
                 return "";
         }
     }

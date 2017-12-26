@@ -26,8 +26,8 @@ export class Daycare {
   export class Parent {
     constructor(
       public id: number,
-      public firstname: string,
-      public lastname: string,
+      public firstName: string,
+      public lastName: string,
       public daycare: number
     ) { }
   }

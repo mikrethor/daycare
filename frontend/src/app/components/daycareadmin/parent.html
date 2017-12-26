@@ -1,24 +1,24 @@
 <div class="col-md-6 col-md-offset-3">
     <h1>{{daycare.name}}</h1>
     <h2>Administration Parent</h2>
-    <md-list>
-        <h3 md-header>Parents</h3>
-        <md-list-item *ngFor="let p of parents; let i = index;">
-            <md-icon md-list-avatar color="primary">face</md-icon>
-            <h4 md-line>{{p.firstname}} {{ p.lastname}}</h4>
-            <!--<p md-line> dsdsd </p>-->
-            <button md-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/:idDaycare/admin/:idAdmin/parents/edit']">
-                <md-icon>edit</md-icon>
+    <mat-list>
+        <h3 mat-header>Parents</h3>
+        <mat-list-item *ngFor="let p of parents; let i = index;">
+            <mat-icon mat-list-avatar color="primary">face</mat-icon>
+            <h4 mat-line>{{p.firstName}} {{ p.lastName}}</h4>
+            <!--<p mat-line> dsdsd </p>-->
+            <button mat-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/:idDaycare/admin/:idAdmin/parents/edit']">
+                <mat-icon>edit</mat-icon>
             </button>
-            <button md-icon-button color="primary" (click)="remove(i)">
-                <md-icon>remove</md-icon>
+            <button mat-icon-button color="primary" (click)="remove(i)">
+                <mat-icon>remove</mat-icon>
             </button>
-        </md-list-item>
-    </md-list>
-    <button md-fab color="primary" [routerLink]="['/daycare/:idDaycare/admin/:idAdmin/parents/create']">
-        <md-icon>add</md-icon>
+        </mat-list-item>
+    </mat-list>
+    <button mat-fab color="primary" [routerLink]="['/daycare/:idDaycare/admin/:idAdmin/parents/create']">
+        <mat-icon>add</mat-icon>
     </button>
-    <button md-icon-button color="primary" [disabled]="loading" [routerLink]="['/daycareadmin']">
-        <md-icon>cancel</md-icon>
+    <button mat-icon-button color="primary" [disabled]="loading" [routerLink]="['/daycareadmin']">
+        <mat-icon>cancel</mat-icon>
     </button>
 </div>

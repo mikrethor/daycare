@@ -61,7 +61,7 @@ export class DaycareServiceImpl implements DaycareService{
             .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
         }
 
-  getChildrenByParentId(idDaycare: number, idParent: number): Observable<Array<Parent>> {
+  getChildrenByParentId(idDaycare: number, idParent: number): Observable<Array<Child>> {
     console.log("getChildrenByParentId " +idDaycare+" "+idParent);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent + "/childs",this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
