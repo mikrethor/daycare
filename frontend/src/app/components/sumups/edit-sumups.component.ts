@@ -13,17 +13,17 @@ import { User, Child, Parent, Sumups } from '../../pojo/pojo';
 export class EditSumupsComponent implements OnInit {
     private user: User;
     private child: Child = new Child(1, "Jean", "Valgeant", 1);
-    private sumup: Sumups = new Sumups(0, 0, 0, 0, 0, "", 0, 0);
+    private sumup: Sumups = new Sumups(0, 0, "BAD", "BAD", "BAD", "", 0, 0);
     private idDayCare: number = 1;
     private idParent: number = 1;
     private displaySumup= {
-        selectedMoodId: 'health-80plus.svg',
-        selectedSleepId: 'health-80plus.svg',
-        selectedAppetiteId: 'health-80plus.svg'
+        selectedMoodId: 'BAD',
+        selectedSleepId: 'BAD',
+        selectedAppetiteId: 'BAD'
     }
-    private appetites: number[] = [0, 5, 10];
-    private moods: number[] = [0, 5, 10];
-    private sleeps: number[] = [0, 5, 10];
+    private appetites: string[] = ["BAD", "MEDIUM", "GOOD"];
+    private moods: string[] = ["BAD", "MEDIUM", "GOOD"];
+    private sleeps: string[] = ["BAD", "MEDIUM", "GOOD"];
 
     constructor(private service: DaycareService, private route: ActivatedRoute
     ) {}
@@ -36,6 +36,7 @@ export class EditSumupsComponent implements OnInit {
         //TODO determiner date du jour
         this.service.getSumup(this.idDayCare, this.idParent, "2017-12-26").subscribe(
             (jsonSumup) => {
+                console.log(jsonSumup);
                 this.sumup = new Sumups(
                     jsonSumup.id,
                     jsonSumup.child,
@@ -47,9 +48,9 @@ export class EditSumupsComponent implements OnInit {
                     jsonSumup.day
                 );
                 this.displaySumup = {
-                    selectedMoodId: this.getImage(this.sumup.mood),
-                    selectedSleepId: this.getImage(this.sumup.sleep),
-                    selectedAppetiteId: this.getImage(this.sumup.appetite)
+                    selectedMoodId: this.sumup.mood,
+                    selectedSleepId: this.sumup.sleep,
+                    selectedAppetiteId: this.sumup.appetite
                 }
             },
             this.service.errorSubscribe,
@@ -57,17 +58,17 @@ export class EditSumupsComponent implements OnInit {
         );
     }
 
-    getImage(level: number) {
-
+    getImage(level: string) {
+        
         switch (level) {
-            case 0:
-                return 'health-40to59.svg';
-            case 5:
-                return 'health-60to79.svg';
-            case 10:
-                return 'health-80plus.svg';
-
+            case "BAD":
+                return '/assets/scalableVectorGraphics/health-40to59.svg';
+            case "MEDIUM":
+                return '/assets/scalableVectorGraphics/health-60to79.svg';
+            case "GOOD":
+                return '/assets/scalableVectorGraphics/health-80plus.svg';
             default:
+            console.log("default")+level;
                 return "";
         }
     }

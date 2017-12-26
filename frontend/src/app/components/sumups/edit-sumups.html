@@ -4,19 +4,19 @@
     </h2>
     <div>
         <h4>Sumup : {{ sumup.day | date:'EEEE d MMMM'}}</h4>
-        <div>Appetite :
+        <div>Appetite : d{{value}}f
             <mat-radio-group>
-                <mat-radio-button value="{{value}}" *ngFor="let value of appetites; let i = index; "><img src="/images/{{ getImage(value) }}"></mat-radio-button>
+                <mat-radio-button value="{{value}}" *ngFor="let value of appetites; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
             </mat-radio-group>
         </div>
-        <div>Mood :
+        <div>Mood : d{{value}}f
             <mat-radio-group>
-                <mat-radio-button value="{{value}}" *ngFor="let value of moods; let i = index; "><img src="/images/{{ getImage(value) }}"></mat-radio-button>
+                <mat-radio-button value="{{value}}" *ngFor="let value of moods; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
             </mat-radio-group>
         </div>
-        <div>Sleep :
+        <div>Sleep : d{{value}}f
             <mat-radio-group>
-                <mat-radio-button value="{{value}}" *ngFor="let value of sleeps; let i = index; "><img src="/images/{{ getImage(value) }}"></mat-radio-button>
+                <mat-radio-button value="{{value}}" *ngFor="let value of sleeps; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
             </mat-radio-group>
         </div>
         <div>

@@ -36,9 +36,9 @@ export class Daycare {
     constructor(
       public id: number,
       public child: number,
-      public mood: number,
-      public sleep: number,
-      public appetite: number,
+      public mood: string,
+      public sleep: string,
+      public appetite: string,
       public comment: string,
       public educator: number,
       public day: number

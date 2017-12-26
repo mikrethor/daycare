@@ -19,7 +19,7 @@ export class ParentComponent implements OnInit {
         selectedSleepId: 'health-80plus.svg',
         selectedAppetiteId: 'health-80plus.svg'
     }
-    private sumup: Sumups = new Sumups(0, 0, 0, 0, 0, "", 0, 0);
+    private sumup: Sumups = new Sumups(0, 0, "BAD", "BAD", "BAD", "", 0, 0);
     private idDayCare: number = -61;
     private idParent: number = -61;
 
@@ -74,14 +74,14 @@ export class ParentComponent implements OnInit {
         );
     }
 
-    getImage(level: number) {
+    getImage(level: string) {
 
         switch (level) {
-            case 0:
+            case "BAD":
                 return 'health-40to59.svg';
-            case 5:
+            case "MEDIUM":
                 return 'health-60to79.svg';
-            case 10:
+            case "GOOD":
                 return 'health-80plus.svg';
 
             default:
