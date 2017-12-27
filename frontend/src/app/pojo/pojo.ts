@@ -10,7 +10,7 @@ export class Daycare {
       public id: number,
       public firstname: string,
       public lastname: string,
-      public daycare: number
+      public daycare: Daycare
     ) { }
   }
   

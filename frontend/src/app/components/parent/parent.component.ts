@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../services/login-service';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { DaycareService, } from '../../services/daycare-service';
-import { User, Child, Parent, Sumups } from '../../pojo/pojo';
+import { User, Child, Parent, Sumups, Daycare } from '../../pojo/pojo';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class ParentComponent implements OnInit {
         selectedSleepId: 0,
         selectedAppetiteId: 0
     }
-    private sumup: Sumups = new Sumups(0, new Child(0,"","",0), 0, 0, 0, "", 0, 0);
+    private sumup: Sumups = new Sumups(0, new Child(0,"","",new Daycare(0,"")), 0, 0, 0, "", 0, 0);
     private idDayCare: number = -61;
     private idParent: number = -61;
 
@@ -43,7 +43,7 @@ export class ParentComponent implements OnInit {
         this.service.getChildrenByParentId(this.idDayCare, this.idParent).subscribe(
             (jsonChildren) => {
                 for (let child of jsonChildren) {
-                    this.children.push(new Child(child.id, child.firstname, child.lastname, this.idDayCare));
+                    this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
                 }
             },
             this.service.errorSubscribe,

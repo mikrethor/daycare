@@ -11,7 +11,7 @@ import { Educator, Child, Daycare } from '../../pojo/pojo';
     templateUrl: './edit-child.html',
 })
 export class AdminEditChildComponent implements OnInit {
-    private child: Child = new Child(0, "", "", 0);
+    private child: Child = new Child(0, "", "", new Daycare(1,""));
     private children: Child[] = [];
     private idDayCare: number = 1;
     private daycare: Daycare = new Daycare(0, "");
@@ -34,7 +34,7 @@ export class AdminEditChildComponent implements OnInit {
     }
 
     create() {
-        this.child = new Child(null, this.model.firstName, this.model.lastName, this.idDayCare);
+        this.child = new Child(null, this.model.firstName, this.model.lastName, this.daycare);
         this.service.createChild(this.idDayCare, this.child).subscribe(
             data => {
                 this.zone.run(() => {

@@ -31,8 +31,15 @@ export class DaycareServiceImpl implements DaycareService{
 //admin 2
   getChildren(id: number): Observable<Array<Child>> {
     console.log("getChildren " +id);
-    return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id + "/childs",this.loginService.getBearerToken())
-      .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id + "/childs/",this.loginService.getBearerToken())
+      .map((response) => {
+        console.log("test :");console.log(response.json())
+       return response.json();
+      }).catch((error: any) => 
+    {
+      console.log(error)
+      return  Observable.throw(error.json().error || 'Server error')}
+    );
   }
 
   getEducators(id: number): Observable<Array<Educator>> {
@@ -57,7 +64,6 @@ export class DaycareServiceImpl implements DaycareService{
   getParents(idDaycare: number): Observable<Array<Parent>> {
     console.log("getParents " +idDaycare);
       return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
-      
             .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
         }
 
@@ -84,9 +90,7 @@ export class DaycareServiceImpl implements DaycareService{
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs";
     let body = JSON.stringify(child);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(url, body, options
+    return this.http.post(url, body, this.loginService.getBearerToken()
     )
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -95,20 +99,14 @@ export class DaycareServiceImpl implements DaycareService{
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents";
     let body = JSON.stringify(parent);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(url, body, options
+    return this.http.post(url, body, this.loginService.getBearerToken()
     )
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   deleteParent(idDaycare: number, idParent: number): Observable<Boolean> {
-
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent;
-
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions({ headers: headers });
-    return this.http.delete(url)
+    return this.http.delete(url,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
@@ -123,7 +121,6 @@ export class DaycareServiceImpl implements DaycareService{
   }
 
   createEducator(idDaycare: number, educator: Educator): Observable<Array<Educator>> {
-
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators";
     let body = JSON.stringify(educator);
     return this.http.post(url, body, this.loginService.getBearerToken())
@@ -137,7 +134,6 @@ export class DaycareServiceImpl implements DaycareService{
   }
 
   deleteChild(idDaycare: number, idChild: number): Observable<Boolean> {
-
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild;
     return this.http.delete(url)
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));

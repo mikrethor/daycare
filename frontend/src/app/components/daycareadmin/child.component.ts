@@ -20,9 +20,6 @@ export class AdminChildComponent implements OnInit {
     private daycare: Daycare = new Daycare(0, "");
     private deleted: boolean = false;
 
-
-
-
     constructor(private service: DaycareService, private zone: NgZone
     ) { }
 
@@ -36,11 +33,10 @@ export class AdminChildComponent implements OnInit {
 
         );
 
-        this.service.getChildren(this.idDayCare)
-            .subscribe(
+        this.service.getChildren(this.idDayCare).subscribe(
             (json) => {
                 for (let child of json) {
-                    this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
+                    this.children.push(new Child(child.id, child.firstname, child.lastname, new Daycare(1,"")));
                 }
             },
             this.service.errorSubscribe,
@@ -67,7 +63,7 @@ export class AdminChildComponent implements OnInit {
         this.service.getChildren(this.idDayCare).subscribe(
             (jsonChild) => {
                 for (let child of jsonChild) {
-                    this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
+                    this.children.push(new Child(child.id, child.firstname, child.lastname, new Daycare(0,"test")));
 
                 }
             },

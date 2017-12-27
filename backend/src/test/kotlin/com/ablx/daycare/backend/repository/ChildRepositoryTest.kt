@@ -22,7 +22,7 @@ class ChildRepositoryTest {
                 .isEqualTo("Arthur")
         Assertions.assertThat(child.lastname)
                 .isEqualTo("B")
-        Assertions.assertThat(child.daycare.Id)
+        Assertions.assertThat(child.daycare.id)
                 .isEqualTo(1L)
     }
 

@@ -15,3 +15,8 @@ internal data class Child(
         @OneToMany(mappedBy = "child", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
         var sumups: List<Sumup> = emptyList()
 )
+{
+        override fun toString(): String {
+                return "Child(id=$id, firstname='$firstname', lastname='$lastname', daycare=$daycare)"
+        }
+}

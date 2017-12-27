@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../services/login-service';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { DaycareService, } from '../../services/daycare-service';
-import { User, Child, Parent, Sumups } from '../../pojo/pojo';
+import { User, Child, Parent, Sumups,Daycare } from '../../pojo/pojo';
 
 
 @Component({
@@ -12,8 +12,8 @@ import { User, Child, Parent, Sumups } from '../../pojo/pojo';
 })
 export class EditSumupsComponent implements OnInit {
     private user: User;
-    private child: Child = new Child(1, "Jean", "Valgeant", 1);
-    private sumup: Sumups = new Sumups(0, new Child(0,"","",0), 0, 0, 0, "", 0, 0);
+    private child: Child = new Child(0, "Jean", "Valgeant", new Daycare(0,""));
+    private sumup: Sumups = new Sumups(0, new Child(0,"","",new Daycare(0,"")), 0, 0, 0, "", 0, 0);
     private idDayCare: number = 1;
     private idParent: number = 1;
     private displaySumup= {

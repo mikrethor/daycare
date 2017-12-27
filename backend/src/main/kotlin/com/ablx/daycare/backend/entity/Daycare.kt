@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 internal data class Daycare(
-        @field: Id @field: GeneratedValue var Id : Long = 0, //Primary Key
+        @field: Id @field: GeneratedValue var id : Long = 0, //Primary Key
         var name : String = "", //Column
         @get:JsonIgnore
         @OneToMany(mappedBy = "daycare", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
@@ -16,7 +16,7 @@ internal data class Daycare(
 ){
 
     override fun toString(): String {
-        return "Daycare(Id=$Id, name='$name')"
+        return "Daycare(Id=$id, name='$name')"
     }
 
 
