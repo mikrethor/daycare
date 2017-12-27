@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams, Jsonp } from '@angular/http';
+import { Http, Response} from '@angular/http';
 import { ConstantsService } from './constants-service';
 import { LoginService } from './login-service';
 import { Daycare,Role,User,Sumups,Child,Educator,Parent } from '../pojo/pojo';
@@ -15,8 +15,8 @@ export class DaycareServiceImpl implements DaycareService{
 
   getDaycare(id: number): Observable<Daycare> {
     console.log("getDaycare " +id);
-    var endpoint = this.constantService.API_ENDPOINT;
-    var url = endpoint+"/daycares/"+id;
+    let endpoint = this.constantService.API_ENDPOINT;
+    let url = endpoint+"/daycares/"+id;
 
  
     return this.http.get( url, this.loginService.getBearerToken())
@@ -33,11 +33,9 @@ export class DaycareServiceImpl implements DaycareService{
     console.log("getChildren " +id);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + id + "/childs/",this.loginService.getBearerToken())
       .map((response) => {
-        console.log("test :");console.log(response.json())
        return response.json();
       }).catch((error: any) => 
     {
-      console.log(error)
       return  Observable.throw(error.json().error || 'Server error')}
     );
   }
@@ -56,7 +54,7 @@ export class DaycareServiceImpl implements DaycareService{
   }
 
   getParent(idDaycare: number, idParent: number): Observable<Parent> {
-    console.log("getEducator " +idDaycare+" "+idParent)
+    console.log("getEducator " +idDaycare+" "+idParent);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -127,10 +125,10 @@ export class DaycareServiceImpl implements DaycareService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean> {
+  deleteEducator(idDaycare: number, idEducator: number):Observable<Response>{
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator;
-    return this.http.delete(url,this.loginService.getBearerToken())
-      .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    console.log("delete url "+url);
+   return this.http.delete(url,this.loginService.getBearerToken());
   }
 
   deleteChild(idDaycare: number, idChild: number): Observable<Boolean> {
@@ -165,7 +163,7 @@ export abstract class DaycareService {
   abstract deleteParent(idDaycare: number, idParent: number): Observable<Boolean>;
   abstract createSumup(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>>;
   abstract createEducator(idDaycare: number, educator: Educator): Observable<Array<Educator>>;
-  abstract deleteEducator(idDaycare: number, idEducator: number): Observable<Boolean>;
+  abstract deleteEducator(idDaycare: number, idEducator: number):Observable<Response>;
   abstract deleteChild(idDaycare: number, idChild: number): Observable<Boolean>;
   abstract getUser(username:String): Observable<User>;
   abstract errorSubscribe(error);

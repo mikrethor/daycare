@@ -1,10 +1,8 @@
-import { Component, Output, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs/Rx';
 import { LoginService} from '../../services/login-service';
 import { DaycareService} from '../../services/daycare-service';
 import { UserService} from '../../services/user-service';
-import { User } from '../../pojo/pojo';
 
 
 @Component({
@@ -15,17 +13,12 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     returnUrl: string;
-    connected = false;
-    logged = false;
     dataToken: String;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private loginService: LoginService,
-        private daycareService: DaycareService,
-        private userService: UserService,
-        private zone: NgZone
+        private loginService: LoginService
 ) { }
 
     ngOnInit() {
@@ -35,7 +28,7 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         //route to role page
-       this.loginService.login(this.model.username,this.model.password)      .subscribe(
+       this.loginService.login(this.model.username,this.model.password).subscribe(
         data => {
                 this.loginService.saveToken(data);
                 this.dataToken=data;
@@ -43,11 +36,7 @@ export class LoginComponent implements OnInit {
         },
         err => {
           alert('Invalid Credentials :'+err)
-        }); 
-
-   
-
-
+        });
         this.loading = false;
     }
 }

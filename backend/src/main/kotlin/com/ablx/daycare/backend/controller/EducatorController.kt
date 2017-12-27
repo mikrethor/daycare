@@ -16,17 +16,19 @@ internal class EducatorController {
     lateinit var userRepository: UserRepository
 
     @GetMapping("/daycares/{idDaycare}/educators")
-    fun findByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long) =
+    fun findByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: Long) =
             userRepository.findAllByDaycareAndRole(idDaycare, Role.EDUCATOR.value)
 
 
     @GetMapping("/daycares/{idDaycare}/educators/{id}")
-    fun findByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="id")id: Long) =
-            userRepository.findOneByIdByDaycareAndRole(id,idDaycare, Role.EDUCATOR.value)
+    fun findByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: Long, @PathVariable(value = "id") id: Long) =
+            userRepository.findOneByIdByDaycareAndRole(id, idDaycare, Role.EDUCATOR.value)
 
     @DeleteMapping("/daycares/{idDaycare}/educators/{id}")
-    fun delete(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="id")id: Long) =
-            userRepository.delete(id)
+    fun delete(@PathVariable(value = "idDaycare") idDaycare: Long, @PathVariable(value = "id") id: Long):Boolean {
+        userRepository.delete(id)
+        return true
+    }
 
 
 }
