@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+//To be removed
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
@@ -41,6 +44,7 @@ import { UserService } from 'app/services/user-service';
         BrowserModule,
         FormsModule,
         HttpModule,
+        HttpClientModule,
         MaterialModule,
         BrowserAnimationsModule,
         routing
