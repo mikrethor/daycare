@@ -125,10 +125,11 @@ export class DaycareServiceImpl implements DaycareService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteEducator(idDaycare: number, idEducator: number):Observable<Response>{
+  deleteEducator(idDaycare: number, idEducator: number):Observable<Boolean>{
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator;
     console.log("delete url "+url);
-   return this.http.delete(url,this.loginService.getBearerToken());
+    return this.http.delete(url,this.loginService.getBearerToken()).
+    map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   deleteChild(idDaycare: number, idChild: number): Observable<Boolean> {
@@ -163,7 +164,7 @@ export abstract class DaycareService {
   abstract deleteParent(idDaycare: number, idParent: number): Observable<Boolean>;
   abstract createSumup(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>>;
   abstract createEducator(idDaycare: number, educator: Educator): Observable<Array<Educator>>;
-  abstract deleteEducator(idDaycare: number, idEducator: number):Observable<Response>;
+  abstract deleteEducator(idDaycare: number, idEducator: number):Observable<Boolean>;
   abstract deleteChild(idDaycare: number, idChild: number): Observable<Boolean>;
   abstract getUser(username:String): Observable<User>;
   abstract errorSubscribe(error);
