@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.username = params['username']; 
-            });
+        });
 
         this.daycareService.getUser(this.username).subscribe(
             data => {
@@ -39,11 +39,13 @@ export class UserComponent implements OnInit {
                 this.lastName=data.lastName;
                 this.roles=data.roles;
                 this.daycare=data.daycare;
-                this.user=new User(data.id,data.username,data.firstName,data.lastName,data.roles,data.daycare);
+                let user=new User(data.id,data.username,data.firstName,data.lastName,data.roles,data.daycare);
+                this.user=user;
+                this.userService.set(user);
             },
             this.daycareService.errorSubscribe,
             this.daycareService.completed);
-            // this.userService.set(this.user);
+            
             // console.log(this.userService.isEducator());       
     }
     

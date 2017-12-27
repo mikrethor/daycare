@@ -20,15 +20,19 @@ export class UserService {
     currentUser():User{
         return this.user;
     }
-    isRole(roleName:string):boolean{
-        console.log(this.user.roles);
-        for(let role of this.user.roles){
+
+    isInRoles(roleName:string,roles:Array<Role>):boolean{
+        for(let role of roles){
             console.log(role.name);
             if(role.name==roleName){
                 return true;
             }
         }
         return false;
+    }
+
+    isRole(roleName:string):boolean{
+        return this.isInRoles(roleName,this.user.roles);
     }
 
     isEducator():boolean{
