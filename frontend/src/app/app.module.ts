@@ -24,29 +24,37 @@ import { AdminEditEducatorComponent } from './components/daycareadmin/edit-educa
 import { AdminEditParentComponent } from './components/daycareadmin/edit-parent.component';
 import { LoginService } from './services/login-service';
 import { ConstantsService } from 'app/services/constants-service';
-import { DaycareServiceImpl ,DaycareService } from 'app/services/daycare-service';
+import { ChildServiceImpl, ChildService } from 'app/services/child-service';
+import { DaycareServiceImpl, DaycareService } from 'app/services/daycare-service';
+import { EducatorServiceImpl ,EducatorService } from 'app/services/educator-service';
+import { ParentServiceImpl, ParentService } from 'app/services/parent-service';
+import { SumupServiceImpl, SumupService } from 'app/services/sumup-service';
 import { UserService } from 'app/services/user-service';
 
 @NgModule({
-  declarations: [
-    AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,
-    DaycareAdminComponent,NavbarComponent,EditSumupsComponent,AdminChildComponent,AdminEducatorComponent,
-    AdminParentComponent,AdminEditChildComponent,AdminEditEducatorComponent,AdminEditParentComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    MaterialModule,
-    BrowserAnimationsModule,
-    routing
+    declarations: [
+        AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,
+        DaycareAdminComponent,NavbarComponent,EditSumupsComponent,AdminChildComponent,AdminEducatorComponent,
+        AdminParentComponent,AdminEditChildComponent,AdminEditEducatorComponent,AdminEditParentComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        MaterialModule,
+        BrowserAnimationsModule,
+        routing
 
-  ],
-  providers: [LoginService,ConstantsService,UserService, 
-    { provide: LocationStrategy, useClass: HashLocationStrategy, },
-    { provide: APP_BASE_HREF, useValue: '/', },
-    { provide : DaycareService, useClass:DaycareServiceImpl},
-  ],
-  bootstrap: [AppComponent]
+    ],
+    providers: [LoginService,ConstantsService,UserService,
+        { provide: LocationStrategy, useClass: HashLocationStrategy, },
+        { provide: APP_BASE_HREF, useValue: '/', },
+        { provide : ChildService, useClass:ChildServiceImpl},
+        { provide : DaycareService, useClass:DaycareServiceImpl},
+        { provide : EducatorService, useClass:EducatorServiceImpl},
+        { provide : ParentService, useClass:ParentServiceImpl},
+        { provide : SumupService, useClass:SumupServiceImpl},
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response} from '@angular/http';
+import { Http } from '@angular/http';
 import { ConstantsService } from './constants-service';
 import { LoginService } from './login-service';
 import { Daycare,Role,User,Sumups,Child,Educator,Parent } from '../pojo/pojo';
