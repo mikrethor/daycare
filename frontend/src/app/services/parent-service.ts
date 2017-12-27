@@ -16,19 +16,19 @@ export class ParentServiceImpl implements ParentService{
   ) {}
 
 
-  getParent(idDaycare: number, idParent: number): Observable<Parent> {
+    getOneById(idDaycare: number, idParent: number): Observable<Parent> {
     console.log("getEducator " +idDaycare+" "+idParent);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getParents(idDaycare: number): Observable<Array<Parent>> {
+    getAllByDaycareId(idDaycare: number): Observable<Array<Parent>> {
     console.log("getParents " +idDaycare);
       return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
             .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
         }
 
-  createParent(idDaycare: number, parent: Parent): Observable<Array<Parent>> {
+  create(idDaycare: number, parent: Parent): Observable<Array<Parent>> {
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents";
     let body = JSON.stringify(parent);
@@ -37,7 +37,7 @@ export class ParentServiceImpl implements ParentService{
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteParent(idDaycare: number, idParent: number): Observable<Boolean> {
+  delete(idDaycare: number, idParent: number): Observable<Boolean> {
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent;
     return this.http.delete(url,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -49,10 +49,10 @@ export class ParentServiceImpl implements ParentService{
 
 @Injectable()
 export abstract class ParentService {
-  abstract getParent(idDaycare: number, idParent: number): Observable<Parent>;
-  abstract getParents(idDaycare: number): Observable<Array<Parent>>;
-  abstract createParent(idDaycare: number, parent: Parent): Observable<Array<Parent>>;
-  abstract deleteParent(idDaycare: number, idParent: number): Observable<Boolean>;
+  abstract getOneById(idDaycare: number, idParent: number): Observable<Parent>;
+  abstract getAllByDaycareId(idDaycare: number): Observable<Array<Parent>>;
+  abstract create(idDaycare: number, parent: Parent): Observable<Array<Parent>>;
+  abstract delete(idDaycare: number, idParent: number): Observable<Boolean>;
   abstract errorSubscribe(error);
   abstract completed();
 }

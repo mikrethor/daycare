@@ -1,9 +1,9 @@
-import { Component, Output, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService } from '../../services/daycare-service';
-import { Educator, Child, Daycare, Sumups } from '../../pojo/pojo';
+import {Component, OnInit} from '@angular/core';
+import {DaycareService} from '../../services/daycare-service';
+import {Child, Daycare, Educator, Sumups} from '../../pojo/pojo';
+import {EducatorService} from "../../services/educator-service";
+import {ChildService} from "../../services/child-service";
+import {SumupService} from "../../services/sumup-service";
 
 
 @Component({
@@ -18,28 +18,32 @@ export class EducatorComponent implements OnInit {
     private idDayCare: number = 1;
     private daycare: Daycare = new Daycare(0, "");
 
-    constructor(private service: DaycareService
+    constructor(
+        private daycareService: DaycareService,
+        private educatorService: EducatorService,
+        private childService: ChildService,
+        private sumupService: SumupService,
     ) { }
 
     ngOnInit() {
-        this.service.getDaycare(this.idDayCare).subscribe(
+        this.daycareService.getDaycare(this.idDayCare).subscribe(
             (json) => {
                 this.daycare = new Daycare(json.id, json.name);
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.daycareService.errorSubscribe,
+            this.daycareService.completed
         );
 
-        this.service.getEducator(this.idDayCare, 1).subscribe(
+        this.educatorService.getOneById(this.idDayCare, 1).subscribe(
 
             (jsonEducator) => {
                 this.educator = new Educator(jsonEducator.id, jsonEducator.firstName, jsonEducator.lastName, jsonEducator.daycare);
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.educatorService.errorSubscribe,
+            this.educatorService.completed
         );
 
-        this.service.getChildren(this.idDayCare)
+        this.childService.getAllByDaycareId(this.idDayCare)
             .subscribe(
             (json) => {
                 for (let child of json) {
@@ -47,15 +51,15 @@ export class EducatorComponent implements OnInit {
                     this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.childService.errorSubscribe,
+            this.childService.completed
             );
     }
 
     selectChild(index: number) {
         this.selectedChild = this.children[index];
         this.sumups = [];
-        this.service.getSumups(this.idDayCare, this.selectedChild.id).subscribe(
+        this.sumupService.getAllByChildId(this.idDayCare, this.selectedChild.id).subscribe(
             (json) => {
                 for (let sumup of json) {
                     this.sumups.push(new Sumups(
@@ -70,8 +74,8 @@ export class EducatorComponent implements OnInit {
                     ));
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.daycareService.errorSubscribe,
+            this.daycareService.completed
         );
     }
 

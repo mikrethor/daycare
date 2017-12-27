@@ -1,9 +1,8 @@
-import { Component, Output, OnInit, SimpleChanges, NgZone } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService} from '../../services/daycare-service';
-import { Educator, Child, Daycare } from '../../pojo/pojo';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {DaycareService} from '../../services/daycare-service';
+import {Child, Daycare} from '../../pojo/pojo';
+import {ChildService} from "../../services/child-service";
 
 
 @Component({
@@ -18,30 +17,34 @@ export class AdminEditChildComponent implements OnInit {
     private deleted: boolean = false;
     model: any = {};
 
-    constructor(private service: DaycareService, private zone: NgZone, private router: Router,
+    constructor(
+        private daycareService: DaycareService,
+        private childService: ChildService,
+        private zone: NgZone,
+        private router: Router,
     ) { }
 
     ngOnInit() {
 
-        this.service.getDaycare(this.idDayCare).subscribe(
+        this.daycareService.getDaycare(this.idDayCare).subscribe(
             (json) => {
                 this.daycare = new Daycare(json.id, json.name);
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.daycareService.errorSubscribe,
+            this.daycareService.completed
 
         );
     }
 
     create() {
         this.child = new Child(null, this.model.firstName, this.model.lastName, this.daycare);
-        this.service.createChild(this.idDayCare, this.child).subscribe(
+        this.childService.create(this.idDayCare, this.child).subscribe(
             data => {
                 this.zone.run(() => {
                     this.router.navigate(['daycare', this.idDayCare, 'admin', 1, 'children']);
                 });
             },
-            this.service.errorSubscribe,
-            this.service.completed);
+            this.childService.errorSubscribe,
+            this.childService.completed);
     }
 }

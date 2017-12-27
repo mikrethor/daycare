@@ -1,9 +1,7 @@
-import { Component, Output, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService, } from '../../services/daycare-service';
-import { User, Child, Parent, Sumups,Daycare } from '../../pojo/pojo';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Child, Daycare, Sumups, User} from '../../pojo/pojo';
+import {SumupService} from "../../services/sumup-service";
 
 
 @Component({
@@ -15,7 +13,7 @@ export class EditSumupsComponent implements OnInit {
     private child: Child = new Child(0, "Jean", "Valgeant", new Daycare(0,""));
     private sumup: Sumups = new Sumups(0, new Child(0,"","",new Daycare(0,"")), 0, 0, 0, "", 0, 0);
     private idDayCare: number = 1;
-    private idParent: number = 1;
+    private idChild: number = 1;
     private displaySumup= {
         selectedMoodId: 0,
         selectedSleepId: 0,
@@ -25,16 +23,18 @@ export class EditSumupsComponent implements OnInit {
     private moods: number[] = [0, 5, 10];
     private sleeps: number[] = [0, 5, 10];
 
-    constructor(private service: DaycareService, private route: ActivatedRoute
+    constructor(
+        private sumupService: SumupService,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.user = new User(0, "", "", "", null,null);
         this.idDayCare = 1;//this.route.snapshot.params['idDaycare'];
-        this.idParent = 1;//this.route.snapshot.params['idParent'];
+        this.idChild = 1;//this.route.snapshot.params['idParent'];
 
         //TODO determiner date du jour
-        this.service.getSumup(this.idDayCare, this.idParent, "2017-12-26").subscribe(
+        this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idChild, "2017-12-26").subscribe(
             (jsonSumup) => {
                 this.sumup = new Sumups(
                     jsonSumup.id,
@@ -55,13 +55,13 @@ export class EditSumupsComponent implements OnInit {
                     selectedAppetiteId: this.sumup.appetite
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.sumupService.errorSubscribe,
+            this.sumupService.completed
         );
     }
 
     getImage(level: number) {
-        
+
         switch (level) {
             case 0:
                 return '/assets/scalableVectorGraphics/health-40to59.svg';

@@ -1,9 +1,9 @@
-import { Component, Output, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService, } from '../../services/daycare-service';
-import { User, Child, Parent, Sumups, Daycare } from '../../pojo/pojo';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Child, Daycare, Parent, Sumups, User} from '../../pojo/pojo';
+import {SumupService} from "../../services/sumup-service";
+import {ParentService} from "../../services/parent-service";
+import {ChildService} from "../../services/child-service";
 
 
 @Component({
@@ -23,7 +23,11 @@ export class ParentComponent implements OnInit {
     private idDayCare: number = -61;
     private idParent: number = -61;
 
-    constructor(private service: DaycareService, private route: ActivatedRoute
+    constructor(
+        private sumupService: SumupService,
+        private parentService: ParentService,
+        private childService: ChildService,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -32,26 +36,26 @@ export class ParentComponent implements OnInit {
         this.idParent = this.route.snapshot.params['idParent'];
 
 
-        this.service.getParent(this.idDayCare, this.idParent).subscribe(
+        this.parentService.getOneById(this.idDayCare, this.idParent).subscribe(
             (jsonParent) => {
                 this.parent = new Parent(jsonParent.id, jsonParent.firstName, jsonParent.lastName, jsonParent.daycare);
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.parentService.errorSubscribe,
+            this.parentService.completed
         );
 
-        this.service.getChildrenByParentId(this.idDayCare, this.idParent).subscribe(
+        this.childService.getAllByParentId(this.idDayCare, this.idParent).subscribe(
             (jsonChildren) => {
                 for (let child of jsonChildren) {
                     this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.childService.errorSubscribe,
+            this.childService.completed
         );
 
         //TODO determiner date du jour
-        this.service.getSumup(this.idDayCare, this.idParent, "2017-12-21").subscribe(
+        this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idParent, "2017-12-21").subscribe(
             (jsonSumup) => {
                 this.sumup = new Sumups(
                     jsonSumup.id,
@@ -69,8 +73,8 @@ export class ParentComponent implements OnInit {
                     selectedAppetiteId: this.sumup.appetite
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.sumupService.errorSubscribe,
+            this.sumupService.completed
         );
     }
 

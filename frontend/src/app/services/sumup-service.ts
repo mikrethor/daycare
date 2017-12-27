@@ -15,20 +15,20 @@ export class SumupServiceImpl implements SumupService{
       private loginService: LoginService
   ) {}
 
-  getSumups(idDaycare: number, idChild: number): Observable<Array<Sumups>> {
+  getAllByChildId(idDaycare: number, idChild: number): Observable<Array<Sumups>> {
     console.log("getSumups " +idDaycare+" "+idChild);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/",this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups> {
+  getOneByChildIdAndDay(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups> {
     console.log("getSumup " +idDaycare+" "+idChild+" "+daySumup);
     console.log(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/day/" + daySumup);
     return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups/day/" + daySumup,this.loginService.getBearerToken())
       .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  createSumup(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>> {
+  create(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>> {
 
     let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups";
     let body = JSON.stringify(sumup);
@@ -44,9 +44,9 @@ export class SumupServiceImpl implements SumupService{
 
 @Injectable()
 export abstract class SumupService {
-  abstract getSumups(idDaycare: number, idChild: number): Observable<Array<Sumups>>;
-  abstract getSumup(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups>;
-  abstract createSumup(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>>;
+  abstract getAllByChildId(idDaycare: number, idChild: number): Observable<Array<Sumups>>;
+  abstract getOneByChildIdAndDay(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups>;
+  abstract create(idDaycare: number, idChild: number, sumup: Sumups): Observable<Array<Sumups>>;
   abstract errorSubscribe(error);
   abstract completed();
 }

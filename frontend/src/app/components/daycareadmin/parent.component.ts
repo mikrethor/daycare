@@ -1,9 +1,8 @@
-import { Component, Output, OnInit, NgZone } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService} from '../../services/daycare-service';
-import { Parent, Daycare } from '../../pojo/pojo';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {DaycareService} from '../../services/daycare-service';
+import {Daycare, Parent} from '../../pojo/pojo';
+import {ParentService} from "../../services/parent-service";
 
 
 @Component({
@@ -18,7 +17,11 @@ export class AdminParentComponent implements OnInit {
     model: any = {};
     private deleted: boolean = false;
 
-    constructor(private service: DaycareService, private zone: NgZone, private router: Router,
+    constructor(
+        private service: DaycareService,
+        private parentService: ParentService,
+        private zone: NgZone,
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -37,7 +40,7 @@ export class AdminParentComponent implements OnInit {
 
     getParents() {
         this.parents = [];
-        this.service.getParents(this.idDayCare).subscribe(
+        this.parentService.getAllByDaycareId(this.idDayCare).subscribe(
             (jsonParent) => {
                 for (let parent of jsonParent) {
                     console.log(parent)
@@ -45,8 +48,8 @@ export class AdminParentComponent implements OnInit {
 
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.parentService.errorSubscribe,
+            this.parentService.completed
         );
     }
 
@@ -66,7 +69,7 @@ export class AdminParentComponent implements OnInit {
     }
 
     remove(index: number) {
-        this.service.deleteParent(this.idDayCare, this.parents[index].id).subscribe(
+        this.parentService.delete(this.idDayCare, this.parents[index].id).subscribe(
             data => {
                 this.deleted = (data == true);
                 if (this.deleted) {

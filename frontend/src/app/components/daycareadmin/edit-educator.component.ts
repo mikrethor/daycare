@@ -1,9 +1,8 @@
-import { Component, Output, OnInit, SimpleChanges, NgZone } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService} from '../../services/daycare-service';
-import { Educator, Child, Daycare } from '../../pojo/pojo';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {DaycareService} from '../../services/daycare-service';
+import {Daycare, Educator} from '../../pojo/pojo';
+import {EducatorService} from "../../services/educator-service";
 
 
 @Component({
@@ -18,17 +17,21 @@ export class AdminEditEducatorComponent implements OnInit {
     private deleted: boolean = false;
     model: any = {};
 
-    constructor(private service: DaycareService, private zone: NgZone, private router: Router,
-    ) { }
+    constructor(
+        private daycareService: DaycareService,
+        private educatorService: EducatorService,
+        private zone: NgZone,
+        private router: Router,
+    ) {}
 
     ngOnInit() {
 
-        this.service.getDaycare(this.idDayCare).subscribe(
+        this.daycareService.getDaycare(this.idDayCare).subscribe(
             (json) => {
                 this.daycare = new Daycare(json.id, json.name);
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.daycareService.errorSubscribe,
+            this.daycareService.completed
 
         );
 
@@ -37,13 +40,13 @@ export class AdminEditEducatorComponent implements OnInit {
 
     create() {
         this.educator = new Educator(null, this.model.firstName, this.model.lastName, this.idDayCare);
-        this.service.createEducator(this.idDayCare, this.educator).subscribe(
+        this.educatorService.create(this.idDayCare, this.educator).subscribe(
             data => {
                 this.zone.run(() => {
                     this.router.navigate(['daycare', this.idDayCare, 'admin', 1, 'educators']);
                 });
             },
-            this.service.errorSubscribe,
-            this.service.completed);
+            this.educatorService.errorSubscribe,
+            this.educatorService.completed);
     }
 }

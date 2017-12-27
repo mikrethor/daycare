@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams, Jsonp } from '@angular/http';
-import { Cookie } from 'ng2-cookies';
-import { Router } from '@angular/router';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import { User,Role} from '../pojo/pojo';
+import {LoginService} from "./login-service";
+import {ConstantsService} from "./constants-service";
 
 @Injectable()
 export class UserService {
     private user:User;
     
     constructor(
+        private http: Http,
+        private constantService: ConstantsService,
+        private loginService: LoginService
     ) {}
 
     set(user:User){
@@ -46,4 +49,14 @@ export class UserService {
     isParent():boolean{
         return this.isRole("PARENT");
     }
+
+    getUser(username:String):Observable<User>{
+        let url: string = this.constantService.API_ENDPOINT + "/users/" + username;
+        return this.http.get(url,this.loginService.getBearerToken())
+            .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+
+    errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
+    completed() { console.log("the subscription is completed") }
 }

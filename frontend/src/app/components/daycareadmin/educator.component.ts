@@ -1,9 +1,7 @@
-import { Component, Output, OnInit, OnChanges, SimpleChanges, NgZone } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService} from '../../services/daycare-service';
-import { Educator, Child, Daycare } from '../../pojo/pojo';
+import {Component, NgZone, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {DaycareService} from '../../services/daycare-service';
+import {Daycare, Educator} from '../../pojo/pojo';
+import {EducatorService} from "../../services/educator-service";
 
 
 @Component({
@@ -18,17 +16,20 @@ export class AdminEducatorComponent implements OnInit, OnChanges {
     private deleted: boolean = false;
     model: any = {};
 
-    constructor(private service: DaycareService, private zone: NgZone
-    ) { }
+    constructor(
+        private daycareService: DaycareService,
+        private educatorService: EducatorService,
+        private zone: NgZone
+    ) {}
 
     ngOnInit() {
 
-        this.service.getDaycare(this.idDayCare).subscribe(
+        this.daycareService.getDaycare(this.idDayCare).subscribe(
             (json) => {
                 this.daycare = new Daycare(json.id, json.name);
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.daycareService.errorSubscribe,
+            this.daycareService.completed
 
         );
 
@@ -37,20 +38,20 @@ export class AdminEducatorComponent implements OnInit, OnChanges {
 
     getEducators() {
         this.educators = [];
-        this.service.getEducators(this.idDayCare).subscribe(
+        this.educatorService.getAllByDaycareId(this.idDayCare).subscribe(
             (jsonEducator) => {
                 for (let educator of jsonEducator) {
                     this.educators.push(new Educator(educator.id, educator.firstName, educator.lastName, educator.daycare));
 
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.educatorService.errorSubscribe,
+            this.educatorService.completed
         );
     }
 
     remove(index: number) {
-        this.service.deleteEducator(this.idDayCare, this.educators[index].id).subscribe(
+        this.educatorService.delete(this.idDayCare, this.educators[index].id).subscribe(
             data => {
                 this.deleted = (data == true);
                 if (this.deleted) {
@@ -59,8 +60,8 @@ export class AdminEducatorComponent implements OnInit, OnChanges {
                     });
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed);
+            this.daycareService.errorSubscribe,
+            this.daycareService.completed);
     }
 
 

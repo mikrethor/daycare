@@ -1,11 +1,7 @@
-import { Component, Output, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { LoginService} from '../../services/login-service';
-import { DaycareService, } from '../../services/daycare-service';
-import { UserService, } from '../../services/user-service';
-import { Role, Daycare, User} from '../../pojo/pojo';
-import { RouterModule, Routes } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService,} from '../../services/user-service';
+import {Daycare, Role, User} from '../../pojo/pojo';
 
 @Component({
     selector: 'user',
@@ -24,7 +20,6 @@ export class UserComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private daycareService: DaycareService,
         private userService: UserService,
 ) { }
 
@@ -33,7 +28,7 @@ export class UserComponent implements OnInit {
             this.username = params['username']; 
         });
 
-        this.daycareService.getUser(this.username).subscribe(
+        this.userService.getUser(this.username).subscribe(
             data => {
                 this.firstName=data.firstName;
                 this.lastName=data.lastName;
@@ -43,8 +38,8 @@ export class UserComponent implements OnInit {
                 this.user=user;
                 this.userService.set(user);
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed);
+            this.userService.errorSubscribe,
+            this.userService.completed);
             
             // console.log(this.userService.isEducator());       
     }

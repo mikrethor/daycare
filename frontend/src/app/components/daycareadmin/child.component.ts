@@ -1,9 +1,7 @@
-import { Component, Output, OnInit, NgZone } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { DaycareService } from '../../services/daycare-service';
-import { Educator, Child, Daycare } from '../../pojo/pojo';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {ChildService} from '../../services/child-service';
+import {Child, Daycare, Educator} from '../../pojo/pojo';
+import {DaycareService} from "../../services/daycare-service";
 
 
 @Component({
@@ -20,37 +18,40 @@ export class AdminChildComponent implements OnInit {
     private daycare: Daycare = new Daycare(0, "");
     private deleted: boolean = false;
 
-    constructor(private service: DaycareService, private zone: NgZone
+    constructor(
+        private childService: ChildService,
+        private daycareService: DaycareService,
+        private zone: NgZone
     ) { }
 
     ngOnInit() {
-        this.service.getDaycare(this.idDayCare).subscribe(
+        this.daycareService.getDaycare(this.idDayCare).subscribe(
             (json) => {
                 this.daycare = new Daycare(json.id, json.name);
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.childService.errorSubscribe,
+            this.childService.completed
 
         );
 
-        this.service.getChildren(this.idDayCare).subscribe(
+        this.childService.getAllByDaycareId(this.idDayCare).subscribe(
             (json) => {
                 for (let child of json) {
                     this.children.push(new Child(child.id, child.firstname, child.lastname, new Daycare(1,"")));
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed);
+            this.childService.errorSubscribe,
+            this.childService.completed);
     }
 
     // create() {
     //     this.child = new Child(null, this.model.firstName, this.model.lastName, this.idDayCare);
-    //     this.service.createChild(this.idDayCare, this.child).subscribe(
+    //     this.childService.createChild(this.idDayCare, this.child).subscribe(
     //         data => {
     //             console.log(data);
     //         },
-    //         this.service.errorSubscribe,
-    //         this.service.completed);
+    //         this.childService.errorSubscribe,
+    //         this.childService.completed);
     // }
 
     edit(index: number) {
@@ -60,20 +61,20 @@ export class AdminChildComponent implements OnInit {
 
     getChildren() {
         this.children = [];
-        this.service.getChildren(this.idDayCare).subscribe(
+        this.childService.getAllByDaycareId(this.idDayCare).subscribe(
             (jsonChild) => {
                 for (let child of jsonChild) {
                     this.children.push(new Child(child.id, child.firstname, child.lastname, new Daycare(0,"test")));
 
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed
+            this.childService.errorSubscribe,
+            this.childService.completed
         );
     }
 
     remove(index: number) {
-        this.service.deleteChild(this.idDayCare, this.children[index].id).subscribe(
+        this.childService.delete(this.idDayCare, this.children[index].id).subscribe(
             data => {
                 this.deleted = (data == true);
                 if (this.deleted) {
@@ -82,8 +83,8 @@ export class AdminChildComponent implements OnInit {
                     });
                 }
             },
-            this.service.errorSubscribe,
-            this.service.completed);
+            this.childService.errorSubscribe,
+            this.childService.completed);
     }
 
 

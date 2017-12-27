@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DaycareService } from '../../services/daycare-service';
-import { UserService } from '../../services/user-service';
-import { ActivatedRoute } from '@angular/router';
-import { Role } from '../../pojo/pojo';
+import {Component, OnInit} from '@angular/core';
+import {DaycareService} from '../../services/daycare-service';
+import {UserService} from '../../services/user-service';
+import {ActivatedRoute} from '@angular/router';
+import {Role} from '../../pojo/pojo';
 
 @Component({
   selector: 'daycare-navbar',
@@ -13,8 +13,7 @@ export class NavbarComponent  implements OnInit {
   idDaycare:number
   idAdmin:number
   roles:Array<Role>=[]
-  //TODO the menu has to be generated with ROLES
-  //Admin
+
   menuData = {
     "menu": [
       { "id": 3, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
@@ -32,7 +31,7 @@ export class NavbarComponent  implements OnInit {
       this.username = params['username']; 
     });
 
-    this.daycareService.getUser(this.username).subscribe(
+      this.userService.getUser(this.username).subscribe(
       data => {
          this.idDaycare=data.daycare.id;
          //this.roles=data.roles;

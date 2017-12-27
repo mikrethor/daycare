@@ -9,7 +9,7 @@ import { LoginService} from '../../services/login-service';
 export class LogoutComponent implements OnInit {
     constructor(
         private loginService: LoginService,
-) { }
+    ) { }
     ngOnInit() {
         this.logout();
     }
