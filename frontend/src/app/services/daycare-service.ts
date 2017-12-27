@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { ConstantsService } from './constants-service';
-import { LoginService } from './login-service';
-import { Daycare,Role,User,Sumups,Child,Educator,Parent } from '../pojo/pojo';
-import { Observable } from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {ConstantsService} from './constants-service';
+import {LoginService} from './login-service';
+import {Daycare} from '../pojo/pojo';
+import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 @Injectable()
