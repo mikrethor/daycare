@@ -41,7 +41,6 @@ import { UserService } from 'app/services/user-service';
     imports: [
         BrowserModule,
         FormsModule,
-        // HttpModule,
         HttpClientModule,
         MaterialModule,
         BrowserAnimationsModule,
