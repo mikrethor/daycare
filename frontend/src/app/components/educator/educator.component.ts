@@ -27,8 +27,8 @@ export class EducatorComponent implements OnInit {
 
     ngOnInit() {
         this.daycareService.getDaycare(this.idDayCare).subscribe(
-            (json) => {
-                this.daycare = new Daycare(json.id, json.name);
+            (daycare) => {
+                this.daycare = daycare;
             },
             this.daycareService.errorSubscribe,
             this.daycareService.completed
@@ -37,7 +37,7 @@ export class EducatorComponent implements OnInit {
         this.educatorService.getOneById(this.idDayCare, 1).subscribe(
 
             (jsonEducator) => {
-                this.educator = new Educator(jsonEducator.id, jsonEducator.firstName, jsonEducator.lastName, jsonEducator.daycare);
+                this.educator = jsonEducator;
             },
             this.educatorService.errorSubscribe,
             this.educatorService.completed
@@ -48,7 +48,7 @@ export class EducatorComponent implements OnInit {
             (json) => {
                 for (let child of json) {
                     console.log(child.firstname+" "+child.lastname);
-                    this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
+                    this.children.push(child);
                 }
             },
             this.childService.errorSubscribe,
@@ -62,16 +62,7 @@ export class EducatorComponent implements OnInit {
         this.sumupService.getAllByChildId(this.idDayCare, this.selectedChild.id).subscribe(
             (json) => {
                 for (let sumup of json) {
-                    this.sumups.push(new Sumups(
-                        sumup.id,
-                        sumup.child,
-                        sumup.mood,
-                        sumup.sleep,
-                        sumup.appetite,
-                        sumup.comment,
-                        sumup.educator,
-                        sumup.day
-                    ));
+                    this.sumups.push(sumup);
                 }
             },
             this.daycareService.errorSubscribe,

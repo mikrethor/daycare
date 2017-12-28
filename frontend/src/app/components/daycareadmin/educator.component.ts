@@ -25,8 +25,8 @@ export class AdminEducatorComponent implements OnInit, OnChanges {
     ngOnInit() {
 
         this.daycareService.getDaycare(this.idDayCare).subscribe(
-            (json) => {
-                this.daycare = new Daycare(json.id, json.name);
+            (daycare) => {
+                this.daycare = daycare;
             },
             this.daycareService.errorSubscribe,
             this.daycareService.completed
@@ -39,9 +39,9 @@ export class AdminEducatorComponent implements OnInit, OnChanges {
     getEducators() {
         this.educators = [];
         this.educatorService.getAllByDaycareId(this.idDayCare).subscribe(
-            (jsonEducator) => {
-                for (let educator of jsonEducator) {
-                    this.educators.push(new Educator(educator.id, educator.firstName, educator.lastName, educator.daycare));
+            (educators) => {
+                for (let educator of educators) {
+                    this.educators.push(educator);
 
                 }
             },

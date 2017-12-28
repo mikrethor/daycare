@@ -35,8 +35,8 @@ export class AdminChildComponent implements OnInit {
         });
 
         this.daycareService.getDaycare(this.idDayCare).subscribe(
-            (json) => {
-                this.daycare = new Daycare(json.id, json.name);
+            (daycare) => {
+                this.daycare =daycare;
             },
             this.childService.errorSubscribe,
             this.childService.completed
@@ -46,7 +46,7 @@ export class AdminChildComponent implements OnInit {
         this.childService.getAllByDaycareId(this.idDayCare).subscribe(
             (childs: Array<Child>) => {
                 for (let child of childs) {
-                    this.children.push(new Child(child.id, child.firstname, child.lastname, new Daycare(1,"")));
+                    this.children.push(child);
                 }
             },
             this.childService.errorSubscribe,
@@ -63,7 +63,7 @@ export class AdminChildComponent implements OnInit {
         this.childService.getAllByDaycareId(this.idDayCare).subscribe(
             (childs: Array<Child>) => {
                 for (let child of childs) {
-                    this.children.push(new Child(child.id, child.firstname, child.lastname, new Daycare(1,"")));
+                    this.children.push(child);
                 }
             },
             this.childService.errorSubscribe,

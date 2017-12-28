@@ -14,7 +14,6 @@ export class AdminEditEducatorComponent implements OnInit {
     private educators: Educator[] = [];
     private idDayCare: number = 1;
     private daycare: Daycare = new Daycare(0, "");
-    private deleted: boolean = false;
     model: any = {};
 
     constructor(
@@ -27,8 +26,8 @@ export class AdminEditEducatorComponent implements OnInit {
     ngOnInit() {
 
         this.daycareService.getDaycare(this.idDayCare).subscribe(
-            (json) => {
-                this.daycare = new Daycare(json.id, json.name);
+            (daycare) => {
+                this.daycare = daycare;
             },
             this.daycareService.errorSubscribe,
             this.daycareService.completed

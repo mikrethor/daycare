@@ -18,7 +18,7 @@ export class ParentComponent implements OnInit {
         selectedMoodId: 0,
         selectedSleepId: 0,
         selectedAppetiteId: 0
-    }
+    };
     private sumup: Sumups = new Sumups(0, new Child(0,"","",new Daycare(0,"")), 0, 0, 0, "", 0, 0);
     private idDayCare: number = -61;
     private idParent: number = -61;
@@ -38,7 +38,7 @@ export class ParentComponent implements OnInit {
 
         this.parentService.getOneById(this.idDayCare, this.idParent).subscribe(
             (jsonParent) => {
-                this.parent = new Parent(jsonParent.id, jsonParent.firstName, jsonParent.lastName, jsonParent.daycare);
+                this.parent = jsonParent;
             },
             this.parentService.errorSubscribe,
             this.parentService.completed
@@ -47,7 +47,7 @@ export class ParentComponent implements OnInit {
         this.childService.getAllByParentId(this.idDayCare, this.idParent).subscribe(
             (jsonChildren) => {
                 for (let child of jsonChildren) {
-                    this.children.push(new Child(child.id, child.firstname, child.lastname, child.daycare));
+                    this.children.push(child);
                 }
             },
             this.childService.errorSubscribe,
@@ -57,16 +57,7 @@ export class ParentComponent implements OnInit {
         //TODO determiner date du jour
         this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idParent, "2017-12-21").subscribe(
             (jsonSumup) => {
-                this.sumup = new Sumups(
-                    jsonSumup.id,
-                    jsonSumup.child,
-                    jsonSumup.mood,
-                    jsonSumup.sleep,
-                    jsonSumup.appetite,
-                    jsonSumup.comment,
-                    jsonSumup.educator,
-                    jsonSumup.day
-                );
+                this.sumup = jsonSumup;
                 this.child = {
                     selectedMoodId: this.sumup.mood,
                     selectedSleepId: this.sumup.sleep,
@@ -78,7 +69,7 @@ export class ParentComponent implements OnInit {
         );
     }
 
-    getImage(level: number) {
+    static getImage(level: number) {
         
         switch (level) {
             case 0:
@@ -96,7 +87,7 @@ export class ParentComponent implements OnInit {
 
     }
 
-    getPosition(level: string) {
+    static getPosition(level: string) {
         
         switch (level) {
             case "BAD":
@@ -106,7 +97,6 @@ export class ParentComponent implements OnInit {
             case "GOOD":
                 return 2;
             default:
-            console.log("default")+level;
                 return -1;
         }
     }

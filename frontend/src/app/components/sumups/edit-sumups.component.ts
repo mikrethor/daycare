@@ -18,7 +18,7 @@ export class EditSumupsComponent implements OnInit {
         selectedMoodId: 0,
         selectedSleepId: 0,
         selectedAppetiteId: 0
-    }
+    };
     private appetites: number[] = [0, 5, 10];
     private moods: number[] = [0, 5, 10];
     private sleeps: number[] = [0, 5, 10];
@@ -36,16 +36,7 @@ export class EditSumupsComponent implements OnInit {
         //TODO determiner date du jour
         this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idChild, "2017-12-26").subscribe(
             (jsonSumup) => {
-                this.sumup = new Sumups(
-                    jsonSumup.id,
-                    jsonSumup.child,
-                    jsonSumup.mood,
-                    jsonSumup.sleep,
-                    jsonSumup.appetite,
-                    jsonSumup.comment,
-                    jsonSumup.educator,
-                    jsonSumup.day
-                );
+                this.sumup = jsonSumup;
 
                 this.child=this.sumup.child;
 
@@ -60,7 +51,7 @@ export class EditSumupsComponent implements OnInit {
         );
     }
 
-    getImage(level: number) {
+    static getImage(level: number) {
 
         switch (level) {
             case 0:

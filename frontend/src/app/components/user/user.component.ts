@@ -6,7 +6,6 @@ import {Daycare, Role, User} from '../../pojo/pojo';
 @Component({
     selector: 'user',
     templateUrl: './user.html',
-    // providers: [LoginService]
 })
 export class UserComponent implements OnInit {
     model: any = {};
@@ -34,14 +33,11 @@ export class UserComponent implements OnInit {
                 this.lastName=user.lastName;
                 this.roles=user.roles;
                 this.daycare=user.daycare;
-                // let user=new User(user.id,user.username,user.firstName,user.lastName,user.roles,user.daycare);
                 this.user=user;
                 this.userService.set(user);
             },
             this.userService.errorSubscribe,
             this.userService.completed);
-            
-            // console.log(this.userService.isEducator());       
     }
     
 }

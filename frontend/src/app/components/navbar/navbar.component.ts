@@ -9,10 +9,10 @@ import {Role} from '../../pojo/pojo';
   templateUrl: './navbar.html',
 })
 export class NavbarComponent  implements OnInit {
-  username:string
-  idDaycare:number
-  idAdmin:number
-  roles:Array<Role>=[]
+  username:string;
+  idDaycare:number;
+  idAdmin:number;
+  roles:Array<Role>=[];
 
   menuData = {
     "menu": [
@@ -32,16 +32,13 @@ export class NavbarComponent  implements OnInit {
     });
 
       this.userService.getUser(this.username).subscribe(
-      data => {
-         this.idDaycare=data.daycare.id;
-         //this.roles=data.roles;
-
-         for (let role of data.roles) {
-          this.roles.push(new Role(role.name,role.description));
-
+      user => {
+         this.idDaycare=user.daycare.id;
+         for (let role of user.roles) {
+          this.roles.push(role);
         }
 
-         this.idAdmin=data.id
+         this.idAdmin=user.id;
          if(this.userService.isInRoles("ADMIN",this.roles)){
           this.menuData = {
             "menu": [
