@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
-import { User,Role} from '../pojo/pojo';
+import {Role, User} from '../pojo/pojo';
 import {LoginService} from "./login-service";
 import {ConstantsService} from "./constants-service";
 
@@ -11,7 +11,7 @@ export class UserService {
     private user:User;
     
     constructor(
-        private http: Http,
+        private http: HttpClient,
         private constantService: ConstantsService,
         private loginService: LoginService
     ) {}
@@ -52,8 +52,8 @@ export class UserService {
 
     getUser(username:String):Observable<User>{
         let url: string = this.constantService.API_ENDPOINT + "/users/" + username;
-        return this.http.get(url,this.loginService.getBearerToken())
-            .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.get<User>(url,this.loginService.getBearerToken2());
+            // .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
 

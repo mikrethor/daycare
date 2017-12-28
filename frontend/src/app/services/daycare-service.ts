@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 import {ConstantsService} from './constants-service';
 import {LoginService} from './login-service';
+import {HttpClient} from '@angular/common/http';
 import {Daycare} from '../pojo/pojo';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
@@ -10,7 +10,7 @@ import 'rxjs/Rx';
 export class DaycareServiceImpl implements DaycareService{
     private daycare:Daycare;
     constructor(
-        private http: Http,
+        private http: HttpClient,
         private constantService: ConstantsService,
         private loginService: LoginService
     ) {}
@@ -20,11 +20,7 @@ export class DaycareServiceImpl implements DaycareService{
         let endpoint = this.constantService.API_ENDPOINT;
         let url = endpoint+"/daycares/"+id;
 
-
-        return this.http.get( url, this.loginService.getBearerToken())
-            .map((response) =>
-                {return response.json();}
-            )
+        return this.http.get<Daycare>( url, this.loginService.getBearerToken2())
             .catch(
                 (error: any) => Observable.throw(error.json()|| 'Server error')
             );

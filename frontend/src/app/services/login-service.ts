@@ -16,7 +16,7 @@ export class LoginService {
     private clientSecret="XY7kmzoNzl100";
 
     constructor(
-        private newHttp: HttpClient,
+        private http: HttpClient,
         private constantService: ConstantsService,
         private router: Router
     ) {}
@@ -38,6 +38,18 @@ export class LoginService {
         });
         let options = new RequestOptions({ headers: headers });
         return options;
+    }
+
+    //TODO when other services will all use httpClient
+    getBearerToken2():{headers:HttpHeaders,withCredentials:boolean}{
+        let headers = new HttpHeaders()
+            .set('Authorization', this.getBearerAuthorization());
+
+        const httpOptions = {
+            headers: headers,
+            withCredentials: false
+        };
+        return httpOptions;
     }
 
     saveToken(token){
@@ -66,7 +78,7 @@ export class LoginService {
             withCredentials: true
         };
 
-        return  this.newHttp.post<JwtToken>(
+        return  this.http.post<JwtToken>(
             this.authUrl,
             new FormData(),
             httpOptions

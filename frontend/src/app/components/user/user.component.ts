@@ -29,12 +29,12 @@ export class UserComponent implements OnInit {
         });
 
         this.userService.getUser(this.username).subscribe(
-            data => {
-                this.firstName=data.firstName;
-                this.lastName=data.lastName;
-                this.roles=data.roles;
-                this.daycare=data.daycare;
-                let user=new User(data.id,data.username,data.firstName,data.lastName,data.roles,data.daycare);
+            user => {
+                this.firstName=user.firstName;
+                this.lastName=user.lastName;
+                this.roles=user.roles;
+                this.daycare=user.daycare;
+                // let user=new User(user.id,user.username,user.firstName,user.lastName,user.roles,user.daycare);
                 this.user=user;
                 this.userService.set(user);
             },
