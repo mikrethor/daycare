@@ -24,7 +24,7 @@ const routes: Routes = [
     { path: 'daycare/:idDaycare/admin/:idAdmin', component: DaycareAdminComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/children', component: AdminChildComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/children/create', component: AdminEditChildComponent },
-    { path: 'daycare/:idDaycare/admin/:idAdmin/children/edit', component: AdminEditChildComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/children/:idChild/edit', component: AdminEditChildComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/educators', component: AdminEducatorComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/educators/create', component: AdminEditEducatorComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/educators/edit', component: AdminEditEducatorComponent },

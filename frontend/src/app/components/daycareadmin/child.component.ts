@@ -2,6 +2,7 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {ChildService} from '../../services/child-service';
 import {Child, Daycare, Educator} from '../../pojo/pojo';
 import {DaycareService} from "../../services/daycare-service";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -12,6 +13,7 @@ export class AdminChildComponent implements OnInit {
     private educator: Educator = new Educator(0, "", "", 0);
     private children: Child[] = [];
     private child: Child;
+    private idAdmin: number;
     model: any = {};
 
     private idDayCare: number = 1;
@@ -21,10 +23,17 @@ export class AdminChildComponent implements OnInit {
     constructor(
         private childService: ChildService,
         private daycareService: DaycareService,
-        private zone: NgZone
+        private zone: NgZone,
+        private route: ActivatedRoute,
     ) { }
 
     ngOnInit() {
+
+        this.route.params.subscribe(params => {
+            // this.idChild = params['idChild'];
+            this.idAdmin=params['idAdmin'];
+        });
+
         this.daycareService.getDaycare(this.idDayCare).subscribe(
             (json) => {
                 this.daycare = new Daycare(json.id, json.name);

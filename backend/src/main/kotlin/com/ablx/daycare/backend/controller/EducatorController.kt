@@ -1,12 +1,11 @@
 package com.ablx.daycare.backend.controller
 
+import com.ablx.daycare.backend.entity.Educator
+import com.ablx.daycare.backend.entity.User
 import com.ablx.daycare.backend.enum.Role
 import com.ablx.daycare.backend.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
@@ -29,6 +28,10 @@ internal class EducatorController {
         userRepository.delete(id)
         return true
     }
+
+    @PostMapping("/daycares/{idDaycare}/educators")
+    fun create(@PathVariable(value="idDaycare")idDaycare:Long, @ModelAttribute educator: User) =
+            userRepository.save(educator)
 
 
 }

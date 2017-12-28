@@ -1,11 +1,10 @@
 package com.ablx.daycare.backend.controller
 
+import com.ablx.daycare.backend.entity.Child
 import com.ablx.daycare.backend.repository.ChildRepository
+import com.ablx.daycare.backend.repository.DaycareRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
@@ -13,6 +12,9 @@ internal class ChildController {
 
     @Autowired
     lateinit var childrenRepository: ChildRepository
+
+    @Autowired
+    lateinit var daycareRepository: DaycareRepository
 
     @GetMapping("/children/{id}")
     fun findById(@PathVariable(value="id")id: Long) =
@@ -27,17 +29,25 @@ internal class ChildController {
             childrenRepository.findAllByDaycare(idDaycare)
 
     @GetMapping("/daycares/{idDaycare}/childs/{id}")
-    fun findOneByIdByDaycare(@PathVariable(value="idDaycare")id:Long,@PathVariable(value="idDaycare")idDaycare:Long) =
-            childrenRepository.findOneByIdByDaycare(id,idDaycare)
+    fun findOneByIdByDaycare(@PathVariable(value="idDaycare")idDaycare:Long,@PathVariable(value="id")idChild:Long) =
+            childrenRepository.findOneByIdByDaycare(idChild,idDaycare)
 
     @GetMapping("/daycares/{idDaycare}/parents/{idParent}/childs")
     fun findAllByDaycareAndParentId(@PathVariable(value="idDaycare")idDaycare:Long,
                                     @PathVariable(value="idParent")idParent:Long) =
             childrenRepository.findAllByDaycare(idDaycare)
 
+    @DeleteMapping("/daycares/{idDaycare}/childs/{id}")
+    fun delete(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="idDaycare")idParent: Long,@PathVariable(value="id")id: Long) :Boolean{
+        childrenRepository.delete(id)
+        return true}
 
-    @DeleteMapping("/daycares/{idDaycare}/parents/{idParent}/childs/{id}")
-    fun delete(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="idDaycare")idParent: Long,@PathVariable(value="id")id: Long) =
-            childrenRepository.delete(id)
+    @PostMapping("/daycares/{idDaycare}/childs")
+    fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody  child: Child):Child {
+
+        child.daycare=daycareRepository.findOne(idDaycare)
+
+        return   childrenRepository.save(child)
+    }
 
 }

@@ -30,6 +30,15 @@ export class ChildServiceImpl implements ChildService{
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
+    getOneByDaycareId(idDaycare: number,id: number): Observable<Child> {
+        console.log("getChildren " +id);
+        return this.http.get<Child>(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/"+id,this.loginService.getBearerToken())
+            .catch((error: any) =>
+                {
+                    return  Observable.throw(error.json().error || 'Server error')}
+            );
+    }
+
     create(idDaycare: number, child: Child): Observable<Child> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs";
         let body = JSON.stringify(child);
@@ -49,6 +58,7 @@ export class ChildServiceImpl implements ChildService{
 
 @Injectable()
 export abstract class ChildService {
+    abstract getOneByDaycareId(idDaycare: number,id: number): Observable<Child>;
     abstract getAllByDaycareId(id: number): Observable<Child[]>;
     abstract getAllByParentId(idDaycare: number, idParent: number): Observable<Array<Child>>;
     abstract create(idDaycare: number, child: Child): Observable<Child>

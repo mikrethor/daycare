@@ -1,8 +1,9 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DaycareService} from '../../services/daycare-service';
 import {Child, Daycare} from '../../pojo/pojo';
 import {ChildService} from "../../services/child-service";
+import {UserService} from "../../services/user-service";
 
 
 @Component({
@@ -11,37 +12,63 @@ import {ChildService} from "../../services/child-service";
 })
 export class AdminEditChildComponent implements OnInit {
     private child: Child = new Child(0, "", "", new Daycare(1,""));
-    private children: Child[] = [];
-    private idDayCare: number = 1;
+    private idChild: number;
+    private idDaycare: number = 1;
     private daycare: Daycare = new Daycare(0, "");
-    private deleted: boolean = false;
+    private idAdmin: number;
     model: any = {};
 
     constructor(
         private daycareService: DaycareService,
         private childService: ChildService,
+        private userService: UserService,
         private zone: NgZone,
+        private route: ActivatedRoute,
         private router: Router,
-    ) { }
+    ) {}
 
     ngOnInit() {
+        console.log("currentUser")
 
-        this.daycareService.getDaycare(this.idDayCare).subscribe(
-            (json) => {
-                this.daycare = new Daycare(json.id, json.name);
+
+        this.route.params.subscribe(params => {
+            this.idChild = params['idChild'];
+            this.idAdmin=params['idAdmin'];
+            this.idDaycare=params['idDaycare'];
+
+        });
+
+        this.daycareService.getDaycare(this.idDaycare).subscribe(
+            (daycare) => {
+                this.daycare = daycare;
+                this.child.daycare=daycare;
             },
             this.daycareService.errorSubscribe,
             this.daycareService.completed
 
         );
+        if(this.idChild>0){
+            this.childService.getOneByDaycareId(this.idDaycare,this.idChild).subscribe(
+                (child) => {
+                    this.child = child;
+                    this.model.id=this.child.id;
+                    this.model.firstname=this.child.firstname;
+                    this.model.lastname=this.child.lastname;
+                    console.log(this.child)
+                },
+                this.childService.errorSubscribe,
+                this.childService.completed
+            );
+        }
     }
 
     create() {
-        this.child = new Child(null, this.model.firstname, this.model.lastname, this.daycare);
-        this.childService.create(this.idDayCare, this.child).subscribe(
+        this.child.firstname= this.model.firstname;
+        this.child.lastname=this.model.lastname;
+        this.childService.create(this.idDaycare, this.child).subscribe(
             data => {
                 this.zone.run(() => {
-                    this.router.navigate(['daycare', this.idDayCare, 'admin', 1, 'children']);
+                    this.router.navigate(['daycare', this.idDaycare, 'admin', this.idAdmin, 'children']);
                 });
             },
             this.childService.errorSubscribe,
