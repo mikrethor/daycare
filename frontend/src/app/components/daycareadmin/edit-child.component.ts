@@ -37,7 +37,7 @@ export class AdminEditChildComponent implements OnInit {
     }
 
     create() {
-        this.child = new Child(null, this.model.firstName, this.model.lastName, this.daycare);
+        this.child = new Child(null, this.model.firstname, this.model.lastname, this.daycare);
         this.childService.create(this.idDayCare, this.child).subscribe(
             data => {
                 this.zone.run(() => {

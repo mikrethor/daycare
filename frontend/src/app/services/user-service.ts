@@ -52,7 +52,7 @@ export class UserService {
 
     getUser(username:String):Observable<User>{
         let url: string = this.constantService.API_ENDPOINT + "/users/" + username;
-        return this.http.get<User>(url,this.loginService.getBearerToken2());
+        return this.http.get<User>(url,this.loginService.getBearerToken());
             // .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 

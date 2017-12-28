@@ -20,7 +20,7 @@ export class DaycareServiceImpl implements DaycareService{
         let endpoint = this.constantService.API_ENDPOINT;
         let url = endpoint+"/daycares/"+id;
 
-        return this.http.get<Daycare>( url, this.loginService.getBearerToken2())
+        return this.http.get<Daycare>( url, this.loginService.getBearerToken())
             .catch(
                 (error: any) => Observable.throw(error.json()|| 'Server error')
             );

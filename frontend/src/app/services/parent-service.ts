@@ -18,13 +18,13 @@ export class ParentServiceImpl implements ParentService{
 
     getOneById(idDaycare: number, idParent: number): Observable<Parent> {
         console.log("getEducator " +idDaycare+" "+idParent);
-        return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent,this.loginService.getBearerToken2())
+        return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     getAllByDaycareId(idDaycare: number): Observable<Parent[]> {
         console.log("getParents " +idDaycare);
-        return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken2())
+        return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
@@ -32,14 +32,14 @@ export class ParentServiceImpl implements ParentService{
 
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents";
         let body = JSON.stringify(parent);
-        return this.http.post(url, body, this.loginService.getBearerToken2()
+        return this.http.post(url, body, this.loginService.getBearerToken()
         )
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     delete(idDaycare: number, idParent: number): Observable<Boolean> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent;
-        return this.http.delete(url,this.loginService.getBearerToken2())
+        return this.http.delete(url,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 

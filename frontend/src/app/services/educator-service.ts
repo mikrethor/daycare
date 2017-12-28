@@ -17,27 +17,27 @@ export class EducatorServiceImpl implements EducatorService{
 
     getAllByDaycareId(id: number): Observable<Educator[]> {
         console.log("getEducators " +id);
-        return this.http.get<Educator[]>(this.constantService.API_ENDPOINT + "/users/role/1/daycares/" + id, this.loginService.getBearerToken2())
+        return this.http.get<Educator[]>(this.constantService.API_ENDPOINT + "/users/role/1/daycares/" + id, this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     getOneById(idDaycare: number, idEducator: number): Observable<Educator> {
         console.log("getEducator " +idDaycare+" "+idEducator);
-        return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator,this.loginService.getBearerToken2())
+        return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     create(idDaycare: number, educator: Educator): Observable<Educator[]> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators";
         let body = JSON.stringify(educator);
-        return this.http.post(url, body, this.loginService.getBearerToken2())
+        return this.http.post(url, body, this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     delete(idDaycare: number, idEducator: number):Observable<Boolean>{
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator;
         console.log("delete url "+url);
-        return this.http.delete(url,this.loginService.getBearerToken2())
+        return this.http.delete(url,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 

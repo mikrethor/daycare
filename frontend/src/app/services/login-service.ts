@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Headers, RequestOptions} from '@angular/http';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {JwtToken} from '../pojo/pojo';
 import {Cookie} from 'ng2-cookies';
@@ -30,21 +29,11 @@ export class LoginService {
     }
 
     //TODO when other services will all use httpClient
-    getBearerToken():RequestOptions{
-        let headers = new Headers({
-            // 'Content-Type': 'application/json',
-            'Authorization': this.getBearerAuthorization(),
-            // 'Allow-Control-Allow-Origin': '*'
-        });
-        let options = new RequestOptions({ headers: headers });
-        return options;
-    }
-
-    //TODO when other services will all use httpClient
-    getBearerToken2():{headers:HttpHeaders,withCredentials:boolean}{
+    getBearerToken():{headers:HttpHeaders,withCredentials:boolean}{
         let headers = new HttpHeaders()
-            .set('Authorization', this.getBearerAuthorization());
-
+            .set('Authorization', this.getBearerAuthorization())
+            .set('Access-Control-Allow-Origin', '*' )
+            .set('Content-Type', 'application/json; charset=utf8');
         const httpOptions = {
             headers: headers,
             withCredentials: false

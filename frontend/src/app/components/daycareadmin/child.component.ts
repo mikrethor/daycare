@@ -44,16 +44,6 @@ export class AdminChildComponent implements OnInit {
             this.childService.completed);
     }
 
-    // create() {
-    //     this.child = new Child(null, this.model.firstName, this.model.lastName, this.idDayCare);
-    //     this.childService.createChild(this.idDayCare, this.child).subscribe(
-    //         data => {
-    //             console.log(data);
-    //         },
-    //         this.childService.errorSubscribe,
-    //         this.childService.completed);
-    // }
-
     edit(index: number) {
         //edit
         console.log("edit : " + index);

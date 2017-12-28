@@ -17,7 +17,7 @@ export class ChildServiceImpl implements ChildService{
 
     getAllByDaycareId(id: number): Observable<Child[]> {
         console.log("getChildren " +id);
-        return this.http.get<Child[]>(this.constantService.API_ENDPOINT + "/daycares/" + id + "/childs/",this.loginService.getBearerToken2())
+        return this.http.get<Child[]>(this.constantService.API_ENDPOINT + "/daycares/" + id + "/childs/",this.loginService.getBearerToken())
             .catch((error: any) =>
                 {
                     return  Observable.throw(error.json().error || 'Server error')}
@@ -26,22 +26,21 @@ export class ChildServiceImpl implements ChildService{
 
     getAllByParentId(idDaycare: number, idParent: number): Observable<Array<Child>> {
         console.log("getChildrenByParentId " +idDaycare+" "+idParent);
-        return this.http.get<Child[]>(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent + "/childs",this.loginService.getBearerToken2())
+        return this.http.get<Child[]>(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent + "/childs",this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     create(idDaycare: number, child: Child): Observable<Child> {
-
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs";
         let body = JSON.stringify(child);
-        return this.http.post<Child>(url, body, this.loginService.getBearerToken2())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.post<Child>(url, body, this.loginService.getBearerToken())
+            .catch((error: any) => {console.log(error);return Observable.throw(error.json().error || 'Server error')});
     }
 
     delete(idDaycare: number, idChild: number): Observable<Boolean> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild;
-        return this.http.delete(url,this.loginService.getBearerToken2())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.delete(url,this.loginService.getBearerToken())
+            .catch((error: any) =>  Observable.throw(error.error || 'Server error'));
     }
 
     errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
