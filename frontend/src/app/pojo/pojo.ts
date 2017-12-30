@@ -2,8 +2,13 @@ export class Daycare {
     constructor(
         public id: number,
         public name: string
-    ) { }
+    ){}
+
+    static create() : Daycare{
+        return new Daycare(0,"");
+    }
 }
+
 
 export class Child {
     constructor(
@@ -12,6 +17,10 @@ export class Child {
         public lastname: string,
         public daycare: Daycare
     ) { }
+
+    static create() : Child{
+        return new Child(0,"","",Daycare.create());
+    }
 }
 
 export class Educator {
@@ -21,6 +30,10 @@ export class Educator {
         public lastName: string,
         public daycare: Daycare
     ) { }
+
+    static create() : Educator{
+        return new Educator(0,"","",Daycare.create());
+    }
 }
 
 export class Parent {
@@ -28,8 +41,12 @@ export class Parent {
         public id: number,
         public firstName: string,
         public lastName: string,
-        public daycare: number
+        public daycare: Daycare
     ) { }
+
+    static create() : Parent{
+        return new Parent(0,"","",Daycare.create());
+    }
 }
 
 export class Sumups {
@@ -43,6 +60,10 @@ export class Sumups {
         public educator: number,
         public day: number
     ) { }
+
+    static create() : Sumups{
+        return new Sumups(0,Child.create(),0,0,0,"",0,0);
+    }
 }
 
 export class User {
@@ -54,6 +75,10 @@ export class User {
         public roles:Array<Role>,
         public daycare: Daycare
     ) { }
+
+    static create() : User{
+        return new User(0,"","","",new Array<Role>(),Daycare.create());
+    }
 }
 
 export class Role {

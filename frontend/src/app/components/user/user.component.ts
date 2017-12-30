@@ -13,8 +13,8 @@ export class UserComponent implements OnInit {
     lastName:String="";
     firstName:String="";
     roles:Array<Role>;
-    daycare:Daycare=new Daycare(0,"");
-    user:User=new User(0,"","","",[],new Daycare(0,""));
+    daycare:Daycare=Daycare.create();
+    user:User=User.create();
 
     constructor(
         private route: ActivatedRoute,

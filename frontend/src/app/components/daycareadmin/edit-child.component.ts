@@ -11,10 +11,10 @@ import {UserService} from "../../services/user-service";
     templateUrl: './edit-child.html',
 })
 export class AdminEditChildComponent implements OnInit {
-    private child: Child = new Child(0, "", "", new Daycare(1,""));
+    private child: Child = Child.create();
     private idChild: number;
     private idDaycare: number = 1;
-    private daycare: Daycare = new Daycare(0, "");
+    private daycare: Daycare = Daycare.create();
     private idAdmin: number;
     model: any = {};
 
@@ -28,7 +28,6 @@ export class AdminEditChildComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log("currentUser")
 
 
         this.route.params.subscribe(params => {

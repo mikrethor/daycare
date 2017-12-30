@@ -12,7 +12,7 @@ import {ParentService} from "../../services/parent-service";
 export class AdminParentComponent implements OnInit {
     private idDayCare: number = 1;
     private parents: Parent[] = [];
-    private daycare: Daycare = new Daycare(0, "");
+    private daycare: Daycare = Daycare.create();
     private parent: Parent;
     model: any = {};
     private deleted: boolean = false;
@@ -43,7 +43,6 @@ export class AdminParentComponent implements OnInit {
         this.parentService.getAllByDaycareId(this.idDayCare).subscribe(
             (jsonParent) => {
                 for (let parent of jsonParent) {
-                    console.log(parent)
                     this.parents.push(new Parent(parent.id, parent.firstName, parent.lastName, parent.daycare));
 
                 }

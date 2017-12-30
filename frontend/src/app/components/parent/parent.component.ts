@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Child, Daycare, Parent, Sumups, User} from '../../pojo/pojo';
+import {Child, Parent, Sumups, User} from '../../pojo/pojo';
 import {SumupService} from "../../services/sumup-service";
 import {ParentService} from "../../services/parent-service";
 import {ChildService} from "../../services/child-service";
@@ -12,14 +12,14 @@ import {ChildService} from "../../services/child-service";
 })
 export class ParentComponent implements OnInit {
     private user: User;
-    private parent: Parent = new Parent(0, "", "", null);
+    private parent: Parent = Parent.create();
     private children: Child[] = [];
     private child= {
         selectedMoodId: 0,
         selectedSleepId: 0,
         selectedAppetiteId: 0
     };
-    private sumup: Sumups = new Sumups(0, new Child(0,"","",new Daycare(0,"")), 0, 0, 0, "", 0, 0);
+    private sumup: Sumups = Sumups.create();
     private idDayCare: number = -61;
     private idParent: number = -61;
 
@@ -31,7 +31,7 @@ export class ParentComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.user = new User(0, "", "", "", null,null);
+        this.user = User.create();
         this.idDayCare = this.route.snapshot.params['idDaycare'];
         this.idParent = this.route.snapshot.params['idParent'];
 

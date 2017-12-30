@@ -11,12 +11,12 @@ import {SumupService} from "../../services/sumup-service";
     templateUrl: './educator.html',
 })
 export class EducatorComponent implements OnInit {
-    private educator: Educator = new Educator(null, "", "", null);
+    private educator: Educator = Educator.create();
     private children: Child[] = [];
     private sumups: Sumups[] = [];
     private selectedChild: Child;
     private idDayCare: number = 1;
-    private daycare: Daycare = new Daycare(0, "");
+    private daycare: Daycare = Daycare.create();
 
     constructor(
         private daycareService: DaycareService,

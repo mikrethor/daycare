@@ -10,14 +10,14 @@ import {ActivatedRoute} from "@angular/router";
     templateUrl: './child.html',
 })
 export class AdminChildComponent implements OnInit {
-    private educator: Educator = new Educator(0, "", "", new Daycare(0,""));
+    private educator: Educator = Educator.create();
     private children: Child[] = [];
     private child: Child;
     private idAdmin: number;
     model: any = {};
 
     private idDayCare: number = 1;
-    private daycare: Daycare = new Daycare(0, "");
+    private daycare: Daycare =  Daycare.create();
     private deleted: boolean = false;
 
     constructor(

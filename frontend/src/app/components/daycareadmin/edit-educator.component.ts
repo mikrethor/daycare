@@ -10,10 +10,10 @@ import {EducatorService} from "../../services/educator-service";
     templateUrl: './edit-educator.html',
 })
 export class AdminEditEducatorComponent implements OnInit {
-    private educator: Educator = new Educator(0, "", "", new Daycare(0,""));
+    private educator: Educator = Educator.create();
     private educators: Educator[] = [];
     private idDayCare: number = 1;
-    private daycare: Daycare = new Daycare(0, "");
+    private daycare: Daycare = Daycare.create();
     model: any = {};
 
     constructor(

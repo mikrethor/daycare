@@ -10,8 +10,8 @@ import {SumupService} from "../../services/sumup-service";
 })
 export class EditSumupsComponent implements OnInit {
     private user: User;
-    private child: Child = new Child(0, "Jean", "Valgeant", new Daycare(0,""));
-    private sumup: Sumups = new Sumups(0, new Child(0,"","",new Daycare(0,"")), 0, 0, 0, "", 0, 0);
+    private child: Child = Child.create();
+    private sumup: Sumups = Sumups.create();
     private idDayCare: number = 1;
     private idChild: number = 1;
     private displaySumup= {

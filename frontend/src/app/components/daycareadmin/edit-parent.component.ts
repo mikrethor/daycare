@@ -10,10 +10,10 @@ import {ParentService} from "../../services/parent-service";
     templateUrl: './edit-parent.html',
 })
 export class AdminEditParentComponent implements OnInit {
-    private parent: Parent = new Parent(0, "", "", 0);
+    private parent: Parent = Parent.create();
     private parents: Parent[] = [];
     private idDayCare: number = 1;
-    private daycare: Daycare = new Daycare(0, "");
+    private daycare: Daycare = Daycare.create();
     model: any = {};
 
     constructor(
@@ -36,7 +36,7 @@ export class AdminEditParentComponent implements OnInit {
     }
 
     create() {
-        this.parent = new Parent(null, this.model.firstName, this.model.lastName, this.idDayCare);
+        this.parent = new Parent(null, this.model.firstName, this.model.lastName, this.daycare);
         this.parentService.create(this.idDayCare, this.parent).subscribe(
             data => {
                 this.zone.run(() => {
