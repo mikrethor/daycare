@@ -30,8 +30,9 @@ internal class EducatorController {
     }
 
     @PostMapping("/daycares/{idDaycare}/educators")
-    fun create(@PathVariable(value="idDaycare")idDaycare:Long, @ModelAttribute educator: User) =
-            userRepository.save(educator)
+    fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody educator: User) :User {
+        return userRepository.save(educator)
+    }
 
 
 }

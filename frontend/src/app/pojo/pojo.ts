@@ -19,7 +19,7 @@ export class Educator {
         public id: number,
         public firstName: string,
         public lastName: string,
-        public daycare: number
+        public daycare: Daycare
     ) { }
 }
 

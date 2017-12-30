@@ -9,7 +9,7 @@ import {EducatorService} from "../../services/educator-service";
     templateUrl: './daycareadmin.html',
 })
 export class DaycareAdminComponent implements OnInit {
-    private educator: Educator = new Educator(0, "", "",0);
+    private educator: Educator = new Educator(0, "", "",new Daycare(0,""));
     private children: Child[] = [];
     private idDayCare: number = 1;
     private daycare: Daycare = new Daycare(0, "");

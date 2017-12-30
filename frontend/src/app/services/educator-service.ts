@@ -30,8 +30,8 @@ export class EducatorServiceImpl implements EducatorService{
     create(idDaycare: number, educator: Educator): Observable<Educator[]> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators";
         let body = JSON.stringify(educator);
-        return this.http.post(url, body, this.loginService.getBearerToken())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.post<Educator>(url, body, this.loginService.getBearerToken())
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     delete(idDaycare: number, idEducator: number):Observable<Boolean>{
