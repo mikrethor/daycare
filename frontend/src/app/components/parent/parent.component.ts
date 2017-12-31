@@ -53,21 +53,25 @@ export class ParentComponent implements OnInit {
             this.childService.errorSubscribe,
             this.childService.completed
         );
+        if(this.children.length>0){
 
-        //TODO determiner date du jour
-        this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idParent, "2017-12-26").subscribe(
-            (jsonSumup) => {
-                console.log("test"+jsonSumup);
-                this.sumup = jsonSumup;
-                this.child = {
-                    selectedMoodId: this.sumup.mood,
-                    selectedSleepId: this.sumup.sleep,
-                    selectedAppetiteId: this.sumup.appetite
-                }
-            },
-            this.sumupService.errorSubscribe,
-            this.sumupService.completed
-        );
+            let idCurrentChild=this.children[0].id;
+            //TODO determiner date du jour
+            this.sumupService.getOneByChildIdAndDay(this.idDayCare, idCurrentChild, "2017-12-26").subscribe(
+                (jsonSumup) => {
+                    console.log("test"+jsonSumup);
+                    this.sumup = jsonSumup;
+                    this.child = {
+                        selectedMoodId: this.sumup.mood,
+                        selectedSleepId: this.sumup.sleep,
+                        selectedAppetiteId: this.sumup.appetite
+                    }
+                },
+                this.sumupService.errorSubscribe,
+                this.sumupService.completed
+            );
+        }
+
     }
 
     getImage(level: number) {
@@ -89,7 +93,7 @@ export class ParentComponent implements OnInit {
     }
 
     static getPosition(level: string) {
-        
+
         switch (level) {
             case "BAD":
                 return 0;
