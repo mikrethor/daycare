@@ -21,17 +21,17 @@
         <h4>Sumup : {{ sumup.day | date:'EEEE d MMMM'}}</h4>
         <div>Appetite :
 
-            <img src="/images/{{child.selectedAppetiteId}}">
+            <img src="{{ getImage(child.selectedAppetiteId) }}">
 
         </div>
         <div>Mood :
 
-            <img src="/images/{{child.selectedMoodId}}">
+            <img src="{{ getImage(child.selectedMoodId) }}">
 
         </div>
         <div>Sleep :
 
-            <img src="/images/{{child.selectedSleepId}}">
+            <img src="{{ getImage(child.selectedSleepId) }}">
 
         </div>
         <div>

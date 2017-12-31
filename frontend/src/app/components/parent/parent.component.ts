@@ -55,8 +55,9 @@ export class ParentComponent implements OnInit {
         );
 
         //TODO determiner date du jour
-        this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idParent, "2017-12-21").subscribe(
+        this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idParent, "2017-12-26").subscribe(
             (jsonSumup) => {
+                console.log("test"+jsonSumup);
                 this.sumup = jsonSumup;
                 this.child = {
                     selectedMoodId: this.sumup.mood,
@@ -69,8 +70,7 @@ export class ParentComponent implements OnInit {
         );
     }
 
-    static getImage(level: number) {
-        
+    getImage(level: number) {
         switch (level) {
             case 0:
                 return '/assets/scalableVectorGraphics/health-40to59.svg';
@@ -82,6 +82,7 @@ export class ParentComponent implements OnInit {
                 return "";
         }
     }
+
 
     select(index:number){
 

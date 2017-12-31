@@ -51,7 +51,7 @@ export class EditSumupsComponent implements OnInit {
         );
     }
 
-    static getImage(level: number) {
+    getImage(level: number) {
 
         switch (level) {
             case 0:
