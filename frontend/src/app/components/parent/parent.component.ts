@@ -4,6 +4,8 @@ import {Child, Parent, Sumups, User} from '../../pojo/pojo';
 import {SumupService} from "../../services/sumup-service";
 import {ParentService} from "../../services/parent-service";
 import {ChildService} from "../../services/child-service";
+import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
+import {DateService} from "../../services/date-service";
 
 
 @Component({
@@ -27,6 +29,7 @@ export class ParentComponent implements OnInit {
         private sumupService: SumupService,
         private parentService: ParentService,
         private childService: ChildService,
+        private dateService: DateService,
         private route: ActivatedRoute
     ) {}
 
@@ -53,11 +56,14 @@ export class ParentComponent implements OnInit {
             this.childService.errorSubscribe,
             this.childService.completed
         );
+
+        console.log("tets   "+this.children.length)
+
         if(this.children.length>0){
 
             let idCurrentChild=this.children[0].id;
             //TODO determiner date du jour
-            this.sumupService.getOneByChildIdAndDay(this.idDayCare, idCurrentChild, "2017-12-26").subscribe(
+            this.sumupService.getOneByChildIdAndDay(this.idDayCare, idCurrentChild, this.dateService.getCurrentDay()).subscribe(
                 (jsonSumup) => {
                     console.log("test"+jsonSumup);
                     this.sumup = jsonSumup;
@@ -89,20 +95,8 @@ export class ParentComponent implements OnInit {
 
 
     select(index:number){
-
+//TODO move getsumuphere
     }
 
-    static getPosition(level: string) {
 
-        switch (level) {
-            case "BAD":
-                return 0;
-            case "MEDIUM":
-                return 1;
-            case "GOOD":
-                return 2;
-            default:
-                return -1;
-        }
-    }
 }

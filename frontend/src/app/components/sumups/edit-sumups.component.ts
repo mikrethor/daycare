@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Child, Daycare, Sumups, User} from '../../pojo/pojo';
 import {SumupService} from "../../services/sumup-service";
+import {DateService} from "../../services/date-service";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class EditSumupsComponent implements OnInit {
 
     constructor(
         private sumupService: SumupService,
+        private dateService: DateService,
         private route: ActivatedRoute
     ) {}
 
@@ -33,8 +35,7 @@ export class EditSumupsComponent implements OnInit {
         this.idDayCare = 1;//this.route.snapshot.params['idDaycare'];
         this.idChild = 1;//this.route.snapshot.params['idParent'];
 
-        //TODO determiner date du jour
-        this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idChild, "2017-12-26").subscribe(
+        this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idChild, this.dateService.getCurrentDay()).subscribe(
             (jsonSumup) => {
                 this.sumup = jsonSumup;
 

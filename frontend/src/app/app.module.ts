@@ -25,6 +25,7 @@ import { AdminEditEducatorComponent } from './components/daycareadmin/edit-educa
 import { AdminEditParentComponent } from './components/daycareadmin/edit-parent.component';
 import { LoginService } from './services/login-service';
 import { ConstantsService } from 'app/services/constants-service';
+import { DateService } from 'app/services/date-service';
 import { ChildServiceImpl, ChildService } from 'app/services/child-service';
 import { DaycareServiceImpl, DaycareService } from 'app/services/daycare-service';
 import { EducatorServiceImpl ,EducatorService } from 'app/services/educator-service';
@@ -47,7 +48,7 @@ import { UserService } from 'app/services/user-service';
         routing
 
     ],
-    providers: [LoginService,ConstantsService,UserService,
+    providers: [LoginService,ConstantsService,UserService,DateService,
         { provide: LocationStrategy, useClass: HashLocationStrategy, },
         { provide: APP_BASE_HREF, useValue: '/', },
         { provide : ChildService, useClass:ChildServiceImpl},
