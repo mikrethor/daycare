@@ -23,12 +23,17 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+
+
         this.loading = true;
         //route to role page
         this.loginService.login(this.model.username,this.model.password).subscribe(
             data => {
                 this.loginService.saveToken(data.access_token);
                 this.dataToken=data.access_token;
+                localStorage.setItem("test",data.access_token);
+
+
                 this.router.navigateByUrl('/daycare/user/'+this.model.username);
             },
             err => {
