@@ -1,18 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {JwtToken} from '../pojo/pojo';
-import {Cookie} from 'ng2-cookies';
 import {ConstantsService} from './constants-service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
+import {LocalStorage} from "../annotations/local-storage";
 
 @Injectable()
 export class LoginService {
     private authUrl = this.constantService.API_ENDPOINT + "/oauth/token";
-    private myToken : String;
     private clientId="testjwtclientid";
     private clientSecret="XY7kmzoNzl100";
+
+
+    @LocalStorage
+    private myToken:string;
 
     constructor(
         private http: HttpClient,
@@ -25,7 +28,7 @@ export class LoginService {
     }
 
     getBearerAuthorization():string{
-        return 'Bearer '+this.myToken
+        return 'Bearer '+this.myToken;
     }
 
     //TODO when other services will all use httpClient
@@ -42,20 +45,16 @@ export class LoginService {
     }
 
     saveToken(token){
-        var expireDate = new Date().getTime() + (1000 * token.expires_in);
-        Cookie.set("access_token", token.access_token, expireDate);
         this.myToken=token;
     }
 
     checkCredentials(){
-        // if (!Cookie.check('access_token')){
-        if (Cookie.get('access_token').length != 0){
+        if (this.myToken.length != 0){
             this.router.navigate(['/login']);
         }
     }
 
     logout() {
-        Cookie.delete('access_token');
         this.myToken="";
         this.router.navigate(['/daycare/login']);
     }

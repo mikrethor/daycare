@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
         //route to role page
         this.loginService.login(this.model.username,this.model.password).subscribe(
             data => {
-                console.log(data)
                 this.loginService.saveToken(data.access_token);
                 this.dataToken=data.access_token;
                 this.router.navigateByUrl('/daycare/user/'+this.model.username);
