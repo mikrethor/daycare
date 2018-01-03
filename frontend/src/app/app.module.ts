@@ -32,12 +32,15 @@ import { EducatorServiceImpl ,EducatorService } from 'app/services/educator-serv
 import { ParentServiceImpl, ParentService } from 'app/services/parent-service';
 import { SumupServiceImpl, SumupService } from 'app/services/sumup-service';
 import { UserService } from 'app/services/user-service';
+import {AdminEditUserComponent} from "./components/daycareadmin/edit-user.components";
+import {AdminUserComponent} from "./components/daycareadmin/user.component";
 
 @NgModule({
     declarations: [
         AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,
         DaycareAdminComponent,NavbarComponent,EditSumupsComponent,AdminChildComponent,AdminEducatorComponent,
-        AdminParentComponent,AdminEditChildComponent,AdminEditEducatorComponent,AdminEditParentComponent
+        AdminParentComponent,AdminEditChildComponent,AdminEditEducatorComponent,AdminEditParentComponent,
+        AdminEditUserComponent,AdminUserComponent
     ],
     imports: [
         BrowserModule,

@@ -12,6 +12,8 @@ import { AdminEditEducatorComponent } from './daycareadmin/edit-educator.compone
 import { AdminEditChildComponent } from './daycareadmin/edit-child.component';
 import { AdminEditParentComponent } from './daycareadmin/edit-parent.component';
 import { EditSumupsComponent } from './sumups/edit-sumups.component';
+import {AdminEditUserComponent} from "./daycareadmin/edit-user.components";
+import {AdminUserComponent} from "./daycareadmin/user.component";
 
 const routes: Routes = [
     { path: '', redirectTo: 'daycare/login', pathMatch: 'full' },
@@ -32,6 +34,9 @@ const routes: Routes = [
     { path: 'daycare/:idDaycare/admin/:idAdmin/parents/create', component: AdminEditParentComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/parents/edit', component: AdminEditParentComponent },
     { path: 'daycare/:idDaycare/children/:idChildren/sumups', component: EditSumupsComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/users', component: AdminUserComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/users/create', component: AdminEditUserComponent },
+    { path: 'daycare/:idDaycare/admin/:idAdmin/users/edit', component: AdminEditUserComponent },
 
 ];
 

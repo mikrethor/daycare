@@ -45,7 +45,8 @@ export class NavbarComponent  implements OnInit {
               { "id": 0, "name": "Children", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/children", },
               { "id": 1, "name": "Educators", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/educators", },
               { "id": 2, "name": "Parents", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/parents", },
-              { "id": 3, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
+              { "id": 3, "name": "Users", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/users", },
+              { "id": 4, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
             ]
           };
         }

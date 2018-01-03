@@ -53,7 +53,11 @@ export class UserService {
     getUser(username:String):Observable<User>{
         let url: string = this.constantService.API_ENDPOINT + "/users/" + username;
         return this.http.get<User>(url,this.loginService.getBearerToken());
-            // .map((response) => response.json()).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    delete(idDaycare:number,idUser:number):Observable<Boolean>{
+        let url: string = this.constantService.API_ENDPOINT + "/users/" + idUser;
+        return new Observable<true>();
     }
 
 
