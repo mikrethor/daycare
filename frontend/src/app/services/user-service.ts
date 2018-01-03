@@ -55,6 +55,17 @@ export class UserService {
         return this.http.get<User>(url,this.loginService.getBearerToken());
     }
 
+    getUsersByDaycareId(idDaycare:number):Observable<User[]>{
+        let url: string = this.constantService.API_ENDPOINT + "/daycares/"+idDaycare+"/users/" ;
+        return this.http.get<User[]>(url,this.loginService.getBearerToken());
+    }
+
+    getUsersByIdByDaycareId(idDaycare:number,idUser:number):Observable<User>{
+        let url: string = this.constantService.API_ENDPOINT + "/daycares/"+idDaycare+"/users/"+idUser ;
+        console.log(url);
+        return this.http.get<User>(url,this.loginService.getBearerToken());
+    }
+
     delete(idDaycare:number,idUser:number):Observable<Boolean>{
         let url: string = this.constantService.API_ENDPOINT + "/users/" + idUser;
         return new Observable<true>();

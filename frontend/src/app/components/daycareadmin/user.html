@@ -7,7 +7,7 @@
             <mat-icon mat-list-avatar color="primary">face</mat-icon>
             <h4 mat-line>{{p.firstName}} {{ p.lastName}}</h4>
             <!--<p mat-line> dsdsd </p>-->
-            <button mat-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/',idDaycare,'admin',idUser,'users','edit']">
+            <button mat-icon-button color="primary" (click)="edit(i)" [routerLink]="['/daycare/',idDaycare,'admin',idUser,'users',p.id,'edit']">
                 <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button color="primary" (click)="remove(i)">

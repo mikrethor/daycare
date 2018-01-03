@@ -37,23 +37,21 @@ export class AdminUserComponent implements OnInit, OnChanges {
             },
             this.daycareService.errorSubscribe,
             this.daycareService.completed
-
         );
 
-        this.users=this.getUsers();
+        this.getUsers();
     }
 
-    getUsers():User[]{
-
-
-        let user = User.create();
-        user.lastName = 'Moi';
-        user.firstName = 'Mon';
-
-        let users:User[]=[];
-        users.push(user);
-
-        return users;
+    getUsers(){
+        this.userService.getUsersByDaycareId(this.idDaycare).subscribe(
+            (users) => {
+                this.users=[];
+                for (let user of users) {
+                    this.users.push(user);
+                }
+            },
+            this.daycareService.errorSubscribe,
+            this.daycareService.completed);
     }
 
     remove(index: number) {

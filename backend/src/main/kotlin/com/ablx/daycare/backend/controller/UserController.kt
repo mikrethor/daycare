@@ -19,7 +19,16 @@ internal class UserController{
             userRepository.findByUsername(name)
 
     @GetMapping("/users/role/{idRole}/daycares/{idDaycare}")
-    fun findByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="idRole")idRole: Long) =
+    fun findAllByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="idRole")idRole: Long) =
             userRepository.findAllByDaycareAndRole(idDaycare,idRole)
+
+    @GetMapping("/daycares/{idDaycare}/users")
+    fun findAllByDaycare(@PathVariable(value="idDaycare")idDaycare: Long) =
+            userRepository.findAllByDaycare(idDaycare)
+
+    @GetMapping("/daycares/{idDaycare}/users/{idUser}")
+    fun findOneByDaycareAndIdUser(@PathVariable(value="idDaycare")idDaycare: Long,
+                                  @PathVariable(value="idUser")idUser: Long) =
+            userRepository.findOneByIdByDaycare(idUser,idDaycare)
 
 }

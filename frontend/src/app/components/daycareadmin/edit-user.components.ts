@@ -1,5 +1,5 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DaycareService} from '../../services/daycare-service';
 import {Daycare, Role, User} from '../../pojo/pojo';
 import {UserService} from "../../services/user-service";
@@ -12,7 +12,8 @@ import {RoleService} from "../../services/role-service";
 })
 export class AdminEditUserComponent implements OnInit {
     private user: User = User.create();
-    private idDayCare: number = 1;
+    private idDaycare: number = 1;
+    private idUser: number = 1;
     private daycare: Daycare = Daycare.create();
     private roles: Role[] = [];
     model: any = {};
@@ -23,11 +24,20 @@ export class AdminEditUserComponent implements OnInit {
         private roleService: RoleService,
         private zone: NgZone,
         private router: Router,
+        private route: ActivatedRoute,
     ) { }
 
     ngOnInit() {
 
-        this.daycareService.getDaycare(this.idDayCare).subscribe(
+        this.route.params.subscribe(params => {
+            this.idUser=params['idUser'];
+            this.idDaycare=params['idDaycare'];
+        });
+
+        console.log(" idUser : "+this.idUser);
+        console.log(" idDaycare : "+this.idDaycare);
+
+        this.daycareService.getDaycare(this.idDaycare).subscribe(
             (daycare) => {
                 this.daycare = daycare;
             },
@@ -36,11 +46,22 @@ export class AdminEditUserComponent implements OnInit {
 
         );
 
+        this.userService.getUsersByIdByDaycareId(this.idDaycare,this.idUser).subscribe(
+            (user) => {
+
+                console.log(user);
+
+                this.user = user;
+            },
+            this.userService.errorSubscribe,
+            this.userService.completed
+
+        );
+
         this.roleService.getRoles()
             .subscribe(
                 (roles) => {
                     for (let role of roles) {
-                        console.log(role.id+" "+role.name);
                         this.roles.push(role);
                     }
                 },
@@ -51,10 +72,10 @@ export class AdminEditUserComponent implements OnInit {
 
     create() {
         this.user = User.create();
-        // this.parentService.create(this.idDayCare, this.user).subscribe(
+        // this.parentService.create(this.idDaycare, this.user).subscribe(
         //     data => {
         //         this.zone.run(() => {
-        //             this.router.navigate(['daycare', this.idDayCare, 'admin', 1, 'parents']);
+        //             this.router.navigate(['daycare', this.idDaycare, 'admin', 1, 'parents']);
         //         });
         //     },
         //     this.parentService.errorSubscribe,
