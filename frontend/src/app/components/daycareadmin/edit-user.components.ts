@@ -1,8 +1,9 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DaycareService} from '../../services/daycare-service';
-import {Daycare, Parent} from '../../pojo/pojo';
-import {ParentService} from "../../services/parent-service";
+import {Daycare, Role, User} from '../../pojo/pojo';
+import {UserService} from "../../services/user-service";
+import {RoleService} from "../../services/role-service";
 
 
 @Component({
@@ -10,15 +11,16 @@ import {ParentService} from "../../services/parent-service";
     templateUrl: './edit-user.html',
 })
 export class AdminEditUserComponent implements OnInit {
-    private parent: Parent = Parent.create();
-    private parents: Parent[] = [];
+    private user: User = User.create();
     private idDayCare: number = 1;
     private daycare: Daycare = Daycare.create();
+    private roles: Role[] = [];
     model: any = {};
 
     constructor(
         private daycareService: DaycareService,
-        private parentService: ParentService,
+        private userService: UserService,
+        private roleService: RoleService,
         private zone: NgZone,
         private router: Router,
     ) { }
@@ -33,17 +35,29 @@ export class AdminEditUserComponent implements OnInit {
             this.daycareService.completed
 
         );
+
+        this.roleService.getRoles()
+            .subscribe(
+                (roles) => {
+                    for (let role of roles) {
+                        console.log(role.id+" "+role.name);
+                        this.roles.push(role);
+                    }
+                },
+                this.roleService.errorSubscribe,
+                this.roleService.completed
+            );
     }
 
     create() {
-        this.parent = new Parent(null, this.model.firstName, this.model.lastName, this.daycare);
-        this.parentService.create(this.idDayCare, this.parent).subscribe(
-            data => {
-                this.zone.run(() => {
-                    this.router.navigate(['daycare', this.idDayCare, 'admin', 1, 'parents']);
-                });
-            },
-            this.parentService.errorSubscribe,
-            this.parentService.completed);
+        this.user = User.create();
+        // this.parentService.create(this.idDayCare, this.user).subscribe(
+        //     data => {
+        //         this.zone.run(() => {
+        //             this.router.navigate(['daycare', this.idDayCare, 'admin', 1, 'parents']);
+        //         });
+        //     },
+        //     this.parentService.errorSubscribe,
+        //     this.parentService.completed);
     }
 }

@@ -83,6 +83,7 @@ export class User {
 
 export class Role {
     constructor(
+        public id: number,
         public name: String,
         public description: String
     ) { }

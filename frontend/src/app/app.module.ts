@@ -34,6 +34,7 @@ import { SumupServiceImpl, SumupService } from 'app/services/sumup-service';
 import { UserService } from 'app/services/user-service';
 import {AdminEditUserComponent} from "./components/daycareadmin/edit-user.components";
 import {AdminUserComponent} from "./components/daycareadmin/user.component";
+import {RoleService} from "./services/role-service";
 
 @NgModule({
     declarations: [
@@ -51,7 +52,7 @@ import {AdminUserComponent} from "./components/daycareadmin/user.component";
         routing
 
     ],
-    providers: [LoginService,ConstantsService,UserService,DateService,
+    providers: [LoginService,ConstantsService,UserService,DateService,RoleService,
         { provide: LocationStrategy, useClass: HashLocationStrategy, },
         { provide: APP_BASE_HREF, useValue: '/', },
         { provide : ChildService, useClass:ChildServiceImpl},
