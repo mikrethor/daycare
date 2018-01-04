@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Daycare} from '../pojo/pojo';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
+import {NGXLogger} from "ngx-logger";
 
 @Injectable()
 export class DaycareServiceImpl implements DaycareService{
@@ -12,17 +13,18 @@ export class DaycareServiceImpl implements DaycareService{
     constructor(
         private http: HttpClient,
         private constantService: ConstantsService,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private logger: NGXLogger
     ) {}
 
     getDaycare(id: number): Observable<Daycare> {
-        console.log("getDaycare " +id);
+        this.logger.debug("getDaycare :", id);
         let endpoint = this.constantService.API_ENDPOINT;
         let url = endpoint+"/daycares/"+id;
 
         return this.http.get<Daycare>( url, this.loginService.getBearerToken())
             .catch(
-                (error: any) => Observable.throw(error.json()|| 'Server error')
+                (error: any) => Observable.throw(error || 'Server error')
             );
     }
 

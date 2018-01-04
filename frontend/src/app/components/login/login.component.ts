@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../../services/login-service';
+import {NGXLogger} from "ngx-logger";
 
 @Component({
     selector: 'login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private logger: NGXLogger
     ) { }
 
     ngOnInit() {
@@ -23,23 +25,18 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-
-
         this.loading = true;
         //route to role page
         this.loginService.login(this.model.username,this.model.password).subscribe(
             data => {
                 this.loginService.saveToken(data.access_token);
                 this.dataToken=data.access_token;
-                localStorage.setItem("test",data.access_token);
-
-
                 this.router.navigateByUrl('/daycare/user/'+this.model.username);
             },
-            err => {
-                console.log(err)
-                alert('Invalid Credentials :'+err)
-            });
+            (error)=>{ this.logger.error("Error happened : in "," LoginService::login", error);
+                alert('Invalid Credentials :'+error);}
+
+            ,()=>{this.logger.info("LoginService::login completed")});
         this.loading = false;
     }
 }

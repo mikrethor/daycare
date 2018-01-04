@@ -5,15 +5,17 @@ import 'rxjs/Rx';
 import {Role, User} from '../pojo/pojo';
 import {LoginService} from "./login-service";
 import {ConstantsService} from "./constants-service";
+import {NGXLogger} from "ngx-logger";
 
 @Injectable()
 export class UserService {
     private user:User;
-    
+
     constructor(
         private http: HttpClient,
         private constantService: ConstantsService,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private logger: NGXLogger
     ) {}
 
     set(user:User){
@@ -26,7 +28,6 @@ export class UserService {
 
     isInRoles(roleName:string,roles:Array<Role>):boolean{
         for(let role of roles){
-            console.log(role.name);
             if(role.name==roleName){
                 return true;
             }
@@ -62,7 +63,6 @@ export class UserService {
 
     getUsersByIdByDaycareId(idDaycare:number,idUser:number):Observable<User>{
         let url: string = this.constantService.API_ENDPOINT + "/daycares/"+idDaycare+"/users/"+idUser ;
-        console.log(url);
         return this.http.get<User>(url,this.loginService.getBearerToken());
     }
 
@@ -73,5 +73,5 @@ export class UserService {
 
 
     errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
-    completed() { console.log("the subscription is completed") }
+    completed() { console.log("the subscription is completed")}
 }

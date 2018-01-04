@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService,} from '../../services/user-service';
 import {Daycare, Role, User} from '../../pojo/pojo';
+import {NGXLogger} from "ngx-logger";
 
 @Component({
     selector: 'user',
@@ -20,11 +21,12 @@ export class UserComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
-) { }
+        private logger: NGXLogger
+    ) { }
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.username = params['username']; 
+            this.username = params['username'];
         });
 
         this.userService.getUser(this.username).subscribe(
@@ -36,8 +38,8 @@ export class UserComponent implements OnInit {
                 this.user=user;
                 this.userService.set(user);
             },
-            this.userService.errorSubscribe,
-            this.userService.completed);
+            (error)=>{ this.logger.error("Error happened : in "," UserService::getUser", error) },
+            ()=>{this.logger.info("UserService::getUser completed")});
     }
-    
+
 }

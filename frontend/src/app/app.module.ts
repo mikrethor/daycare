@@ -7,6 +7,8 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
 
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+
 import { routing } from './components/app.routing';
 import { AppComponent } from './components/application/app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -40,6 +42,7 @@ import {RoleService} from "./services/role-service";
         AdminEditUserComponent,AdminUserComponent
     ],
     imports: [
+        LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
         BrowserModule,
         FormsModule,
         HttpClientModule,
