@@ -14,6 +14,7 @@ export class AdminEditUserComponent implements OnInit {
     private user: User = User.create();
     private idDaycare: number = 1;
     private idUser: number = 1;
+    private idAdmin: number = 1;
     private daycare: Daycare = Daycare.create();
     private roles: Role[] = [];
     model: any = {};
@@ -32,6 +33,7 @@ export class AdminEditUserComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.idUser=params['idUser'];
             this.idDaycare=params['idDaycare'];
+            this.idAdmin=params['idAdmin'];
         });
 
         console.log(" idUser : "+this.idUser);
@@ -72,13 +74,5 @@ export class AdminEditUserComponent implements OnInit {
 
     create() {
         this.user = User.create();
-        // this.parentService.create(this.idDaycare, this.user).subscribe(
-        //     data => {
-        //         this.zone.run(() => {
-        //             this.router.navigate(['daycare', this.idDaycare, 'admin', 1, 'parents']);
-        //         });
-        //     },
-        //     this.parentService.errorSubscribe,
-        //     this.parentService.completed);
     }
 }

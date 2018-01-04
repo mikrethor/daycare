@@ -1,17 +1,13 @@
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
-import { UserComponent } from './user/user.component';
-import { ParentComponent } from './parent/parent.component';
-import { EducatorComponent } from './educator/educator.component';
-import { DaycareAdminComponent } from './daycareadmin/daycareadmin.component';
-import { AdminEducatorComponent } from './daycareadmin/educator.component';
-import { AdminParentComponent } from './daycareadmin/parent.component';
-import { AdminChildComponent } from './daycareadmin/child.component';
-import { AdminEditEducatorComponent } from './daycareadmin/edit-educator.component';
-import { AdminEditChildComponent } from './daycareadmin/edit-child.component';
-import { AdminEditParentComponent } from './daycareadmin/edit-parent.component';
-import { EditSumupsComponent } from './sumups/edit-sumups.component';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './login/login.component';
+import {LogoutComponent} from './logout/logout.component';
+import {UserComponent} from './user/user.component';
+import {ParentComponent} from './parent/parent.component';
+import {EducatorComponent} from './educator/educator.component';
+import {DaycareAdminComponent} from './daycareadmin/daycareadmin.component';
+import {AdminChildComponent} from './daycareadmin/child.component';
+import {AdminEditChildComponent} from './daycareadmin/edit-child.component';
+import {EditSumupsComponent} from './sumups/edit-sumups.component';
 import {AdminEditUserComponent} from "./daycareadmin/edit-user.components";
 import {AdminUserComponent} from "./daycareadmin/user.component";
 
@@ -27,12 +23,6 @@ const routes: Routes = [
     { path: 'daycare/:idDaycare/admin/:idAdmin/children', component: AdminChildComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/children/create', component: AdminEditChildComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/children/:idChild/edit', component: AdminEditChildComponent },
-    { path: 'daycare/:idDaycare/admin/:idAdmin/educators', component: AdminEducatorComponent },
-    { path: 'daycare/:idDaycare/admin/:idAdmin/educators/create', component: AdminEditEducatorComponent },
-    { path: 'daycare/:idDaycare/admin/:idAdmin/educators/edit', component: AdminEditEducatorComponent },
-    { path: 'daycare/:idDaycare/admin/:idAdmin/parents', component: AdminParentComponent },
-    { path: 'daycare/:idDaycare/admin/:idAdmin/parents/create', component: AdminEditParentComponent },
-    { path: 'daycare/:idDaycare/admin/:idAdmin/parents/edit', component: AdminEditParentComponent },
     { path: 'daycare/:idDaycare/children/:idChildren/sumups', component: EditSumupsComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/users', component: AdminUserComponent },
     { path: 'daycare/:idDaycare/admin/:idAdmin/users/create', component: AdminEditUserComponent },
