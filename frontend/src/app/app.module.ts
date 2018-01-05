@@ -7,7 +7,7 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
 
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 
 import { routing } from './components/app.routing';
 import { AppComponent } from './components/application/app.component';
@@ -33,6 +33,7 @@ import { UserService } from 'app/services/user-service';
 import {AdminEditUserComponent} from "./components/daycareadmin/edit-user.components";
 import {AdminUserComponent} from "./components/daycareadmin/user.component";
 import {RoleService} from "./services/role-service";
+import {environment} from "../environments/environment";
 
 @NgModule({
     declarations: [
@@ -59,7 +60,18 @@ import {RoleService} from "./services/role-service";
         { provide : EducatorService, useClass:EducatorServiceImpl},
         { provide : ParentService, useClass:ParentServiceImpl},
         { provide : SumupService, useClass:SumupServiceImpl},
+
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(private logger: NGXLogger) {
+        this.showEnvironment();
+    }
+
+    // **** show environment
+    showEnvironment() {
+        this.logger.warn('Environment : ' + environment.envName);
+    }
+}
+

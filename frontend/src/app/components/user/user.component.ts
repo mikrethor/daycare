@@ -25,12 +25,14 @@ export class UserComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.logger.debug("ngOnInit");
         this.route.params.subscribe(params => {
             this.username = params['username'];
         });
 
         this.userService.getUser(this.username).subscribe(
             user => {
+                this.logger.debug("User : ",user);
                 this.firstName=user.firstName;
                 this.lastName=user.lastName;
                 this.roles=user.roles;
@@ -38,8 +40,8 @@ export class UserComponent implements OnInit {
                 this.user=user;
                 this.userService.set(user);
             },
-            (error)=>{ this.logger.error("Error happened : in "," UserService::getUser", error) },
-            ()=>{this.logger.info("UserService::getUser completed")});
+            (error)=>this.userService.errorSubscribe(error),
+            ()=>this.userService.completed('UserService::getUser')
+        );
     }
-
 }

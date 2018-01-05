@@ -71,7 +71,8 @@ export class UserService {
         return new Observable<true>();
     }
 
-
-    errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
-    completed() { console.log("the subscription is completed")}
+    errorSubscribe(error) {   this.logger.error("Error happened : ", error); }
+    completed(description) {
+        this.logger.debug(description,"completed");
+    }
 }
