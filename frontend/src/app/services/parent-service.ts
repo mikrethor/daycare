@@ -5,25 +5,28 @@ import {Parent} from '../pojo/pojo';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 import {HttpClient} from "@angular/common/http";
+import {Service, ServiceImpl} from "./service";
+import {NGXLogger} from "ngx-logger";
 
 @Injectable()
-export class ParentServiceImpl implements ParentService{
+export class ParentServiceImpl extends ServiceImpl implements ParentService{
 
     constructor(
         private http: HttpClient,
         private constantService: ConstantsService,
-        private loginService: LoginService
-    ) {}
+        private loginService: LoginService,
+        protected logger: NGXLogger
+    ) {super(logger);}
 
 
     getOneById(idDaycare: number, idParent: number): Observable<Parent> {
-        console.log("getEducator " +idDaycare+" "+idParent);
+        this.logger.debug("getEducator : " ,idDaycare,idParent);
         return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     getAllByDaycareId(idDaycare: number): Observable<Parent[]> {
-        console.log("getParents " +idDaycare);
+        this.logger.debug("getParents : " ,idDaycare);
         return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -42,17 +45,12 @@ export class ParentServiceImpl implements ParentService{
         return this.http.delete(url,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-
-    errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
-    completed() { console.log("the subscription is completed") }
 }
 
 @Injectable()
-export abstract class ParentService {
+export abstract class ParentService extends Service{
     abstract getOneById(idDaycare: number, idParent: number): Observable<Parent>;
     abstract getAllByDaycareId(idDaycare: number): Observable<Parent[]>;
     abstract create(idDaycare: number, parent: Parent): Observable<Parent[]>;
     abstract delete(idDaycare: number, idParent: number): Observable<Boolean>;
-    abstract errorSubscribe(error);
-    abstract completed();
 }

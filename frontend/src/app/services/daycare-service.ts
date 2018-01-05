@@ -6,16 +6,17 @@ import {Daycare} from '../pojo/pojo';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 import {NGXLogger} from "ngx-logger";
+import {Service, ServiceImpl} from "./service";
 
 @Injectable()
-export class DaycareServiceImpl implements DaycareService{
+export class DaycareServiceImpl extends ServiceImpl implements DaycareService{
     private daycare:Daycare;
     constructor(
         private http: HttpClient,
         private constantService: ConstantsService,
         private loginService: LoginService,
-        private logger: NGXLogger
-    ) {}
+        protected logger: NGXLogger
+    ) {super(logger);}
 
     getDaycare(id: number): Observable<Daycare> {
         this.logger.debug("getDaycare :", id);
@@ -27,14 +28,9 @@ export class DaycareServiceImpl implements DaycareService{
                 (error: any) => Observable.throw(error || 'Server error')
             );
     }
-
-    errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
-    completed() { console.log("the subscription is completed") }
 }
 
 @Injectable()
-export abstract class DaycareService {
+export abstract class DaycareService extends Service{
     abstract getDaycare(id: number) : Observable<Daycare>;
-    abstract errorSubscribe(error);
-    abstract completed();
 }

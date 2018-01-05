@@ -6,6 +6,7 @@ import {ParentService} from "../../services/parent-service";
 import {ChildService} from "../../services/child-service";
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 import {DateService} from "../../services/date-service";
+import {NGXLogger} from "ngx-logger";
 
 
 @Component({
@@ -30,7 +31,8 @@ export class ParentComponent implements OnInit {
         private parentService: ParentService,
         private childService: ChildService,
         private dateService: DateService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private logger: NGXLogger
     ) {}
 
     ngOnInit() {
@@ -38,13 +40,12 @@ export class ParentComponent implements OnInit {
         this.idDayCare = this.route.snapshot.params['idDaycare'];
         this.idParent = this.route.snapshot.params['idParent'];
 
-
         this.parentService.getOneById(this.idDayCare, this.idParent).subscribe(
             (jsonParent) => {
                 this.parent = jsonParent;
             },
-            this.parentService.errorSubscribe,
-            this.parentService.completed
+            (error)=>this.parentService.errorSubscribe(error),
+            this.parentService.completed('ParentService::getOneById')
         );
 
         this.childService.getAllByParentId(this.idDayCare, this.idParent).subscribe(
@@ -53,11 +54,11 @@ export class ParentComponent implements OnInit {
                     this.children.push(child);
                 }
             },
-            this.childService.errorSubscribe,
-            this.childService.completed
+            (error)=>this.childService.errorSubscribe(error),
+            this.childService.completed('ParentService::getAllByParentId')
         );
 
-        console.log("tets   "+this.children.length)
+        this.logger.debug("Children length :",this.children.length)
 
         if(this.children.length>0){
 
@@ -65,7 +66,7 @@ export class ParentComponent implements OnInit {
             //TODO determiner date du jour
             this.sumupService.getOneByChildIdAndDay(this.idDayCare, idCurrentChild, this.dateService.getCurrentDay()).subscribe(
                 (jsonSumup) => {
-                    console.log("test"+jsonSumup);
+                    this.logger.debug(jsonSumup);
                     this.sumup = jsonSumup;
                     this.child = {
                         selectedMoodId: this.sumup.mood,
@@ -73,8 +74,8 @@ export class ParentComponent implements OnInit {
                         selectedAppetiteId: this.sumup.appetite
                     }
                 },
-                this.sumupService.errorSubscribe,
-                this.sumupService.completed
+                (error)=>this.sumupService.errorSubscribe(error),
+                this.sumupService.completed('SumupService::getOneByChildIdAndDay')
             );
         }
 

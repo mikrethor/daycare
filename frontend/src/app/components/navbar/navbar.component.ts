@@ -5,54 +5,54 @@ import {ActivatedRoute} from '@angular/router';
 import {Role} from '../../pojo/pojo';
 
 @Component({
-  selector: 'daycare-navbar',
-  templateUrl: './navbar.html',
+    selector: 'daycare-navbar',
+    templateUrl: './navbar.html',
 })
 export class NavbarComponent  implements OnInit {
-  username:string;
-  idDaycare:number;
-  idAdmin:number;
-  roles:Array<Role>=[];
+    username:string;
+    idDaycare:number;
+    idAdmin:number;
+    roles:Array<Role>=[];
 
-  menuData = {
-    "menu": [
-      { "id": 3, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
-    ]
-  };
-  
-  constructor(
-    private daycareService: DaycareService,
-    private userService: UserService,
-    private route: ActivatedRoute) { }
+    menuData = {
+        "menu": [
+            { "id": 3, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
+        ]
+    };
 
-  ngOnInit() {
+    constructor(
+        private daycareService: DaycareService,
+        private userService: UserService,
+        private route: ActivatedRoute) { }
 
-    this.route.params.subscribe(params => {
-      this.username = params['username']; 
-    });
+    ngOnInit() {
 
-      this.userService.getUser(this.username).subscribe(
-      user => {
-         this.idDaycare=user.daycare.id;
-         for (let role of user.roles) {
-          this.roles.push(role);
-        }
+        this.route.params.subscribe(params => {
+            this.username = params['username'];
+        });
 
-         this.idAdmin=user.id;
-         if(this.userService.isInRoles("ADMIN",this.roles)){
-          this.menuData = {
-            "menu": [
-              { "id": 0, "name": "Children", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/children", },
-              { "id": 1, "name": "Users", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/users", },
-              { "id": 2, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
-            ]
-          };
-        }
-      },
-      this.daycareService.errorSubscribe,
-      this.daycareService.completed);
-    
- 
-  }
-  
+        this.userService.getUser(this.username).subscribe(
+            user => {
+                this.idDaycare=user.daycare.id;
+                for (let role of user.roles) {
+                    this.roles.push(role);
+                }
+
+                this.idAdmin=user.id;
+                if(this.userService.isInRoles("ADMIN",this.roles)){
+                    this.menuData = {
+                        "menu": [
+                            { "id": 0, "name": "Children", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/children", },
+                            { "id": 1, "name": "Users", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/users", },
+                            { "id": 2, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
+                        ]
+                    };
+                }
+            },
+            (error)=>this.userService.errorSubscribe(error),
+            ()=>this.userService.completed('UserService::getUser'));
+
+
+    }
+
 }

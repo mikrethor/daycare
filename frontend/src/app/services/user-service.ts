@@ -6,17 +6,18 @@ import {Role, User} from '../pojo/pojo';
 import {LoginService} from "./login-service";
 import {ConstantsService} from "./constants-service";
 import {NGXLogger} from "ngx-logger";
+import {ServiceImpl} from "./service";
 
 @Injectable()
-export class UserService {
+export class UserService extends ServiceImpl{
     private user:User;
 
     constructor(
         private http: HttpClient,
         private constantService: ConstantsService,
         private loginService: LoginService,
-        private logger: NGXLogger
-    ) {}
+        protected logger: NGXLogger
+    ) {super(logger);}
 
     set(user:User){
         this.user=user;
@@ -69,10 +70,5 @@ export class UserService {
     delete(idDaycare:number,idUser:number):Observable<Boolean>{
         let url: string = this.constantService.API_ENDPOINT + "/users/" + idUser;
         return new Observable<true>();
-    }
-
-    errorSubscribe(error) {   this.logger.error("Error happened : ", error); }
-    completed(description) {
-        this.logger.debug(description,"completed");
     }
 }

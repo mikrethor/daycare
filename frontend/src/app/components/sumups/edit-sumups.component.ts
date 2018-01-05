@@ -47,8 +47,8 @@ export class EditSumupsComponent implements OnInit {
                     selectedAppetiteId: this.sumup.appetite
                 }
             },
-            this.sumupService.errorSubscribe,
-            this.sumupService.completed
+            (error)=>this.sumupService.errorSubscribe(error),
+            this.sumupService.completed('SumupService::getOneByChildIdAndDay')
         );
     }
 

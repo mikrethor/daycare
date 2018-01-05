@@ -4,6 +4,7 @@ import {DaycareService} from '../../services/daycare-service';
 import {Child, Daycare} from '../../pojo/pojo';
 import {ChildService} from "../../services/child-service";
 import {UserService} from "../../services/user-service";
+import {NGXLogger} from "ngx-logger";
 
 
 @Component({
@@ -25,11 +26,10 @@ export class AdminEditChildComponent implements OnInit {
         private zone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
+        private logger: NGXLogger
     ) {}
 
     ngOnInit() {
-
-
         this.route.params.subscribe(params => {
             this.idChild = params['idChild'];
             this.idAdmin=params['idAdmin'];
@@ -42,9 +42,8 @@ export class AdminEditChildComponent implements OnInit {
                 this.daycare = daycare;
                 this.child.daycare=daycare;
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed
-
+            (error)=>this.daycareService.errorSubscribe(error),
+            this.daycareService.completed('DaycareService::getDaycare')
         );
         if(this.idChild>0){
             this.childService.getOneByDaycareId(this.idDaycare,this.idChild).subscribe(
@@ -53,10 +52,10 @@ export class AdminEditChildComponent implements OnInit {
                     this.model.id=this.child.id;
                     this.model.firstname=this.child.firstname;
                     this.model.lastname=this.child.lastname;
-                    console.log(this.child)
+                    this.logger.debug(this.child)
                 },
-                this.childService.errorSubscribe,
-                this.childService.completed
+                (error)=>this.childService.errorSubscribe(error),
+                this.childService.completed('ChildService::getOneByDaycareId')
             );
         }
     }
@@ -70,7 +69,7 @@ export class AdminEditChildComponent implements OnInit {
                     this.router.navigate(['daycare', this.idDaycare, 'admin', this.idAdmin, 'children']);
                 });
             },
-            this.childService.errorSubscribe,
-            this.childService.completed);
+            (error)=>this.childService.errorSubscribe(error),
+            this.childService.completed('ChildService::create'));
     }
 }

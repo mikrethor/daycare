@@ -5,24 +5,28 @@ import {Educator} from '../pojo/pojo';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 import {HttpClient} from "@angular/common/http";
+import {NGXLogger} from "ngx-logger";
+import {Service, ServiceImpl} from "./service";
 
 @Injectable()
-export class EducatorServiceImpl implements EducatorService{
+export class EducatorServiceImpl extends ServiceImpl implements EducatorService{
 
     constructor(
         private http: HttpClient,
         private constantService: ConstantsService,
-        private loginService: LoginService
-    ) {}
+        private loginService: LoginService,
+        protected logger: NGXLogger
+
+    ) {super(logger);}
 
     getAllByDaycareId(id: number): Observable<Educator[]> {
-        console.log("getEducators " +id);
+        this.logger.debug("getAllByDaycareId : " ,id);
         return this.http.get<Educator[]>(this.constantService.API_ENDPOINT + "/users/role/1/daycares/" + id, this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     getOneById(idDaycare: number, idEducator: number): Observable<Educator> {
-        console.log("getEducator " +idDaycare+" "+idEducator);
+        this.logger.debug("getEducator : " ,idDaycare,idEducator);
         return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -36,21 +40,18 @@ export class EducatorServiceImpl implements EducatorService{
 
     delete(idDaycare: number, idEducator: number):Observable<Boolean>{
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator;
-        console.log("delete url "+url);
+        this.logger.debug("delete url : ",url);
         return this.http.delete(url,this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    errorSubscribe(error) { console.log("Error happened : "); console.log( error) }
-    completed() { console.log("the subscription is completed") }
+
 }
 
 @Injectable()
-export abstract class EducatorService {
+export abstract class EducatorService extends Service{
     abstract getAllByDaycareId(id: number): Observable<Educator[]>;
     abstract getOneById(idDaycare: number, idEducator: number): Observable<Educator>;
     abstract create(idDaycare: number, educator: Educator): Observable<Educator[]>;
     abstract delete(idDaycare: number, idEducator: number):Observable<Boolean>;
-    abstract errorSubscribe(error);
-    abstract completed();
 }

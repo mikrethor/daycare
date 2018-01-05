@@ -3,6 +3,7 @@ import {DaycareService} from '../../services/daycare-service';
 import {Daycare, User} from '../../pojo/pojo';
 import {UserService} from "../../services/user-service";
 import {ActivatedRoute} from "@angular/router";
+import {NGXLogger} from "ngx-logger";
 
 
 @Component({
@@ -22,7 +23,8 @@ export class AdminUserComponent implements OnInit, OnChanges {
         private daycareService: DaycareService,
         private userService: UserService,
         private zone: NgZone,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private logger: NGXLogger
     ) {}
 
     ngOnInit() {
@@ -35,8 +37,8 @@ export class AdminUserComponent implements OnInit, OnChanges {
             (daycare) => {
                 this.daycare = daycare;
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed
+            (error)=>this.daycareService.errorSubscribe(error),
+            ()=>this.daycareService.completed('DaycareService::getDaycare')
         );
 
         this.getUsers();
@@ -50,8 +52,8 @@ export class AdminUserComponent implements OnInit, OnChanges {
                     this.users.push(user);
                 }
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed);
+            (error)=>this.userService.errorSubscribe(error),
+            ()=>this.userService.completed('UserService::getUsersByDaycareId'));
     }
 
     remove(index: number) {
@@ -64,14 +66,14 @@ export class AdminUserComponent implements OnInit, OnChanges {
                     });
                 }
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed);
+            (error)=>this.userService.errorSubscribe(error),
+            ()=>this.userService.completed('UserService::delete'));
     }
 
 
     edit(index: number) {
         //edit
-        console.log("edit : "+index);
+        this.logger.debug("edit : ",index);
     }
 
     ngOnChanges(changes: SimpleChanges) {

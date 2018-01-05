@@ -3,6 +3,7 @@ import {ChildService} from '../../services/child-service';
 import {Child, Daycare, Educator} from '../../pojo/pojo';
 import {DaycareService} from "../../services/daycare-service";
 import {ActivatedRoute} from "@angular/router";
+import {NGXLogger} from "ngx-logger";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class AdminChildComponent implements OnInit {
         private daycareService: DaycareService,
         private zone: NgZone,
         private route: ActivatedRoute,
+        private logger: NGXLogger
     ) { }
 
     ngOnInit() {
@@ -38,8 +40,8 @@ export class AdminChildComponent implements OnInit {
             (daycare) => {
                 this.daycare =daycare;
             },
-            this.childService.errorSubscribe,
-            this.childService.completed
+            (error)=>this.daycareService.errorSubscribe(error),
+            ()=>this.daycareService.completed('DaycareService::getDaycare')
 
         );
 
@@ -49,13 +51,13 @@ export class AdminChildComponent implements OnInit {
                     this.children.push(child);
                 }
             },
-            this.childService.errorSubscribe,
-            this.childService.completed);
+            (error)=>this.childService.errorSubscribe(error),
+            ()=>this.daycareService.completed('ChildService::getAllByDaycareId'));
     }
 
     edit(index: number) {
         //edit
-        console.log("edit : " + index);
+        this.logger.debug("edit : " ,index);
     }
 
     getChildren() {
@@ -66,8 +68,8 @@ export class AdminChildComponent implements OnInit {
                     this.children.push(child);
                 }
             },
-            this.childService.errorSubscribe,
-            this.childService.completed);
+            (error)=>this.childService.errorSubscribe(error),
+            ()=>this.daycareService.completed('ChildService::getAllByDaycareId'));
     }
 
     remove(index: number) {
@@ -80,8 +82,8 @@ export class AdminChildComponent implements OnInit {
                     });
                 }
             },
-            this.childService.errorSubscribe,
-            this.childService.completed);
+            (error)=>this.childService.errorSubscribe(error),
+            ()=>this.daycareService.completed('ChildService::delete'));
     }
 
 

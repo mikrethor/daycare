@@ -4,6 +4,7 @@ import {DaycareService} from '../../services/daycare-service';
 import {Daycare, Role, User} from '../../pojo/pojo';
 import {UserService} from "../../services/user-service";
 import {RoleService} from "../../services/role-service";
+import {NGXLogger} from "ngx-logger";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class AdminEditUserComponent implements OnInit {
         private zone: NgZone,
         private router: Router,
         private route: ActivatedRoute,
+        private logger: NGXLogger
     ) { }
 
     ngOnInit() {
@@ -36,27 +38,27 @@ export class AdminEditUserComponent implements OnInit {
             this.idAdmin=params['idAdmin'];
         });
 
-        console.log(" idUser : "+this.idUser);
-        console.log(" idDaycare : "+this.idDaycare);
+        this.logger.debug(" idUser : ",this.idUser);
+        this.logger.debug(" idDaycare : ",this.idDaycare);
 
         this.daycareService.getDaycare(this.idDaycare).subscribe(
             (daycare) => {
                 this.daycare = daycare;
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed
+            (error)=>this.daycareService.errorSubscribe(error),
+            ()=>this.daycareService.completed('DaycareService::getDaycare')
 
         );
 
         this.userService.getUsersByIdByDaycareId(this.idDaycare,this.idUser).subscribe(
             (user) => {
 
-                console.log(user);
+                this.logger.debug(user);
 
                 this.user = user;
             },
-            this.userService.errorSubscribe,
-            this.userService.completed
+            (error)=>this.userService.errorSubscribe(error),
+            ()=>this.userService.completed('UserService::getUsersByIdByDaycareId')
 
         );
 
@@ -67,8 +69,8 @@ export class AdminEditUserComponent implements OnInit {
                         this.roles.push(role);
                     }
                 },
-                this.roleService.errorSubscribe,
-                this.roleService.completed
+                (error)=>this.roleService.errorSubscribe(error),
+                ()=>this.roleService.completed('RoleService::getRoles')
             );
     }
 

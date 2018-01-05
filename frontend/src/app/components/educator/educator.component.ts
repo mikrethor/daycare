@@ -3,6 +3,7 @@ import {DaycareService} from '../../services/daycare-service';
 import {Child, Daycare, Educator} from '../../pojo/pojo';
 import {EducatorService} from "../../services/educator-service";
 import {ChildService} from "../../services/child-service";
+import {NGXLogger} from "ngx-logger";
 
 
 @Component({
@@ -19,6 +20,7 @@ export class EducatorComponent implements OnInit {
         private daycareService: DaycareService,
         private educatorService: EducatorService,
         private childService: ChildService,
+        private logger: NGXLogger
     ) { }
 
     ngOnInit() {
@@ -26,8 +28,8 @@ export class EducatorComponent implements OnInit {
             (daycare) => {
                 this.daycare = daycare;
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed
+            (error)=>this.daycareService.errorSubscribe(error),
+            ()=>this.daycareService.completed('DaycareService::getDaycare')
         );
 
         this.educatorService.getOneById(this.idDayCare, 1).subscribe(
@@ -35,20 +37,20 @@ export class EducatorComponent implements OnInit {
             (jsonEducator) => {
                 this.educator = jsonEducator;
             },
-            this.educatorService.errorSubscribe,
-            this.educatorService.completed
+            (error)=> this.educatorService.errorSubscribe(error),
+            ()=>this.educatorService.completed('EducatorService::getOneById')
         );
 
         this.childService.getAllByDaycareId(this.idDayCare)
             .subscribe(
-            (json) => {
-                for (let child of json) {
-                    console.log(child.firstname+" "+child.lastname);
-                    this.children.push(child);
-                }
-            },
-            this.childService.errorSubscribe,
-            this.childService.completed
+                (json) => {
+                    for (let child of json) {
+                        this.logger.debug(child);
+                        this.children.push(child);
+                    }
+                },
+                (error)=> this.childService.errorSubscribe(error),
+                ()=>this.childService.completed('ChildService::getAllByDaycareId')
             );
     }
 

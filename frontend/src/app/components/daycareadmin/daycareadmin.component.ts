@@ -25,8 +25,8 @@ export class DaycareAdminComponent implements OnInit {
             (daycare) => {
                 this.daycare = daycare;
             },
-            this.daycareService.errorSubscribe,
-            this.daycareService.completed
+            (error)=>this.daycareService.errorSubscribe(error),
+            this.daycareService.completed('DaycareService::getDaycare')
 
         );
 
@@ -34,8 +34,8 @@ export class DaycareAdminComponent implements OnInit {
             (educator) => {
                 this.educator = educator;
             },
-            this.educatorService.errorSubscribe,
-            this.educatorService.completed
+            (error)=>this.educatorService.errorSubscribe(error),
+            this.educatorService.completed('EducatorService::getOneById')
         );
 
         this.childService.getAllByDaycareId(this.idDayCare)
@@ -45,8 +45,8 @@ export class DaycareAdminComponent implements OnInit {
                         this.children.push(child);
                     }
                 },
-                this.childService.errorSubscribe,
-                this.childService.completed
+                (error)=>this.childService.errorSubscribe(error),
+                this.childService.completed('ChildService::getAllByDaycareId')
             );
     }
 }
