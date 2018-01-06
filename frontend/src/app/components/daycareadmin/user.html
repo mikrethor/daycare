@@ -14,7 +14,7 @@
             </button>
         </mat-list-item>
     </mat-list>
-    <button mat-fab color="primary" [routerLink]="['/daycare/',idDaycare,'admin',idUser,'users','create']">
+    <button mat-fab color="primary" [routerLink]="['/daycare', idDaycare, { outlets: { undernavbar: 'admin/'+idUser+'/users/create'} }]">
         <mat-icon>add</mat-icon>
     </button>
     <button mat-icon-button color="primary" [disabled]="loading" [routerLink]="['/daycareadmin']">

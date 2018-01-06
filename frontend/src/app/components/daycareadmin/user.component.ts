@@ -32,6 +32,11 @@ export class AdminUserComponent implements OnInit, OnChanges {
             this.idUser = params['idAdmin'];
         });
 
+        this.route.parent.params.subscribe(params => {
+            this.idDaycare=params['idDaycare'];
+            this.logger.debug("idDaycare:",this.idDaycare);
+        });
+
 
         this.daycareService.getDaycare(this.idDaycare).subscribe(
             (daycare) => {

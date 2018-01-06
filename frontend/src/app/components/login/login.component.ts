@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
                 });
 
             },
-            (error)=>{ this.logger.error("Error happened : in "," LoginService::login", error);
+            (error)=>{ this.logger.error("Error happened : in","LoginService::login", error);
                 alert('Invalid Credentials :'+error);}
 
             ,()=>{this.logger.info("LoginService::login completed")});

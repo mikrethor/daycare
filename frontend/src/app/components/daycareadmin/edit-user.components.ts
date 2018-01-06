@@ -42,8 +42,9 @@ export class AdminEditUserComponent implements OnInit {
             this.logger.debug("idDaycare:",this.idDaycare);
         });
 
-        this.logger.debug(" idUser : ",this.idUser);
-        this.logger.debug(" idDaycare : ",this.idDaycare);
+        this.logger.debug("idUser :",this.idUser);
+        this.logger.debug("idAdmin :",this.idAdmin);
+        this.logger.debug("idDaycare :",this.idDaycare);
 
         this.daycareService.getDaycare(this.idDaycare).subscribe(
             (daycare) => {
@@ -54,17 +55,19 @@ export class AdminEditUserComponent implements OnInit {
 
         );
 
-        this.userService.getUsersByIdByDaycareId(this.idDaycare,this.idUser).subscribe(
-            (user) => {
+        if(this.idUser!=null){
+            this.userService.getUsersByIdByDaycareId(this.idDaycare,this.idUser).subscribe(
+                (user) => {
 
-                this.logger.debug(user);
+                    this.logger.debug(user);
 
-                this.user = user;
-            },
-            (error)=>this.userService.errorSubscribe(error),
-            ()=>this.userService.completed('UserService::getUsersByIdByDaycareId')
+                    this.user = user;
+                },
+                (error)=>this.userService.errorSubscribe(error),
+                ()=>this.userService.completed('UserService::getUsersByIdByDaycareId')
 
-        );
+            );
+        }
 
         this.roleService.getRoles()
             .subscribe(
