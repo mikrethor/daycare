@@ -34,8 +34,12 @@ export class AdminEditUserComponent implements OnInit {
 
         this.route.params.subscribe(params => {
             this.idUser=params['idUser'];
-            this.idDaycare=params['idDaycare'];
             this.idAdmin=params['idAdmin'];
+        });
+
+        this.route.parent.params.subscribe(params => {
+            this.idDaycare=params['idDaycare'];
+            this.logger.debug("idDaycare:",this.idDaycare);
         });
 
         this.logger.debug(" idUser : ",this.idUser);

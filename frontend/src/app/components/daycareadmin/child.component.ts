@@ -35,7 +35,7 @@ export class AdminChildComponent implements OnInit {
             // this.idChild = params['idChild'];
             this.idAdmin=params['idAdmin'];
         });
-
+this.logger.debug("idDaycare :",this.idDayCare);
         this.daycareService.getDaycare(this.idDayCare).subscribe(
             (daycare) => {
                 this.daycare =daycare;
@@ -69,7 +69,7 @@ export class AdminChildComponent implements OnInit {
                 }
             },
             (error)=>this.childService.errorSubscribe(error),
-            ()=>this.daycareService.completed('ChildService::getAllByDaycareId'));
+            ()=>this.childService.completed('ChildService::getAllByDaycareId'));
     }
 
     remove(index: number) {
@@ -83,7 +83,7 @@ export class AdminChildComponent implements OnInit {
                 }
             },
             (error)=>this.childService.errorSubscribe(error),
-            ()=>this.daycareService.completed('ChildService::delete'));
+            ()=>this.childService.completed('ChildService::delete'));
     }
 
 

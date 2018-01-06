@@ -29,11 +29,7 @@ export class NavbarComponent  implements OnInit {
         private route: ActivatedRoute) { }
 
     ngOnInit() {
-
-
         this.username = this.loginService.username();
-
-
         this.userService.getUser(this.username).subscribe(
             user => {
                 this.idDaycare=user.daycare.id;
@@ -41,13 +37,13 @@ export class NavbarComponent  implements OnInit {
                 for (let role of user.roles) {
                     this.roles.push(role);
                 }
-
+//TODO mettre les liens en dur et cacher en foncton de l'id ou du nom
                 this.idAdmin=user.id;
                 if(this.userService.isInRoles("ADMIN",this.roles)){
                     this.menuData = {
                         "menu": [
                             { "id": 0, "name": "Children", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/children", },
-                            { "id": 1, "name": "Users", "image": "/Images/dashboard_on.gif", "link": this.getUserLink(), },
+                            { "id": 1, "name": "Users", "image": "/Images/dashboard_on.gif", "link": "", },
                             { "id": 2, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/logout", },
                         ]
                     };
@@ -57,14 +53,5 @@ export class NavbarComponent  implements OnInit {
             },
             (error)=>this.userService.errorSubscribe(error),
             ()=>this.userService.completed('UserService::getUser'));
-
-
     }
-
-    getUserLink() {
-        let link = "/daycare/" + this.idDaycare + "/admin/" + this.idAdmin + "/users";
-        console.log(link);
-        return link;
-    }
-
 }

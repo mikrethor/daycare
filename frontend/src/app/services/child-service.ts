@@ -24,14 +24,14 @@ export class ChildServiceImpl extends ServiceImpl implements ChildService{
         return this.http.get<Child[]>(this.constantService.API_ENDPOINT + "/daycares/" + id + "/childs/",this.loginService.getBearerToken())
             .catch((error: any) =>
                 {
-                    return  Observable.throw(error.json().error || 'Server error')}
+                    return  Observable.throw(error.error || 'Server error')}
             );
     }
 
     getAllByParentId(idDaycare: number, idParent: number): Observable<Array<Child>> {
         this.logger.debug("getChildrenByParentId : " ,idDaycare,idParent);
         return this.http.get<Child[]>(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent + "/childs",this.loginService.getBearerToken())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     getOneByDaycareId(idDaycare: number,id: number): Observable<Child> {
@@ -39,7 +39,7 @@ export class ChildServiceImpl extends ServiceImpl implements ChildService{
         return this.http.get<Child>(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/"+id,this.loginService.getBearerToken())
             .catch((error: any) =>
                 {
-                    return  Observable.throw(error.json().error || 'Server error')}
+                    return  Observable.throw(error.error || 'Server error')}
             );
     }
 

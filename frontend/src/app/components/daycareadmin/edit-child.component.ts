@@ -30,11 +30,17 @@ export class AdminEditChildComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.logger.info("AdminEditChildComponent::ngOnInit");
         this.route.params.subscribe(params => {
             this.idChild = params['idChild'];
             this.idAdmin=params['idAdmin'];
-            this.idDaycare=params['idDaycare'];
 
+            this.logger.debug("idChild:",this.idChild);
+            this.logger.debug("idAdmin:",this.idAdmin);
+        });
+        this.route.parent.params.subscribe(params => {
+            this.idDaycare=params['idDaycare'];
+            this.logger.debug("idDaycare:",this.idDaycare);
         });
 
         this.daycareService.getDaycare(this.idDaycare).subscribe(
