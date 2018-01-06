@@ -34,11 +34,12 @@ import {AdminEditUserComponent} from "./components/daycareadmin/edit-user.compon
 import {AdminUserComponent} from "./components/daycareadmin/user.component";
 import {RoleService} from "./services/role-service";
 import {environment} from "../environments/environment";
+import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.component";
 
 @NgModule({
     declarations: [
         AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,
-        DaycareAdminComponent,NavbarComponent,EditSumupsComponent,AdminChildComponent,
+        DaycareAdminComponent,NavbarComponent,UnderNavbarComponent,EditSumupsComponent,AdminChildComponent,
         AdminEditChildComponent,
         AdminEditUserComponent,AdminUserComponent
     ],

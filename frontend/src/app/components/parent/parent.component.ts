@@ -4,7 +4,6 @@ import {Child, Parent, Sumups, User} from '../../pojo/pojo';
 import {SumupService} from "../../services/sumup-service";
 import {ParentService} from "../../services/parent-service";
 import {ChildService} from "../../services/child-service";
-import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 import {DateService} from "../../services/date-service";
 import {NGXLogger} from "ngx-logger";
 
@@ -49,8 +48,8 @@ export class ParentComponent implements OnInit {
         );
 
         this.childService.getAllByParentId(this.idDayCare, this.idParent).subscribe(
-            (jsonChildren) => {
-                for (let child of jsonChildren) {
+            (children) => {
+                for (let child of children) {
                     this.children.push(child);
                 }
             },

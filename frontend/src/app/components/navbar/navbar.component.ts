@@ -3,6 +3,7 @@ import {DaycareService} from '../../services/daycare-service';
 import {UserService} from '../../services/user-service';
 import {ActivatedRoute} from '@angular/router';
 import {Role} from '../../pojo/pojo';
+import {LoginService} from "../../services/login-service";
 
 @Component({
     selector: 'daycare-navbar',
@@ -24,13 +25,14 @@ export class NavbarComponent  implements OnInit {
     constructor(
         private daycareService: DaycareService,
         private userService: UserService,
+        private loginService: LoginService,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
 
-        this.route.params.subscribe(params => {
-            this.username = params['username'];
-        });
+
+        this.username = this.loginService.username();
+
 
         this.userService.getUser(this.username).subscribe(
             user => {
@@ -46,7 +48,7 @@ export class NavbarComponent  implements OnInit {
                         "menu": [
                             { "id": 0, "name": "Children", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/children", },
                             { "id": 1, "name": "Users", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/users", },
-                            { "id": 2, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
+                            { "id": 2, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/logout", },
                         ]
                     };
                 }

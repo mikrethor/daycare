@@ -1,10 +1,9 @@
-<daycare-navbar></daycare-navbar>
 <div class="col-md-6 col-md-offset-3">
-    <h1>{{daycare.name}}</h1>
     
-    <h2>{{user.firstName}} {{user.lastName}} </h2>
+    <span>{{user.firstName}} {{user.lastName}} </span>
 
     <!-- TODO replace by tab -->
-    <a *ngFor="let role of roles; let i = index;" [routerLink]="['/daycare', user.daycare.id, role.name.toLowerCase(),user.id]" 
+    <div><a *ngFor="let role of roles; let i = index;" [routerLink]="['/daycare', user.daycare.id, role.name.toLowerCase(),user.id]"
     class="btn btn-link">{{role.name}}<br></a>
+    </div>
 </div>

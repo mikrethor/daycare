@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 import {LocalStorage} from "../annotations/local-storage";
+import {NGXLogger} from "ngx-logger";
 
 @Injectable()
 export class LoginService {
@@ -17,10 +18,14 @@ export class LoginService {
     @LocalStorage
     private myToken:string;
 
+    @LocalStorage
+    private myUsername:string;
+
     constructor(
         private http: HttpClient,
         private constantService: ConstantsService,
-        private router: Router
+        private router: Router,
+        private logger: NGXLogger
     ) {}
 
     getBasicAuthorization():string{
@@ -57,9 +62,11 @@ export class LoginService {
     logout() {
         this.myToken="";
         this.router.navigate(['/daycare/login']);
+        this.logger.info('Logout successful with',this.myUsername);
     }
 
     login(login: string, password: string):Observable<JwtToken>{
+        this.myUsername=login;
         const httpOptions = {
             headers: this.getBasicToken(),
             params: this.getParamsToAuthenticate(login,password),
@@ -71,6 +78,10 @@ export class LoginService {
             new FormData(),
             httpOptions
         );
+    }
+
+    username(){
+        return this.myUsername;
     }
 
     getBasicToken(): HttpHeaders {
