@@ -62,7 +62,7 @@ export class NavbarComponent  implements OnInit {
     }
 
     getUserLink() {
-        let link = "/daycare/" + this.idDaycare + "/admin/" + this.idAdmin + "/children";
+        let link = "/daycare/" + this.idDaycare + "/admin/" + this.idAdmin + "/users";
         console.log(link);
         return link;
     }

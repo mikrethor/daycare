@@ -1,5 +1,10 @@
 <mat-menu #appMenu="matMenu" x-position="before" y-position="below">
-  <button *ngFor="let item of menuData.menu; let i = index;" mat-menu-item [routerLink]="[item.link]"> {{item.name}} </button>
+  <!--<button *ngFor="let item of menuData.menu; let i = index;" mat-menu-item [routerLink]="[item.link]"> {{item.name}} </button>-->
+
+
+  <button mat-menu-item [routerLink]="['/daycare', idDaycare, { outlets: { undernavbar: 'admin/'+idAdmin+'/children' } }]">Children</button>
+  <button mat-menu-item [routerLink]="['/daycare', idDaycare, { outlets: { undernavbar: 'admin/'+idAdmin+'/users' } }]">Users</button>
+  <button mat-menu-item [routerLink]="['/logout']">Logout</button>
 </mat-menu>
 <mat-toolbar color="primary">
   <span>{{title}}</span>
