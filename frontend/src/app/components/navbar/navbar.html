@@ -2,7 +2,7 @@
   <button *ngFor="let item of menuData.menu; let i = index;" mat-menu-item [routerLink]="[item.link]"> {{item.name}} </button>
 </mat-menu>
 <mat-toolbar color="primary">
-  <span>Daycare</span>
+  <span>{{title}}</span>
   <span class="spacer"></span>
   <button mat-icon-button [mat-menu-trigger-for]="appMenu" >
    <mat-icon>menu</mat-icon>

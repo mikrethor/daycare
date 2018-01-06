@@ -63,7 +63,6 @@ export class ParentComponent implements OnInit {
         if(this.children.length>0){
 
             let idCurrentChild=this.children[0].id;
-            //TODO determiner date du jour
             this.sumupService.getOneByChildIdAndDay(this.idDayCare, idCurrentChild, this.dateService.getCurrentDay()).subscribe(
                 (jsonSumup) => {
                     this.logger.debug(jsonSumup);

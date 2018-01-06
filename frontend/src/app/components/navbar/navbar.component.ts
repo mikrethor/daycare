@@ -11,6 +11,7 @@ import {Role} from '../../pojo/pojo';
 export class NavbarComponent  implements OnInit {
     username:string;
     idDaycare:number;
+    title:string;
     idAdmin:number;
     roles:Array<Role>=[];
 
@@ -34,6 +35,7 @@ export class NavbarComponent  implements OnInit {
         this.userService.getUser(this.username).subscribe(
             user => {
                 this.idDaycare=user.daycare.id;
+                this.title=user.daycare.name;
                 for (let role of user.roles) {
                     this.roles.push(role);
                 }
