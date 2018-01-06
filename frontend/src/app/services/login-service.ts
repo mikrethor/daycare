@@ -61,7 +61,7 @@ export class LoginService {
 
     logout() {
         this.myToken="";
-        this.router.navigate(['/daycare/login']);
+        this.router.navigate(['/login']);
         this.logger.info('Logout successful with',this.myUsername);
     }
 

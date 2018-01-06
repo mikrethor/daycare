@@ -18,7 +18,7 @@ export class NavbarComponent  implements OnInit {
 
     menuData = {
         "menu": [
-            { "id": 3, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/daycare/logout", },
+            { "id": 3, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/logout", },
         ]
     };
 
@@ -47,16 +47,24 @@ export class NavbarComponent  implements OnInit {
                     this.menuData = {
                         "menu": [
                             { "id": 0, "name": "Children", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/children", },
-                            { "id": 1, "name": "Users", "image": "/Images/dashboard_on.gif", "link": "/daycare/"+this.idDaycare+"/admin/"+this.idAdmin+"/users", },
+                            { "id": 1, "name": "Users", "image": "/Images/dashboard_on.gif", "link": this.getUserLink(), },
                             { "id": 2, "name": "Logout", "image": "/Images/dashboard_on.gif", "link": "/logout", },
                         ]
                     };
+
+                    console.log("/daycare/"+this.idDaycare+"/(undernavbar:admin/"+this.idAdmin+"/users)");
                 }
             },
             (error)=>this.userService.errorSubscribe(error),
             ()=>this.userService.completed('UserService::getUser'));
 
 
+    }
+
+    getUserLink() {
+        let link = "/daycare/" + this.idDaycare + "/admin/" + this.idAdmin + "/children";
+        console.log(link);
+        return link;
     }
 
 }

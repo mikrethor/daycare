@@ -27,11 +27,7 @@ export class UserComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.logger.debug("ngOnInit");
-        // this.route.params.subscribe(params => {
-        //     this.username = params['username'];
-        // });
-
+        this.logger.debug("UserComponent::ngOnInit");
         this.username=this.loginService.username();
 
         this.userService.getUser(this.username).subscribe(

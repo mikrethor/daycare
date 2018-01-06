@@ -3,7 +3,7 @@
     <span>{{user.firstName}} {{user.lastName}} </span>
 
     <!-- TODO replace by tab -->
-    <div><a *ngFor="let role of roles; let i = index;" [routerLink]="['/daycare', user.daycare.id, role.name.toLowerCase(),user.id]"
+    <div><a *ngFor="let role of roles; let i = index;" [routerLink]="['/daycare', user.daycare.id, { outlets: { undernavbar: role.name.toLowerCase()+'/'+user.id } }]"
     class="btn btn-link">{{role.name}}<br></a>
     </div>
 </div>

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
                 this.zone.run(() => {
                     this.loginService.saveToken(data.access_token);
                     this.dataToken=data.access_token;
-                    this.router.navigateByUrl('/daycare');
+                    this.router.navigateByUrl('/daycare/0');
                     this.logger.info("Login successful with",this.model.username)
                 });
 
