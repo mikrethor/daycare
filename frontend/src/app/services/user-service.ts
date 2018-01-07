@@ -68,8 +68,10 @@ export class UserService extends ServiceImpl{
     }
 
     delete(idDaycare:number,idUser:number):Observable<Boolean>{
-        let url: string = this.constantService.API_ENDPOINT + "/users/" + idUser;
-        return new Observable<true>();
+        this.logger.debug("UserService::delete",idDaycare,idUser);
+        let url: string = this.constantService.API_ENDPOINT + "/daycares/"+idDaycare+"/users/"+ idUser;
+        return this.http.delete(url,this.loginService.getBearerToken())
+            .catch((error: any) =>  Observable.throw(error.error || 'Server error'));
     }
 
     create(idDaycare: number, user: User): Observable<User> {

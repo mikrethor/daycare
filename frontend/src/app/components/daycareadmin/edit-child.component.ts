@@ -72,7 +72,7 @@ export class AdminEditChildComponent implements OnInit {
         this.childService.create(this.idDaycare, this.child).subscribe(
             data => {
                 this.zone.run(() => {
-                    this.router.navigate(['daycare', this.idDaycare, 'admin', this.idAdmin, 'children']);
+                    this.router.navigate(['daycare',this.idDaycare,{ outlets: { undernavbar: 'admin/'+this.idAdmin+'/children' } }]);
                 });
             },
             (error)=>this.childService.errorSubscribe(error),

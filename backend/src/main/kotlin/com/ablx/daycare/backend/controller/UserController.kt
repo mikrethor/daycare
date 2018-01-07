@@ -35,4 +35,13 @@ internal class UserController{
         return userRepository.save(user)
     }
 
+    @DeleteMapping("/daycares/{idDaycare}/users/{idUser}")
+    fun delete(@PathVariable(value="idDaycare")idDaycare: Long,
+               @PathVariable(value="idUser")idUser: Long) :Boolean{
+        userRepository.delete(idUser)
+        return true
+    }
+
+
+
 }

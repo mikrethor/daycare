@@ -62,8 +62,11 @@ export class AdminUserComponent implements OnInit, OnChanges {
     }
 
     remove(index: number) {
+        this.logger.info("AdminUserComponent::remove",index);
+        this.logger.info("user id",this.users[index].id);
         this.userService.delete(this.idDaycare, this.users[index].id).subscribe(
             data => {
+                this.logger.debug(data);
                 this.deleted = (data == true);
                 if (this.deleted) {
                     this.zone.run(() => {

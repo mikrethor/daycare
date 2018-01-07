@@ -96,6 +96,10 @@ export class AdminEditUserComponent implements OnInit {
                 this.logger.debug(user);
 
                 this.user = user;
+
+                this.zone.run(() => {
+                    this.router.navigate(['daycare',this.idDaycare,{ outlets: { undernavbar: 'admin/'+this.idAdmin+'/users' } }]);
+                });
             },
             (error)=>this.userService.errorSubscribe(error),
             ()=>this.userService.completed('UserService::create')
