@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
-import {Role, User} from '../pojo/pojo';
+import {Educator, Role, User} from '../pojo/pojo';
 import {LoginService} from "./login-service";
 import {ConstantsService} from "./constants-service";
 import {NGXLogger} from "ngx-logger";
@@ -70,5 +70,12 @@ export class UserService extends ServiceImpl{
     delete(idDaycare:number,idUser:number):Observable<Boolean>{
         let url: string = this.constantService.API_ENDPOINT + "/users/" + idUser;
         return new Observable<true>();
+    }
+
+    create(idDaycare: number, user: User): Observable<User> {
+        let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/users";
+        let body = JSON.stringify(user);
+        return this.http.post<User>(url, body, this.loginService.getBearerToken())
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 }

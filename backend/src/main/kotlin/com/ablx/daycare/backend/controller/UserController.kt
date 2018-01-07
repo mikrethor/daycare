@@ -1,10 +1,9 @@
 package com.ablx.daycare.backend.controller
 
+import com.ablx.daycare.backend.entity.User
 import com.ablx.daycare.backend.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
@@ -30,5 +29,10 @@ internal class UserController{
     fun findOneByDaycareAndIdUser(@PathVariable(value="idDaycare")idDaycare: Long,
                                   @PathVariable(value="idUser")idUser: Long) =
             userRepository.findOneByIdByDaycare(idUser,idDaycare)
+
+    @PostMapping("/daycares/{idDaycare}/users")
+    fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody user: User) : User {
+        return userRepository.save(user)
+    }
 
 }

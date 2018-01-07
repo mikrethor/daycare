@@ -31,7 +31,7 @@ export class EducatorServiceImpl extends ServiceImpl implements EducatorService{
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    create(idDaycare: number, educator: Educator): Observable<Educator[]> {
+    create(idDaycare: number, educator: Educator): Observable<Educator> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators";
         let body = JSON.stringify(educator);
         return this.http.post<Educator>(url, body, this.loginService.getBearerToken())
@@ -52,6 +52,6 @@ export class EducatorServiceImpl extends ServiceImpl implements EducatorService{
 export abstract class EducatorService extends Service{
     abstract getAllByDaycareId(id: number): Observable<Educator[]>;
     abstract getOneById(idDaycare: number, idEducator: number): Observable<Educator>;
-    abstract create(idDaycare: number, educator: Educator): Observable<Educator[]>;
+    abstract create(idDaycare: number, educator: Educator): Observable<Educator>;
     abstract delete(idDaycare: number, idEducator: number):Observable<Boolean>;
 }
