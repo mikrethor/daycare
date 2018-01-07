@@ -2,34 +2,38 @@
     <h2>
         <mat-icon color="primary">face</mat-icon> {{ child.firstname }} {{ child.lastname }}
     </h2>
-    <div>
-        <h4>Sumup : {{ sumup.day | date:'EEEE d MMMM'}}</h4>
-        <div>Appetite :
-            <mat-radio-group>
-                <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedAppetiteId" *ngFor="let value of appetites; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
-            </mat-radio-group>
-        </div>
-        <div>Mood :
-            <mat-radio-group>
-                <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedMoodId" *ngFor="let value of moods; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
-            </mat-radio-group>
-        </div>
-        <div>Sleep :
-            <mat-radio-group>
-                <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedSleepId" *ngFor="let value of sleeps; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
-            </mat-radio-group>
-        </div>
+    <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
         <div>
-            Comment : {{sumup.comment}}
+            <h4>Sumup : {{ sumup.day | date:'EEEE d MMMM'}}</h4>
+            <div>Appetite :
+                <mat-radio-group>
+                    <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedAppetiteId" *ngFor="let value of appetites; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div>Mood :
+                <mat-radio-group>
+                    <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedMoodId" *ngFor="let value of moods; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div>Sleep :
+                <mat-radio-group>
+                    <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedSleepId" *ngFor="let value of sleeps; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !comment.valid }">
+                <label for="comment">Comment : </label>
+                <input type="text" class="form-control" name="comment" [(ngModel)]="sumup.comment" #comment="ngModel" required />
+                <div *ngIf="f.submitted && !comment.valid" class="help-block">Comment is required</div>
+            </div>
         </div>
-    </div>
-    <button mat-fab color="primary">
-        <mat-icon>keyboard_arrow_left</mat-icon>
-    </button>
-    <button mat-fab color="primary">
-        <mat-icon>save</mat-icon>
-    </button>
-    <button mat-fab color="primary">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+        <button mat-fab color="primary">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button mat-fab color="primary">
+            <mat-icon>save</mat-icon>
+        </button>
+        <button mat-fab color="primary">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+    </form>
 </div>

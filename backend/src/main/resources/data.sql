@@ -19,7 +19,7 @@ insert into CHILD("ID", "FIRSTNAME", "LASTNAME", "DAYCARE") values (1, 'Arthur',
 insert into CHILD("ID", "FIRSTNAME", "LASTNAME", "DAYCARE") values (2, 'Louis','B',1);
 
 --Child 1
-insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (1, 1,'comment 1','BAD','MEDIUM','GOOD',CURRENT_DATE);
+insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (1, 1,'comment 1 a','BAD','MEDIUM','GOOD',CURRENT_DATE);
 insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (2, 1,'comment 2','GOOD','MEDIUM','BAD',  TO_TIMESTAMP ( '25/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));
 insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (3, 1,'comment 3','MEDIUM','MEDIUM','MEDIUM', TO_TIMESTAMP ( '24/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));
 insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (4, 1,'comment 4','BAD','BAD','BAD',TO_TIMESTAMP ( '23/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));
@@ -31,7 +31,7 @@ insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY
 insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (10, 1,'comment 10','BAD','GOOD','GOOD',TO_TIMESTAMP ( '17/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));
 
 --Child 2
-insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (11, 2,'comment 1','BAD','MEDIUM','GOOD',CURRENT_DATE);
+insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (11, 2,'comment 1 l','BAD','MEDIUM','GOOD',CURRENT_DATE);
 insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (12, 2,'comment 2','GOOD','MEDIUM','GOOD',TO_TIMESTAMP ( '25/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));
 insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (13, 2,'comment 3','GOOD','MEDIUM','GOOD',TO_TIMESTAMP ( '24/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));
 insert into SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") values (14, 2,'comment 4','BAD','BAD','GOOD',TO_TIMESTAMP ( '23/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));

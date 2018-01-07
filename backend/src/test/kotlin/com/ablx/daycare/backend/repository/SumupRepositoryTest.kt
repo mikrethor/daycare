@@ -22,7 +22,7 @@ class SumupRepositoryTest {
     @Test
     fun findOne() {
         val sumup=sumupRepository.findOne(1L)
-        Assertions.assertThat("comment 1")
+        Assertions.assertThat("comment 1 a")
                 .isEqualTo(sumup.comment)
     }
 
@@ -35,7 +35,7 @@ class SumupRepositoryTest {
 
 
         val sumup1=sumups.toTypedArray()[0]
-        Assert.assertEquals("comment 1",sumup1.comment)
+        Assert.assertEquals("comment 1 a",sumup1.comment)
 
         val sumup10=sumups.toTypedArray()[9]
         Assert.assertEquals("comment 10",sumup10.comment)

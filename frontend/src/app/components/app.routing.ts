@@ -22,7 +22,7 @@ const routes: Routes = [
             { path: 'user/:username', component: UserComponent, outlet:'undernavbar',},
             { path: 'parent/:idParent', component: ParentComponent ,outlet:'undernavbar', },
             { path: 'educator/:idEducator', component: EducatorComponent,outlet:'undernavbar', },
-            { path: 'children/:idChildren/sumups', component: EditSumupsComponent ,outlet:'undernavbar',},
+            { path: 'children/:idChild/sumups', component: EditSumupsComponent ,outlet:'undernavbar',},
             { path: 'admin/:idAdmin', component: DaycareAdminComponent ,outlet:'undernavbar',},
             { path: 'admin/:idAdmin/children', component: AdminChildComponent ,outlet:'undernavbar',},
             { path: 'admin/:idAdmin/children/create', component: AdminEditChildComponent ,outlet:'undernavbar',},

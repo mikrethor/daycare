@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Child, Daycare, Sumups, User} from '../../pojo/pojo';
 import {SumupService} from "../../services/sumup-service";
 import {DateService} from "../../services/date-service";
+import {NGXLogger} from "ngx-logger";
 
 
 @Component({
@@ -10,11 +11,12 @@ import {DateService} from "../../services/date-service";
     templateUrl: './edit-sumups.html',
 })
 export class EditSumupsComponent implements OnInit {
-    private user: User;
+    // private user: User;
     private child: Child = Child.create();
     private sumup: Sumups = Sumups.create();
     private idDayCare: number = 1;
     private idChild: number = 1;
+    model: any = {};
     private displaySumup= {
         selectedMoodId: 0,
         selectedSleepId: 0,
@@ -27,13 +29,24 @@ export class EditSumupsComponent implements OnInit {
     constructor(
         private sumupService: SumupService,
         private dateService: DateService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private logger: NGXLogger
     ) {}
 
     ngOnInit() {
-        this.user = new User(0, "", "", "", null,null);
+        // this.user = new User(0, "", "", "", null,null);
         this.idDayCare = 1;//this.route.snapshot.params['idDaycare'];
         this.idChild = 1;//this.route.snapshot.params['idParent'];
+
+        this.route.params.subscribe(params => {
+            this.idChild = params['idChild'];
+
+            this.logger.debug("idChild:",this.idChild);
+        });
+        this.route.parent.params.subscribe(params => {
+            this.idDayCare=params['idDaycare'];
+            this.logger.debug("idDaycare:",this.idDayCare);
+        });
 
         this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idChild, this.dateService.getCurrentDay()).subscribe(
             (jsonSumup) => {
@@ -66,4 +79,6 @@ export class EditSumupsComponent implements OnInit {
                 return -1;
         }
     }
+
+    create(){}
 }
