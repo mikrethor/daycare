@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Child, Daycare, Sumups, User} from '../../pojo/pojo';
+import {Child, Sumups} from '../../pojo/pojo';
 import {SumupService} from "../../services/sumup-service";
 import {DateService} from "../../services/date-service";
 import {NGXLogger} from "ngx-logger";
@@ -11,20 +11,17 @@ import {NGXLogger} from "ngx-logger";
     templateUrl: './edit-sumups.html',
 })
 export class EditSumupsComponent implements OnInit {
-    // private user: User;
     private child: Child = Child.create();
     private sumup: Sumups = Sumups.create();
     private idDayCare: number = 1;
     private idChild: number = 1;
-    model: any = {};
-    private displaySumup= {
-        selectedMoodId: 0,
-        selectedSleepId: 0,
-        selectedAppetiteId: 0
-    };
+
     private appetites: number[] = [0, 5, 10];
     private moods: number[] = [0, 5, 10];
     private sleeps: number[] = [0, 5, 10];
+    private appetite: number= 0;
+    private mood: number = 0;
+    private sleep: number = 0;
 
     constructor(
         private sumupService: SumupService,
@@ -34,9 +31,8 @@ export class EditSumupsComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        // this.user = new User(0, "", "", "", null,null);
-        this.idDayCare = 1;//this.route.snapshot.params['idDaycare'];
-        this.idChild = 1;//this.route.snapshot.params['idParent'];
+        this.idDayCare = 1;
+        this.idChild = 1;
 
         this.route.params.subscribe(params => {
             this.idChild = params['idChild'];
@@ -51,14 +47,13 @@ export class EditSumupsComponent implements OnInit {
         this.sumupService.getOneByChildIdAndDay(this.idDayCare, this.idChild, this.dateService.getCurrentDay()).subscribe(
             (jsonSumup) => {
                 this.sumup = jsonSumup;
+                this.logger.debug("sumup :",this.sumup);
 
                 this.child=this.sumup.child;
 
-                this.displaySumup = {
-                    selectedMoodId: this.sumup.mood,
-                    selectedSleepId: this.sumup.sleep,
-                    selectedAppetiteId: this.sumup.appetite
-                }
+                this.appetite=this.sumup.appetite;
+                this.mood=this.sumup.mood;
+                this.sleep=this.sumup.sleep;
             },
             (error)=>this.sumupService.errorSubscribe(error),
             this.sumupService.completed('SumupService::getOneByChildIdAndDay')
@@ -80,5 +75,20 @@ export class EditSumupsComponent implements OnInit {
         }
     }
 
-    create(){}
+    create(){
+        this.sumup.sleep=this.sleep;
+        this.sumup.mood=this.mood;
+        this.sumup.appetite=this.appetite;
+        this.logger.info("EditSumupsComponent::create",this.sumup);
+        this.logger.info("EditSumupsComponent::create",this);
+
+    }
+
+    previous(){
+        this.logger.info("EditSumupsComponent::previous");
+    }
+
+    next(){
+        this.logger.info("EditSumupsComponent::next");
+    }
 }

@@ -6,18 +6,18 @@
         <div>
             <h4>Sumup : {{ sumup.day | date:'EEEE d MMMM'}}</h4>
             <div>Appetite :
-                <mat-radio-group>
-                    <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedAppetiteId" *ngFor="let value of appetites; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
+                <mat-radio-group name="appetite" [(ngModel)]="appetite">
+                    <mat-radio-button  (click)="appetite=value" value="{{value}}"  [checked]="value == sumup.appetite" *ngFor="let value of appetites;"><img src="{{ getImage(value) }}"></mat-radio-button>
                 </mat-radio-group>
             </div>
             <div>Mood :
-                <mat-radio-group>
-                    <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedMoodId" *ngFor="let value of moods; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
+                <mat-radio-group name="mood" [(ngModel)]="mood">
+                    <mat-radio-button (click)="mood=value" value="{{value}}" [checked]="value == sumup.mood" *ngFor="let value of moods;"><img src="{{ getImage(value) }}"></mat-radio-button>
                 </mat-radio-group>
             </div>
             <div>Sleep :
-                <mat-radio-group>
-                    <mat-radio-button value="{{value}}" [checked]="value == displaySumup.selectedSleepId" *ngFor="let value of sleeps; let i = index; "><img src="{{ getImage(value) }}"></mat-radio-button>
+                <mat-radio-group name="sleep" [(ngModel)]="sleep">
+                    <mat-radio-button (click)="sleep=value" value="{{value}}" [checked]="value == sumup.sleep" *ngFor="let value of sleeps;"><img src="{{ getImage(value) }}"></mat-radio-button>
                 </mat-radio-group>
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !comment.valid }">
@@ -26,13 +26,13 @@
                 <div *ngIf="f.submitted && !comment.valid" class="help-block">Comment is required</div>
             </div>
         </div>
-        <button mat-fab color="primary">
+        <button type="button" mat-fab color="primary" (click)="previous()">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
         <button mat-fab color="primary">
             <mat-icon>save</mat-icon>
         </button>
-        <button mat-fab color="primary">
+        <button type="button" mat-fab color="primary" (click)="next()">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
     </form>
