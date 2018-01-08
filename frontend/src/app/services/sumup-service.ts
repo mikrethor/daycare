@@ -35,7 +35,7 @@ export class SumupServiceImpl extends ServiceImpl implements SumupService{
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups";
         let body = JSON.stringify(sumup);
         return this.http.post(url, body, this.loginService.getBearerToken())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 }
 

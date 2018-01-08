@@ -76,11 +76,23 @@ export class EditSumupsComponent implements OnInit {
     }
 
     create(){
+        this.sumup.id=0;
         this.sumup.sleep=this.sleep;
         this.sumup.mood=this.mood;
         this.sumup.appetite=this.appetite;
+
+
+        this.sumupService.create(this.idDayCare,this.idChild,this.sumup).subscribe(
+            (jsonSumup) => {
+
+                this.logger.debug("sumup :",jsonSumup);
+
+
+            },
+            (error)=>this.sumupService.errorSubscribe(error),
+            this.sumupService.completed('SumupService::create')
+        );
         this.logger.info("EditSumupsComponent::create",this.sumup);
-        this.logger.info("EditSumupsComponent::create",this);
 
     }
 

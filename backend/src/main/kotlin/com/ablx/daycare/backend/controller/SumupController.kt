@@ -5,9 +5,7 @@ import com.ablx.daycare.backend.repository.ChildRepository
 import com.ablx.daycare.backend.repository.SumupRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 
@@ -36,4 +34,11 @@ internal class SumupController {
     fun findAll(@PathVariable(value="idDaycare")idDaycare: Long,
                 @PathVariable(value="idChild")idChild: Long) =
             sumupRepository.findAllByChildOrderByDayDesc(childRepository.findOne(idChild))
+
+    @PostMapping("/daycares/{idDaycare}/childs/{idChild}/sumups")
+    fun create(@PathVariable(value="idDaycare")idDaycare:Long,
+               @PathVariable(value="idChild")idChild:Long,
+               @RequestBody sumup: Sumup) : Sumup {
+        return sumupRepository.save(sumup)
+    }
 }
