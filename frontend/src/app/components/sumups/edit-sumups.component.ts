@@ -75,8 +75,20 @@ export class EditSumupsComponent implements OnInit {
         }
     }
 
+    save(){
+        if(!(this.sumup.id>0)){
+            this.sumup.id=0;
+
+        }
+        this.create();
+    }
+
+
+
+
     create(){
-        this.sumup.id=0;
+        this.logger.info("create");
+
         this.sumup.sleep=this.sleep;
         this.sumup.mood=this.mood;
         this.sumup.appetite=this.appetite;

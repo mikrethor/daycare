@@ -11,6 +11,7 @@ internal data class Sumup(
         @JoinColumn(name = "ID_CHILD", referencedColumnName = "ID")
         var child:Child=Child(),
         var comment:String="",
+        @Temporal(TemporalType.DATE)
         var day:Calendar=GregorianCalendar(),
         @Enumerated(EnumType.STRING)
         var mood:Level=Level.BAD,

@@ -2,7 +2,7 @@
     <h2>
         <mat-icon color="primary">face</mat-icon> {{ child.firstname }} {{ child.lastname }}
     </h2>
-    <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
+    <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
         <div>
             <h4>Sumup : {{ sumup.day | date:'EEEE d MMMM'}}</h4>
             <div>Appetite :
