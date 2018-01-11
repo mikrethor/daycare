@@ -3,6 +3,8 @@ import {DaycareService} from '../../services/daycare-service';
 import {Child, Daycare, Educator} from '../../pojo/pojo';
 import {ChildService} from "../../services/child-service";
 import {EducatorService} from "../../services/educator-service";
+import {NGXLogger} from "ngx-logger";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'daycareadmin',
@@ -11,16 +13,23 @@ import {EducatorService} from "../../services/educator-service";
 export class DaycareAdminComponent implements OnInit {
     private educator: Educator = Educator.create();
     private children: Child[] = [];
-    private idDayCare: number = 1;
+    private idDayCare: number;
     private daycare: Daycare = Daycare.create();
 
     constructor(
         private daycareService: DaycareService,
         private childService: ChildService,
         private educatorService: EducatorService,
+        private route: ActivatedRoute,
+        private logger: NGXLogger
     ) { }
 
     ngOnInit() {
+        this.route.parent.params.subscribe(params => {
+            this.idDayCare=params['idDaycare'];
+            this.logger.debug("idDaycare:",this.idDayCare);
+        });
+
         this.daycareService.getDaycare(this.idDayCare).subscribe(
             (daycare) => {
                 this.daycare = daycare;

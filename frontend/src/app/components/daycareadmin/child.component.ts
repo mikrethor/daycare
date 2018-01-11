@@ -17,7 +17,7 @@ export class AdminChildComponent implements OnInit {
     private idAdmin: number;
     model: any = {};
 
-    private idDayCare: number = 1;
+    private idDayCare: number;
     private daycare: Daycare =  Daycare.create();
     private deleted: boolean = false;
 
@@ -30,9 +30,11 @@ export class AdminChildComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
+        this.route.parent.params.subscribe(params => {
+            this.idDayCare=params['idDaycare'];
+            this.logger.debug("idDaycare:",this.idDayCare);
+        });
         this.route.params.subscribe(params => {
-            // this.idChild = params['idChild'];
             this.idAdmin=params['idAdmin'];
         });
         this.logger.debug("idDaycare :",this.idDayCare);

@@ -13,8 +13,8 @@ import {NGXLogger} from "ngx-logger";
 export class AdminUserComponent implements OnInit, OnChanges {
     private user: User = User.create();
     private users: User[] = [];
-    private idDaycare: number = 1;
-    private idUser: number = 1;
+    private idDaycare: number;
+    private idUser: number;
     private daycare: Daycare = Daycare.create();
     private deleted: boolean = false;
     model: any = {};

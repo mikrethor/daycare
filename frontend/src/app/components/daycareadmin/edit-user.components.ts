@@ -13,9 +13,9 @@ import {NGXLogger} from "ngx-logger";
 })
 export class AdminEditUserComponent implements OnInit {
     private user: User = User.create();
-    private idDaycare: number = 1;
-    private idUser: number = 1;
-    private idAdmin: number = 1;
+    private idDaycare: number;
+    private idUser: number;
+    private idAdmin: number;
     private daycare: Daycare = Daycare.create();
     private roles: Role[] = [];
     model: any = {};
