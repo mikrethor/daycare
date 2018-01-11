@@ -11,11 +11,13 @@ import {AdminEditUserComponent} from "./daycareadmin/edit-user.components";
 import {AdminUserComponent} from "./daycareadmin/user.component";
 import {UnderNavbarComponent} from "./undernavbar/undernavbar.component";
 import {UserComponent} from "./user/user.component";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
+    { path: 'register', component: RegisterComponent, pathMatch: 'full' },
     // { path: 'daycare/user/:username', component: UserComponent },
     { path: 'daycare/:idDaycare', component: UnderNavbarComponent , children:[
             // { path: '', redirectTo: 'user/:username'},

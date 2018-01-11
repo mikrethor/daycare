@@ -12,6 +12,7 @@ import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 import { routing } from './components/app.routing';
 import { AppComponent } from './components/application/app.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserComponent } from './components/user/user.component';
 import { EducatorComponent } from './components/educator/educator.component';
@@ -40,7 +41,7 @@ import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.compone
     declarations: [
         AppComponent,LoginComponent,LogoutComponent,UserComponent,EducatorComponent,ParentComponent,
         DaycareAdminComponent,NavbarComponent,UnderNavbarComponent,EditSumupsComponent,AdminChildComponent,
-        AdminEditChildComponent,
+        AdminEditChildComponent,RegisterComponent,
         AdminEditUserComponent,AdminUserComponent
     ],
     imports: [
