@@ -25,7 +25,6 @@ export class EducatorComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
         this.route.parent.params.subscribe(params => {
             this.idDayCare=params['idDaycare'];
             this.logger.debug("idDaycare:",this.idDayCare);

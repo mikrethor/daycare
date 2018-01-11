@@ -30,6 +30,8 @@ export class EditSumupsComponent implements OnInit {
         private logger: NGXLogger
     ) {}
 
+    //TODO use slider instead of radiobutton
+
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.idChild = params['idChild'];
