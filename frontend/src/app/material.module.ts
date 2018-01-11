@@ -10,6 +10,7 @@ import {
   MatRadioButton,
   MatRadioModule,
   MatCheckboxModule,
+  MatTabsModule,
 
 } from '@angular/material';
 
@@ -23,6 +24,7 @@ import {
     MatListModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatTabsModule,
   ],
   exports: [
     MatButtonModule,
@@ -33,6 +35,7 @@ import {
     MatListModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatTabsModule,
   ]
 })
 export class MaterialModule {}
