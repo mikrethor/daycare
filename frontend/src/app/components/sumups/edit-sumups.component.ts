@@ -76,15 +76,11 @@ export class EditSumupsComponent implements OnInit {
     }
 
     save(){
-        if(!(this.sumup.id>0)){
+        if(!(this.sumup.id > 0)){
             this.sumup.id=0;
-
         }
         this.create();
     }
-
-
-
 
     create(){
         this.logger.info("create");
@@ -93,19 +89,14 @@ export class EditSumupsComponent implements OnInit {
         this.sumup.mood=this.mood;
         this.sumup.appetite=this.appetite;
 
-
         this.sumupService.create(this.idDayCare,this.idChild,this.sumup).subscribe(
             (jsonSumup) => {
-
                 this.logger.debug("sumup :",jsonSumup);
-
-
             },
             (error)=>this.sumupService.errorSubscribe(error),
             this.sumupService.completed('SumupService::create')
         );
         this.logger.info("EditSumupsComponent::create",this.sumup);
-
     }
 
     previous(){

@@ -5,7 +5,7 @@
             <mat-icon mat-list-avatar color="primary">face</mat-icon>
             <h4 mat-line>{{c.firstname}} {{ c.lastname}}</h4>
             <!--<p md-line> dsdsd </p>-->
-            <button mat-icon-button color="primary" [routerLink]="['/daycare/',daycare.id,{ outlets: { undernavbar: 'children/'+c.id+'/sumups'} }]">
+            <button mat-icon-button color="primary" [routerLink]="['/daycare/',idDayCare,{ outlets: { undernavbar: 'children/'+c.id+'/sumups'} }]">
                 <mat-icon>mode_edit</mat-icon>
             </button>
 
