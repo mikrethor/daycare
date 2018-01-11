@@ -1,13 +1,16 @@
 <div class="col-md-6 col-md-offset-3">
     <h3>Administration Users</h3>
-    <h4>{{user.firstName}} {{user.lastName}}</h4>
+    <h4 *ngIf="user.firstName !== ''" >{{user.firstName}} {{user.lastName}}</h4>
     <mat-list>
         <h3 mat-header>Roles</h3>
-        <mat-list-item *ngFor="let e of roles; let i = index;">
-            <h4 mat-line>{{e.name}}</h4>
-        </mat-list-item>
+        <ng-container *ngFor="let e of roles; let i = index;"  >
+            <mat-checkbox color="primary">
+                {{e.name}}
+            </mat-checkbox>
+            <br>
+        </ng-container>
     </mat-list>
-
+    <br>
     <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstname.valid }">
             <label for="firstname">First Name</label>
