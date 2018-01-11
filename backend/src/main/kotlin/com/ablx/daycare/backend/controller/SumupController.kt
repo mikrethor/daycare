@@ -26,7 +26,7 @@ internal class SumupController {
                 @DateTimeFormat(pattern = "yyyy-MM-dd")
                 @PathVariable(value="day")day: Calendar):Sumup {
 
-        //TODO refactoring
+        //TODO refactoring deport creation in front
         try{
             var sumup=sumupRepository.findOneByChildAndDay(idChild,day)
             if(sumup == null){

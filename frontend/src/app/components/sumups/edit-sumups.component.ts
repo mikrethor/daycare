@@ -13,8 +13,8 @@ import {NGXLogger} from "ngx-logger";
 export class EditSumupsComponent implements OnInit {
     private child: Child = Child.create();
     private sumup: Sumups = Sumups.create();
-    private idDayCare: number = 1;
-    private idChild: number = 1;
+    private idDayCare: number;
+    private idChild: number;
 
     private appetites: number[] = [0, 5, 10];
     private moods: number[] = [0, 5, 10];
@@ -31,12 +31,8 @@ export class EditSumupsComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.idDayCare = 1;
-        this.idChild = 1;
-
         this.route.params.subscribe(params => {
             this.idChild = params['idChild'];
-
             this.logger.debug("idChild:",this.idChild);
         });
         this.route.parent.params.subscribe(params => {

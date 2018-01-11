@@ -36,7 +36,12 @@ export class ParentComponent implements OnInit {
 
     ngOnInit() {
         this.user = User.create();
-        this.idDayCare = this.route.snapshot.params['idDaycare'];
+
+        this.route.parent.params.subscribe(params => {
+            this.idDayCare=params['idDaycare'];
+            this.logger.debug("idDaycare:",this.idDayCare);
+        });
+
         this.idParent = this.route.snapshot.params['idParent'];
 
         this.parentService.getOneById(this.idDayCare, this.idParent).subscribe(
