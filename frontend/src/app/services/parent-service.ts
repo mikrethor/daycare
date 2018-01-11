@@ -22,13 +22,13 @@ export class ParentServiceImpl extends ServiceImpl implements ParentService{
     getOneById(idDaycare: number, idParent: number): Observable<Parent> {
         this.logger.debug("getEducator : " ,idDaycare,idParent);
         return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent,this.loginService.getBearerToken())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     getAllByDaycareId(idDaycare: number): Observable<Parent[]> {
         this.logger.debug("getParents : " ,idDaycare);
         return this.http.get(this.constantService.API_ENDPOINT + "/users/role/3/daycares/" + idDaycare, this.loginService.getBearerToken())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     create(idDaycare: number, parent: Parent): Observable<Parent[]> {
@@ -37,13 +37,13 @@ export class ParentServiceImpl extends ServiceImpl implements ParentService{
         let body = JSON.stringify(parent);
         return this.http.post(url, body, this.loginService.getBearerToken()
         )
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     delete(idDaycare: number, idParent: number): Observable<Boolean> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/parents/" + idParent;
         return this.http.delete(url,this.loginService.getBearerToken())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 }
 
