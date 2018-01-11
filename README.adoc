@@ -1,0 +1,3 @@
+= Daycare application
+
+This repository hosts the frontend and the backend project for the future daycare app.
