@@ -13,7 +13,7 @@ internal class UserController{
     lateinit var userRepository:UserRepository
 
     //Name can't contain .
-    @GetMapping("/users/{name}")
+    @GetMapping("/users/{name:.+}")
     fun findByName(@PathVariable(value="name")name: String) =
             userRepository.findByUsername(name)
 
