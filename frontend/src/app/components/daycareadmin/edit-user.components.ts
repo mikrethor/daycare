@@ -83,8 +83,6 @@ export class AdminEditUserComponent implements OnInit {
 
     create() {
         this.logger.debug("create");
-        // this.user = User.create();
-        //TODO username == email?
         this.user.roles=this.roles;
         this.user.daycare=this.daycare;
         this.userService.create(this.idDaycare,this.user).subscribe(
