@@ -83,11 +83,8 @@ export class AdminEditUserComponent implements OnInit {
 
     create() {
         this.logger.debug("create");
-        this.user = User.create();
+        // this.user = User.create();
         //TODO username == email?
-        this.user.firstName=this.model.firstname;
-        this.user.lastName=this.model.lastname;
-        this.user.username=this.model.firstname+this.model.lastname;
         this.user.roles=this.roles;
         this.user.daycare=this.daycare;
         this.userService.create(this.idDaycare,this.user).subscribe(
@@ -105,6 +102,10 @@ export class AdminEditUserComponent implements OnInit {
             ()=>this.userService.completed('UserService::create')
 
         );
+    }
+
+    hasRole(user:User,role:string){
+        return this.userService.isInRoles(role,user.roles);
     }
 
 }

@@ -36,7 +36,6 @@ export class LoginService {
         return 'Bearer '+this.myToken;
     }
 
-    //TODO when other services will all use httpClient
     getBearerToken():{headers:HttpHeaders,withCredentials:boolean}{
         let headers = new HttpHeaders()
             .set('Authorization', this.getBearerAuthorization())
