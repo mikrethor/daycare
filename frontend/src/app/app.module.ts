@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -64,6 +64,7 @@ import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.compone
         { provide : SumupService, useClass:SumupServiceImpl},
 
     ],
+    schemas:[CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

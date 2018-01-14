@@ -3,28 +3,32 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
-    margin: 0;
-    font-family: Roboto, sans-serif;
-  }
-  
-  mat-card {
-    max-width: 80%;
-    margin: 2em auto;
-    text-align: center;
-  }
-  
-  mat-toolbar-row {
-    justify-content: space-between;
-  }
-  
-  .done {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    color: white;
-  }
-  .spacer {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-  }
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+mat-toolbar-row {
+  justify-content: space-between;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+.done {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+}
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
