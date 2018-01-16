@@ -45,6 +45,18 @@ export class AdminEditUserComponent implements OnInit {
         this.logger.debug("idAdmin :",this.idAdmin);
         this.logger.debug("idDaycare :",this.idDaycare);
 
+        if(this.idUser!=null){
+            this.userService.getUsersByIdByDaycareId(this.idDaycare,this.idUser).subscribe(
+                (user) => {
+                    this.zone.run(() => {
+                        this.user = user;
+                    });
+                },
+                (error)=>this.userService.errorSubscribe(error),
+                ()=>this.userService.completed('UserService::getUsersByIdByDaycareId')
+            );
+        }
+
         this.daycareService.getDaycare(this.idDaycare).subscribe(
             (daycare) => {
                 this.daycare = daycare;
@@ -54,33 +66,15 @@ export class AdminEditUserComponent implements OnInit {
 
         );
 
-        if(this.idUser!=null){
-            this.userService.getUsersByIdByDaycareId(this.idDaycare,this.idUser).subscribe(
-                (user) => {
-                    this.zone.run(() => {
-                        this.logger.debug(user);
-
-                        this.user = user;
-                    });
-                },
-                (error)=>this.userService.errorSubscribe(error),
-                ()=>this.userService.completed('UserService::getUsersByIdByDaycareId')
-
-            );
-        }
-
         this.roleService.getRoles()
             .subscribe(
                 (roles) => {
                     this.zone.run(() => {
-
                         for (let role of roles) {
                             role.checked = this.hasRole(this.user, role.name);
                             this.roles.push(role);
-
                         }
                     });
-
                 },
                 (error)=>this.roleService.errorSubscribe(error),
                 ()=>this.roleService.completed('RoleService::getRoles')

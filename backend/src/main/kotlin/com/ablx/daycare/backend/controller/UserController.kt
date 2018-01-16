@@ -32,6 +32,13 @@ internal class UserController{
 
     @PostMapping("/daycares/{idDaycare}/users")
     fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody user: User) : User {
+        if(user.id!=null && user.id>0){
+            var userFromDatabase=userRepository.findOne(user.id)
+            user.password=userFromDatabase.password
+            userFromDatabase=userRepository.save(user)
+            userFromDatabase.password=""
+            return userFromDatabase
+        }
         return userRepository.save(user)
     }
 
