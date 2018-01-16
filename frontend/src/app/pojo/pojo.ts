@@ -85,7 +85,8 @@ export class Role {
     constructor(
         public id: number,
         public name: String,
-        public description: String
+        public description: String,
+        public checked: boolean=false
     ) { }
 }
 

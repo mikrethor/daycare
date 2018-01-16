@@ -2,8 +2,9 @@
     <h3>Administration Users</h3>
     <mat-list>
         <ng-container >
-            <mat-checkbox class="example-margin"  *ngFor="let e of roles; let i = index;"  color="primary" [checked]="hasRole(user,e.name)">
-                {{e.name}}
+            <mat-checkbox class="example-margin"  *ngFor="let role of roles; let i = index;"  color="primary" [checked]="role.checked"
+                          (change)="role.checked = !role.checked">
+                {{ toLowercaseExceptFirstCharacter(role.name,role) }}
             </mat-checkbox>
             <br>
         </ng-container>
@@ -12,27 +13,24 @@
     <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <mat-form-field>
-                <input matInput placeholder="Email"  name="username" [(ngModel)]="user.username" [email]="true" required >
+                <input matInput placeholder="Email" name="username" [(ngModel)]="user.username" [email]="true" required >
             </mat-form-field>
             <div *ngIf="f.submitted && username.value==''" class="help-block">Email is required</div>
             <div *ngIf="f.submitted && username.errors?.email && username.value!=''" class="help-block">This should be an email</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstname.valid }">
             <mat-form-field>
-                <input matInput placeholder="First Name"  name="firstname" [(ngModel)]="user.firstName" required >
+                <input matInput placeholder="First Name" name="firstname" [(ngModel)]="user.firstName" required >
             </mat-form-field>
             <div *ngIf="f.submitted && !firstname.valid" class="help-block">Firstname is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !lastname.valid }">
-            <!--<label for="lastname">Last Name :</label>-->
-            <!--<input type="text" class="form-control" name="lastname" [(ngModel)]="user.lastName" #lastname="ngModel" required />-->
             <mat-form-field>
-                <input matInput placeholder="Last Name"  name="lastname" [(ngModel)]="user.lastName" required >
+                <input matInput placeholder="Last Name" name="lastname" [(ngModel)]="user.lastName" required >
             </mat-form-field>
             <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last Name is required</div>
         </div>
         <div class="form-group">
-            <!--<button [disabled]="loading" class="btn btn-primary">Create</button>-->
             <button mat-icon-button color="primary" >
                 <mat-icon>check circle</mat-icon>
             </button>
@@ -41,7 +39,6 @@
             </button>
             <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
             />
-            <!--<a [routerLink]="['/register']" class="btn btn-link">Register</a>-->
         </div>
     </form>
 

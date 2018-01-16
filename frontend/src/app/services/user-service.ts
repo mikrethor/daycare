@@ -27,7 +27,7 @@ export class UserService extends ServiceImpl{
         return this.user;
     }
 
-    isInRoles(roleName:string,roles:Array<Role>):boolean{
+    isInRoles(roleName:String,roles:Array<Role>):boolean{
         for(let role of roles){
             if(role.name==roleName){
                 return true;

@@ -18,7 +18,6 @@ export class AdminEditUserComponent implements OnInit {
     private idAdmin: number;
     private daycare: Daycare = Daycare.create();
     private roles: Role[] = [];
-    model: any = {};
 
     constructor(
         private daycareService: DaycareService,
@@ -58,10 +57,11 @@ export class AdminEditUserComponent implements OnInit {
         if(this.idUser!=null){
             this.userService.getUsersByIdByDaycareId(this.idDaycare,this.idUser).subscribe(
                 (user) => {
+                    this.zone.run(() => {
+                        this.logger.debug(user);
 
-                    this.logger.debug(user);
-
-                    this.user = user;
+                        this.user = user;
+                    });
                 },
                 (error)=>this.userService.errorSubscribe(error),
                 ()=>this.userService.completed('UserService::getUsersByIdByDaycareId')
@@ -72,9 +72,15 @@ export class AdminEditUserComponent implements OnInit {
         this.roleService.getRoles()
             .subscribe(
                 (roles) => {
-                    for (let role of roles) {
-                        this.roles.push(role);
-                    }
+                    this.zone.run(() => {
+
+                        for (let role of roles) {
+                            role.checked = this.hasRole(this.user, role.name);
+                            this.roles.push(role);
+
+                        }
+                    });
+
                 },
                 (error)=>this.roleService.errorSubscribe(error),
                 ()=>this.roleService.completed('RoleService::getRoles')
@@ -83,18 +89,21 @@ export class AdminEditUserComponent implements OnInit {
 
     create() {
         this.logger.debug("create");
-        this.user.roles=this.roles;
+        this.user.roles=[]
+        for(let role of this.roles){
+            if(role.checked){
+                this.user.roles.push(role)
+            }
+        }
+
+        this.logger.info("test roles : ",this.roles);
+
         this.user.daycare=this.daycare;
         this.userService.create(this.idDaycare,this.user).subscribe(
             (user) => {
-
-                this.logger.debug(user);
-
                 this.user = user;
 
-                this.zone.run(() => {
-                    this.router.navigate(['daycare',this.idDaycare,{ outlets: { undernavbar: 'admin/'+this.idAdmin+'/users' } }]);
-                });
+                this.router.navigate(['daycare',this.idDaycare,{ outlets: { undernavbar: 'admin/'+this.idAdmin+'/users' } }]);
             },
             (error)=>this.userService.errorSubscribe(error),
             ()=>this.userService.completed('UserService::create')
@@ -102,8 +111,12 @@ export class AdminEditUserComponent implements OnInit {
         );
     }
 
-    hasRole(user:User,role:string){
+    hasRole(user:User,role:String){
         return this.userService.isInRoles(role,user.roles);
+    }
+
+    toLowercaseExceptFirstCharacter(test:string,role:Role){
+        return test.substr(0,1)+test.substr(1).toLowerCase();
     }
 
 }
