@@ -45,7 +45,7 @@ import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.compone
         AdminEditUserComponent,AdminUserComponent
     ],
     imports: [
-        LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+        LoggerModule.forRoot({serverLoggingUrl: 'http://localhost:8080/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.DEBUG}),
         BrowserModule,
         FormsModule,
         HttpClientModule,
