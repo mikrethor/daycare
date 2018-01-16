@@ -14,9 +14,9 @@ internal data class Sumup(
         @Temporal(TemporalType.DATE)
         var day:Calendar=GregorianCalendar(),
         @Enumerated(EnumType.STRING)
-        var mood:Level=Level.BAD,
+        var mood: Level = Level.BAD,
         @Enumerated(EnumType.STRING)
-        var sleep:Level=Level.BAD,
+        var sleep: Level = Level.BAD,
         @Enumerated(EnumType.STRING)
-        var appetite:Level=Level.BAD
+        var appetite: Level = Level.BAD
 )

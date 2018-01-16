@@ -37,9 +37,9 @@ internal class SumupController {
                 sumup.day.time = sdf.parse(sdf.format( sumup.day.time))
 
 
-                sumup.mood=Level.BAD
-                sumup.appetite=Level.BAD
-                sumup.sleep=Level.BAD
+                sumup.mood= Level.BAD
+                sumup.appetite= Level.BAD
+                sumup.sleep= Level.BAD
             }
             return  sumup
         }
@@ -48,9 +48,9 @@ internal class SumupController {
             var sumup=Sumup()
             sumup.child=childRepository.findOne(idChild)
             sumup.day=GregorianCalendar()
-            sumup.mood=Level.BAD
-            sumup.appetite=Level.BAD
-            sumup.sleep=Level.BAD
+            sumup.mood= Level.BAD
+            sumup.appetite= Level.BAD
+            sumup.sleep= Level.BAD
             return sumup
         }}
 

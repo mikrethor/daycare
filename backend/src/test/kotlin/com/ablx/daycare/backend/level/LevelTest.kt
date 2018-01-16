@@ -17,16 +17,16 @@ class LevelTest{
 
     @Test
     fun level0IntValueToBad() {
-        Assert.assertEquals(Level.BAD,Level.fromCode(0))
+        Assert.assertEquals(Level.BAD, Level.fromCode(0))
     }
 
     @Test
     fun level5IntValueToMedium() {
-        Assert.assertEquals(Level.MEDIUM,Level.fromCode(5))
+        Assert.assertEquals(Level.MEDIUM, Level.fromCode(5))
     }
 
     @Test
     fun level10IntValueToGood() {
-        Assert.assertEquals(Level.GOOD,Level.fromCode(10))
+        Assert.assertEquals(Level.GOOD, Level.fromCode(10))
     }
 }
