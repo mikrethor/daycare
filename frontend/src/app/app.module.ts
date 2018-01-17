@@ -1,36 +1,36 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
-import { MaterialModule } from './material.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
+import {MaterialModule} from './material.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 
-import { routing } from './components/app.routing';
-import { AppComponent } from './components/application/app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { LogoutComponent } from './components/logout/logout.component';
-import { UserComponent } from './components/user/user.component';
-import { EducatorComponent } from './components/educator/educator.component';
-import { ParentComponent } from './components/parent/parent.component';
-import { DaycareAdminComponent } from './components/daycareadmin/daycareadmin.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { EditSumupsComponent } from './components/sumups/edit-sumups.component';
-import { AdminChildComponent } from './components/daycareadmin/child.component';
-import { AdminEditChildComponent } from './components/daycareadmin/edit-child.component';
-import { LoginService } from './services/login-service';
-import { ConstantsService } from 'app/services/constants-service';
-import { DateService } from 'app/services/date-service';
-import { ChildServiceImpl, ChildService } from 'app/services/child-service';
-import { DaycareServiceImpl, DaycareService } from 'app/services/daycare-service';
-import { EducatorServiceImpl ,EducatorService } from 'app/services/educator-service';
-import { ParentServiceImpl, ParentService } from 'app/services/parent-service';
-import { SumupServiceImpl, SumupService } from 'app/services/sumup-service';
-import { UserService } from 'app/services/user-service';
+import {routing} from './components/app.routing';
+import {AppComponent} from './components/application/app.component';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
+import {LogoutComponent} from './components/logout/logout.component';
+import {UserComponent} from './components/user/user.component';
+import {EducatorComponent} from './components/educator/educator.component';
+import {ParentComponent} from './components/parent/parent.component';
+import {DaycareAdminComponent} from './components/daycareadmin/daycareadmin.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {EditSumupsComponent} from './components/sumups/edit-sumups.component';
+import {AdminChildComponent} from './components/daycareadmin/child.component';
+import {AdminEditChildComponent} from './components/daycareadmin/edit-child.component';
+import {LoginService} from './services/login-service';
+import {ConstantsService} from 'app/services/constants-service';
+import {DateService} from 'app/services/date-service';
+import {ChildService, ChildServiceImpl} from 'app/services/child-service';
+import {DaycareService, DaycareServiceImpl} from 'app/services/daycare-service';
+import {EducatorService, EducatorServiceImpl} from 'app/services/educator-service';
+import {ParentService, ParentServiceImpl} from 'app/services/parent-service';
+import {SumupService, SumupServiceImpl} from 'app/services/sumup-service';
+import {UserService} from 'app/services/user-service';
 import {AdminEditUserComponent} from "./components/daycareadmin/edit-user.components";
 import {AdminUserComponent} from "./components/daycareadmin/user.component";
 import {RoleService} from "./services/role-service";
@@ -45,7 +45,11 @@ import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.compone
         AdminEditUserComponent,AdminUserComponent
     ],
     imports: [
-        LoggerModule.forRoot({serverLoggingUrl: 'http://localhost:8080/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.DEBUG}),
+        LoggerModule.forRoot({
+            serverLoggingUrl: 'http://localhost:8080/api/logs',
+            level: NgxLoggerLevel.DEBUG,
+            serverLogLevel: NgxLoggerLevel.OFF
+        }),
         BrowserModule,
         FormsModule,
         HttpClientModule,

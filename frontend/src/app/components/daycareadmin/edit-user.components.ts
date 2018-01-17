@@ -18,6 +18,9 @@ export class AdminEditUserComponent implements OnInit {
     private idAdmin: number;
     private daycare: Daycare = Daycare.create();
     private roles: Role[] = [];
+    private username = "";
+    private firstname = "";
+    private lastname = "";
 
     constructor(
         private daycareService: DaycareService,
@@ -30,6 +33,20 @@ export class AdminEditUserComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.roleService.getRoles()
+            .subscribe(
+                (roles) => {
+                    this.zone.run(() => {
+                        for (let role of roles) {
+                            role.checked = this.hasRole(this.user, role.name);
+                            this.roles.push(role);
+                        }
+                    });
+                },
+                (error) => this.roleService.errorSubscribe(error),
+                () => this.roleService.completed('RoleService::getRoles')
+            );
+
 
         this.route.params.subscribe(params => {
             this.idUser=params['idUser'];
@@ -50,6 +67,9 @@ export class AdminEditUserComponent implements OnInit {
                 (user) => {
                     this.zone.run(() => {
                         this.user = user;
+                        for (let role of this.roles) {
+                            role.checked = this.hasRole(this.user, role.name);
+                        }
                     });
                 },
                 (error)=>this.userService.errorSubscribe(error),
@@ -66,24 +86,12 @@ export class AdminEditUserComponent implements OnInit {
 
         );
 
-        this.roleService.getRoles()
-            .subscribe(
-                (roles) => {
-                    this.zone.run(() => {
-                        for (let role of roles) {
-                            role.checked = this.hasRole(this.user, role.name);
-                            this.roles.push(role);
-                        }
-                    });
-                },
-                (error)=>this.roleService.errorSubscribe(error),
-                ()=>this.roleService.completed('RoleService::getRoles')
-            );
+
     }
 
     create() {
         this.logger.debug("create");
-        this.user.roles=[]
+        this.user.roles = [];
         for(let role of this.roles){
             if(role.checked){
                 this.user.roles.push(role)
