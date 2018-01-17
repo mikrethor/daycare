@@ -117,8 +117,8 @@ export class AdminEditUserComponent implements OnInit {
         return this.userService.isInRoles(role,user.roles);
     }
 
-    toLowercaseExceptFirstCharacter(test:string,role:Role){
-        return test.substr(0,1)+test.substr(1).toLowerCase();
+    toLowercaseExceptFirstCharacter(_in: string) {
+        return _in.substr(0, 1) + _in.substr(1).toLowerCase();
     }
 
 }
