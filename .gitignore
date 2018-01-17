@@ -1,4 +1,6 @@
 /.idea
+/.idea/*.xml
+/daycare.log
 
 /frontend/node_modules
 
