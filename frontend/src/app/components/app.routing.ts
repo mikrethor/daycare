@@ -18,29 +18,20 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
     { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-    // { path: 'daycare/user/:username', component: UserComponent },
     { path: 'daycare/:idDaycare', component: UnderNavbarComponent , children:[
-            // { path: '', redirectTo: 'user/:username'},
             { path: 'user/:username', component: UserComponent, outlet:'undernavbar',},
             { path: 'parent/:idParent', component: ParentComponent ,outlet:'undernavbar', },
             { path: 'educator/:idEducator', component: EducatorComponent,outlet:'undernavbar', },
             { path: 'children/:idChild/sumups', component: EditSumupsComponent ,outlet:'undernavbar',},
+
             { path: 'admin/:idAdmin', component: DaycareAdminComponent ,outlet:'undernavbar',},
             { path: 'admin/:idAdmin/children', component: AdminChildComponent ,outlet:'undernavbar',},
             { path: 'admin/:idAdmin/children/create', component: AdminEditChildComponent ,outlet:'undernavbar',},
             { path: 'admin/:idAdmin/children/:idChild/edit', component: AdminEditChildComponent ,outlet:'undernavbar',},
-
             { path: 'admin/:idAdmin/users', component: AdminUserComponent ,outlet:'undernavbar'},
             { path: 'admin/:idAdmin/users/create', component: AdminEditUserComponent ,outlet:'undernavbar',},
             { path: 'admin/:idAdmin/users/:idUser/edit', component: AdminEditUserComponent ,outlet:'undernavbar',},
-
-
         ] },
-    // { path: 'daycare/:idDaycare',children:[
-
-
-    // ]},
-
 ];
 
 export const routing = RouterModule.forRoot(routes);
