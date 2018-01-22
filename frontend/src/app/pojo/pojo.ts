@@ -9,7 +9,6 @@ export class Daycare {
     }
 }
 
-
 export class Child {
     constructor(
         public id: number,
@@ -77,7 +76,7 @@ export class User {
     ) { }
 
     static create() : User{
-        return new User(0,"","","",new Array<Role>(),Daycare.create());
+        return new User(0, "", "", "", [], Daycare.create());
     }
 }
 

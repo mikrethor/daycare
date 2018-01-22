@@ -46,7 +46,7 @@ import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.compone
     ],
     imports: [
         LoggerModule.forRoot({
-            serverLoggingUrl: 'http://localhost:8080/api/logs',
+            serverLoggingUrl: 'http://localhost:9200/daycare/logs',
             level: NgxLoggerLevel.DEBUG,
             serverLogLevel: NgxLoggerLevel.OFF
         }),
@@ -58,6 +58,7 @@ import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.compone
         routing
 
     ],
+
     providers: [LoginService,ConstantsService,UserService,DateService,RoleService,
         { provide: LocationStrategy, useClass: HashLocationStrategy, },
         { provide: APP_BASE_HREF, useValue: '/', },

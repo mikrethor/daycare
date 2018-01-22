@@ -1,10 +1,11 @@
 <div class="col-md-6 col-md-offset-3">
     <div>
         <mat-tab-group>
-            <mat-tab *ngFor="let role of roles; let i = index;" label="{{role.name}}">
+            <mat-tab *ngFor="let role of roles;" label="{{role.name}}">
                 <a [routerLink]="['/daycare', user.daycare.id, { outlets: { undernavbar: role.name.toLowerCase()+'/'+user.id } }]"
                    class="btn btn-link">{{role.name}}<br></a>
             <!--TODO create new router to display page in the tab-->
+                <router-outlet name="undernavbar"></router-outlet>
             </mat-tab>
         </mat-tab-group>
     </div>

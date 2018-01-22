@@ -7,7 +7,6 @@ import com.ablx.daycare.backend.repository.SumupRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -28,20 +27,7 @@ internal class SumupController {
 
         //TODO refactoring deport creation in front
         try{
-            var sumup=sumupRepository.findOneByChildAndDay(idChild,day)
-            if(sumup == null){
-                sumup=Sumup()
-                sumup.child=childRepository.findOne(idChild)
-                sumup.day=GregorianCalendar()
-                val sdf = SimpleDateFormat("yyyy-MM-dd'Z'")
-                sumup.day.time = sdf.parse(sdf.format( sumup.day.time))
-
-
-                sumup.mood= Level.BAD
-                sumup.appetite= Level.BAD
-                sumup.sleep= Level.BAD
-            }
-            return  sumup
+            return sumupRepository.findOneByChildAndDay(idChild, day)
         }
         catch (e:Exception){
             System.err.println(e)

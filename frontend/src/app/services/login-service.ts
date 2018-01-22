@@ -14,7 +14,6 @@ export class LoginService {
     private clientId="testjwtclientid";
     private clientSecret="XY7kmzoNzl100";
 
-
     @LocalStorage
     private myToken:string;
 
@@ -41,11 +40,10 @@ export class LoginService {
             .set('Authorization', this.getBearerAuthorization())
             .set('Access-Control-Allow-Origin', '*' )
             .set('Content-Type', 'application/json; charset=utf8');
-        const httpOptions = {
+        return {
             headers: headers,
             withCredentials: false
         };
-        return httpOptions;
     }
 
     saveToken(token){
@@ -84,19 +82,17 @@ export class LoginService {
     }
 
     getBasicToken(): HttpHeaders {
-        let headers = new HttpHeaders()
+        return new HttpHeaders()
             .set('Content-type', 'application/x-www-form-urlencoded')
             .set('Authorization', this.getBasicAuthorization())
             .set('Allow-Control-Allow-Origin', '*');
-        return  headers ;
     }
 
     getParamsToAuthenticate(login:string,password:string): HttpParams{
-        let params = new HttpParams()
+        return new HttpParams()
             .set('username',login)
             .set('password',password)
             .set('grant_type','password');
-        return params;
     }
 } 
 
