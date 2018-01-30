@@ -11,17 +11,17 @@ import {NGXLogger} from "ngx-logger";
     templateUrl: './edit-sumups.html',
 })
 export class EditSumupsComponent implements OnInit {
-    private child: Child = Child.create();
-    private sumup: Sumups = Sumups.create();
-    private idDayCare: number;
-    private idChild: number;
-
-    private appetites: number[] = [0, 5, 10];
-    private moods: number[] = [0, 5, 10];
-    private sleeps: number[] = [0, 5, 10];
-    private appetite: number= 0;
-    private mood: number = 0;
-    private sleep: number = 0;
+    child: Child = Child.create();
+    sumup: Sumups = Sumups.create();
+    sumups: Sumups[];
+    idDayCare: number;
+    idChild: number;
+    appetites: number[] = [0, 5, 10];
+    moods: number[] = [0, 5, 10];
+    sleeps: number[] = [0, 5, 10];
+    appetite: number = 0;
+    mood: number = 0;
+    sleep: number = 0;
 
     constructor(
         private sumupService: SumupService,
@@ -54,6 +54,18 @@ export class EditSumupsComponent implements OnInit {
                 this.sleep=this.sumup.sleep;
             },
             (error)=>this.sumupService.errorSubscribe(error),
+            this.sumupService.completed('SumupService::getOneByChildIdAndDay')
+        );
+
+
+        this.sumupService.getAllByChildId(this.idDayCare, this.idChild).subscribe(
+            (sumups) => {
+                this.sumups = sumups;
+                this.logger.debug("sumups :", this.sumups);
+
+
+            },
+            (error) => this.sumupService.errorSubscribe(error),
             this.sumupService.completed('SumupService::getOneByChildIdAndDay')
         );
     }
