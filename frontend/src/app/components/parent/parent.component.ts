@@ -13,17 +13,17 @@ import {NGXLogger} from "ngx-logger";
     templateUrl: './parent.html',
 })
 export class ParentComponent implements OnInit {
-    private user: User;
-    private parent: Parent = Parent.create();
-    private children: Child[] = [];
-    private child= {
+    user: User;
+    parent: Parent = Parent.create();
+    children: Child[] = [];
+    child = {
         selectedMoodId: 0,
         selectedSleepId: 0,
         selectedAppetiteId: 0
     };
-    private sumup: Sumups = Sumups.create();
-    private idDayCare: number = -61;
-    private idParent: number = -61;
+    sumup: Sumups = Sumups.create();
+    idDayCare: number = -61;
+    idParent: number = -61;
 
     constructor(
         private sumupService: SumupService,
@@ -62,7 +62,7 @@ export class ParentComponent implements OnInit {
             this.childService.completed('ParentService::getAllByParentId')
         );
 
-        this.logger.debug("Children length :",this.children.length)
+        this.logger.debug("Children length :", this.children.length);
 
         if(this.children.length>0){
 

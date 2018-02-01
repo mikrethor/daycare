@@ -11,12 +11,12 @@ import {NGXLogger} from "ngx-logger";
     templateUrl: './user.html',
 })
 export class AdminUserComponent implements OnInit, OnChanges {
-    private user: User = User.create();
-    private users: User[] = [];
-    private idDaycare: number;
-    private idUser: number;
-    private daycare: Daycare = Daycare.create();
-    private deleted: boolean = false;
+    user: User = User.create();
+    users: User[] = [];
+    idDaycare: number;
+    idUser: number;
+    daycare: Daycare = Daycare.create();
+    deleted: boolean = false;
     model: any = {};
 
     constructor(

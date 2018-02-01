@@ -11,15 +11,15 @@ import {NGXLogger} from "ngx-logger";
     templateUrl: './child.html',
 })
 export class AdminChildComponent implements OnInit {
-    private educator: Educator = Educator.create();
-    private children: Child[] = [];
-    private child: Child;
-    private idAdmin: number;
+    educator: Educator = Educator.create();
+    children: Child[] = [];
+    child: Child;
+    idAdmin: number;
     model: any = {};
 
-    private idDayCare: number;
-    private daycare: Daycare =  Daycare.create();
-    private deleted: boolean = false;
+    idDayCare: number;
+    daycare: Daycare = Daycare.create();
+    deleted: boolean = false;
 
     constructor(
         private childService: ChildService,

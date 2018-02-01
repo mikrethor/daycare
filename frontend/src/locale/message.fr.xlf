@@ -1,0 +1,4 @@
+<trans-unit id="username" datatype="html">
+    <source>Username :</source>
+    <target>Utilisateur : </target>
+</trans-unit>

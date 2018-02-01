@@ -12,10 +12,10 @@ import {ActivatedRoute} from "@angular/router";
     templateUrl: './educator.html',
 })
 export class EducatorComponent implements OnInit {
-    private educator: Educator = Educator.create();
-    private children: Child[] = [];
-    private idDayCare: number;
-    private idEducator: number;
+    educator: Educator = Educator.create();
+    children: Child[] = [];
+    idDayCare: number;
+    idEducator: number;
 
     constructor(
         private daycareService: DaycareService,

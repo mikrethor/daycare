@@ -12,15 +12,15 @@ import {NGXLogger} from "ngx-logger";
     templateUrl: './edit-user.html',
 })
 export class AdminEditUserComponent implements OnInit {
-    private user: User = User.create();
-    private idDaycare: number;
-    private idUser: number;
-    private idAdmin: number;
-    private daycare: Daycare = Daycare.create();
-    private roles: Role[] = [];
-    private username = "";
-    private firstname = "";
-    private lastname = "";
+    user: User = User.create();
+    idDaycare: number;
+    idUser: number;
+    idAdmin: number;
+    daycare: Daycare = Daycare.create();
+    roles: Role[] = [];
+    username = "";
+    firstname = "";
+    lastname = "";
 
     constructor(
         private daycareService: DaycareService,

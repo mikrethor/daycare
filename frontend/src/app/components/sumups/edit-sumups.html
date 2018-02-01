@@ -26,13 +26,13 @@
                 <div *ngIf="f.submitted && !comment.valid" class="help-block">Comment is required</div>
             </div>
         </div>
-        <button type="button" mat-fab color="primary" (click)="previous()">
+        <button *ngIf="hasPrevious()" type="button" mat-fab color="primary" (click)="previous()">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
         <button mat-fab color="primary">
             <mat-icon>save</mat-icon>
         </button>
-        <button type="button" mat-fab color="primary" (click)="next()">
+        <button *ngIf="hasNext()" type="button" mat-fab color="primary" (click)="next()">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
     </form>

@@ -8,9 +8,9 @@ import {UserService} from "../../services/user-service";
     templateUrl: './register.html',
 })
 export class RegisterComponent implements OnInit {
-    private username = "";
-    private firstname = "";
-    private lastname = "";
+    username = "";
+    firstname = "";
+    lastname = "";
 
     //TODO search daycare by name
 

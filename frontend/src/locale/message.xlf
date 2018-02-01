@@ -1,0 +1,3 @@
+<trans-unit id="username" datatype="html">
+  <source>Username : </source>
+</trans-unit>

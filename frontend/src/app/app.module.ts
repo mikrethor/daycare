@@ -1,11 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 import {MaterialModule} from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
 
 import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 
@@ -36,6 +36,10 @@ import {AdminUserComponent} from "./components/daycareadmin/user.component";
 import {RoleService} from "./services/role-service";
 import {environment} from "../environments/environment";
 import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.component";
+import localeFr from '@angular/common/locales/fr';
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
     declarations: [
@@ -59,8 +63,11 @@ import {UnderNavbarComponent} from "./components/undernavbar/undernavbar.compone
 
     ],
 
+    // providers: [{provide: LOCALE_ID, useValue: 'en-US' }]
+
     providers: [LoginService,ConstantsService,UserService,DateService,RoleService,
         { provide: LocationStrategy, useClass: HashLocationStrategy, },
+        {provide: LOCALE_ID, useValue: 'fr'},
         { provide: APP_BASE_HREF, useValue: '/', },
         { provide : ChildService, useClass:ChildServiceImpl},
         { provide : DaycareService, useClass:DaycareServiceImpl},

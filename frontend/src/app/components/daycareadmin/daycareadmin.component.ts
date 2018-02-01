@@ -11,10 +11,10 @@ import {ActivatedRoute} from "@angular/router";
     templateUrl: './daycareadmin.html',
 })
 export class DaycareAdminComponent implements OnInit {
-    private educator: Educator = Educator.create();
-    private children: Child[] = [];
-    private idDayCare: number;
-    private daycare: Daycare = Daycare.create();
+    educator: Educator = Educator.create();
+    children: Child[] = [];
+    idDayCare: number;
+    daycare: Daycare = Daycare.create();
 
     constructor(
         private daycareService: DaycareService,

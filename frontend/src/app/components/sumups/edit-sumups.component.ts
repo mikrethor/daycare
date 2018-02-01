@@ -13,7 +13,7 @@ import {NGXLogger} from "ngx-logger";
 export class EditSumupsComponent implements OnInit {
     child: Child = Child.create();
     sumup: Sumups = Sumups.create();
-    sumups: Sumups[];
+    sumups: Sumups[] = [];
     idDayCare: number;
     idChild: number;
     appetites: number[] = [0, 5, 10];
@@ -22,6 +22,7 @@ export class EditSumupsComponent implements OnInit {
     appetite: number = 0;
     mood: number = 0;
     sleep: number = 0;
+    current: number = 0;
 
     constructor(
         private sumupService: SumupService,
@@ -111,9 +112,30 @@ export class EditSumupsComponent implements OnInit {
 
     previous(){
         this.logger.info("EditSumupsComponent::previous");
+        if (this.current < this.sumups.length - 1) {
+            this.current = this.current + 1;
+            this.sumup = this.sumups[this.current];
+        }
+
+
     }
 
     next(){
         this.logger.info("EditSumupsComponent::next");
+        if (this.current > 0) {
+            this.current = this.current - 1;
+            this.sumup = this.sumups[this.current];
+        }
+
+    }
+
+    hasNext() {
+        this.logger.debug("EditSumupsComponent::hasNext", this.current);
+        return this.current != 0;
+    }
+
+    hasPrevious() {
+        this.logger.debug("EditSumupsComponent::hasPrevious", this.current, this.sumups.length - 1, this.current < (this.sumups.length - 1));
+        return this.current < (this.sumups.length - 1);
     }
 }

@@ -12,11 +12,11 @@ import {NGXLogger} from "ngx-logger";
     templateUrl: './edit-child.html',
 })
 export class AdminEditChildComponent implements OnInit {
-    private child: Child = Child.create();
-    private idChild: number;
-    private idDaycare: number = 1;
-    private daycare: Daycare = Daycare.create();
-    private idAdmin: number;
+    child: Child = Child.create();
+    idChild: number;
+    idDaycare: number = 1;
+    daycare: Daycare = Daycare.create();
+    idAdmin: number;
     model: any = {};
 
     constructor(
