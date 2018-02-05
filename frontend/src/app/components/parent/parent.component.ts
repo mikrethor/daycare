@@ -22,8 +22,10 @@ export class ParentComponent implements OnInit {
         selectedAppetiteId: 0
     };
     sumup: Sumups = Sumups.create();
+    sumups: Sumups[] = [];
     idDayCare: number = -61;
     idParent: number = -61;
+    current: number = 0;
 
     constructor(
         private sumupService: SumupService,
@@ -97,9 +99,47 @@ export class ParentComponent implements OnInit {
         }
     }
 
+    select(idChild: number) {
+        this.logger.debug("select", idChild);
 
-    select(index:number){
-//TODO move getsumuphere
+        this.sumupService.getAllByChildId(this.idDayCare, idChild).subscribe(
+            (sumups) => {
+                this.logger.debug("sumups :", this.sumups);
+                this.sumups = sumups;
+                this.sumup = this.sumups[0];
+                this.current = 0;
+
+            },
+            (error) => this.sumupService.errorSubscribe(error),
+            this.sumupService.completed('SumupService::getOneByChildIdAndDay')
+        );
+    }
+
+
+    previous() {
+        this.logger.info("ParentComponent::previous");
+        if (this.current < this.sumups.length - 1) {
+            this.current = this.current + 1;
+            this.sumup = this.sumups[this.current];
+        }
+    }
+
+    next() {
+        this.logger.info("ParentComponent::next");
+        if (this.current > 0) {
+            this.current = this.current - 1;
+            this.sumup = this.sumups[this.current];
+        }
+    }
+
+    hasNext() {
+        this.logger.debug("ParentComponent::hasNext", this.current);
+        return this.current != 0;
+    }
+
+    hasPrevious() {
+        this.logger.debug("ParentComponent::hasPrevious", this.current, this.sumups.length - 1, this.current < (this.sumups.length - 1));
+        return this.current < (this.sumups.length - 1);
     }
 
 

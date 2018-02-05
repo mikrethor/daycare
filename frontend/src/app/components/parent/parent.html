@@ -1,8 +1,8 @@
 <div class="col-md-6 col-md-offset-3">
     <mat-list>
         <h2 mat-header>Children</h2>
-        <mat-list-item *ngFor="let c of children; let i = index;">
-            <mat-icon md-list-avatar color="primary">face</mat-icon>
+        <mat-list-item *ngFor="let c of children;">
+            <mat-icon md-list-avatar color="primary" (click)="select(c.id)">face</mat-icon>
             <h4 mat-line>{{c.firstname}} {{ c.lastname}}</h4>
         </mat-list-item>
     </mat-list>
@@ -18,10 +18,10 @@
             Comment : {{sumup.comment}}
         </div>
     </div>
-    <button mat-fab color="primary">
+    <button *ngIf="hasPrevious()" type="button" mat-fab color="primary" (click)="previous()">
         <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <button mat-fab color="primary">
+    <button *ngIf="hasNext()" type="button" mat-fab color="primary" (click)="next()">
         <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
 </div>
