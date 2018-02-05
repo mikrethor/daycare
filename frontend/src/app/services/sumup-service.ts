@@ -30,7 +30,7 @@ export class SumupServiceImpl extends ServiceImpl implements SumupService{
             .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
-    create(idDaycare: number, idChild: number, sumup: Sumups): Observable<Sumups[]> {
+    create(idDaycare: number, idChild: number, sumup: Sumups): Observable<Sumups> {
         this.logger.debug("create : " ,idDaycare,idChild,sumup);
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild + "/sumups";
         let body = JSON.stringify(sumup);
@@ -43,5 +43,6 @@ export class SumupServiceImpl extends ServiceImpl implements SumupService{
 export abstract class SumupService extends Service{
     abstract getAllByChildId(idDaycare: number, idChild: number): Observable<Sumups[]>;
     abstract getOneByChildIdAndDay(idDaycare: number, idChild: number, daySumup: string): Observable<Sumups>;
-    abstract create(idDaycare: number, idChild: number, sumup: Sumups): Observable<Sumups[]>;
+
+    abstract create(idDaycare: number, idChild: number, sumup: Sumups): Observable<Sumups>;
 }

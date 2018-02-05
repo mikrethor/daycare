@@ -103,6 +103,8 @@ export class EditSumupsComponent implements OnInit {
         this.sumupService.create(this.idDayCare,this.idChild,this.sumup).subscribe(
             (jsonSumup) => {
                 this.logger.debug("sumup :",jsonSumup);
+                this.sumup = jsonSumup;
+                this.sumups[this.current] = this.sumup;
             },
             (error)=>this.sumupService.errorSubscribe(error),
             this.sumupService.completed('SumupService::create')
@@ -116,8 +118,6 @@ export class EditSumupsComponent implements OnInit {
             this.current = this.current + 1;
             this.sumup = this.sumups[this.current];
         }
-
-
     }
 
     next(){
@@ -126,7 +126,6 @@ export class EditSumupsComponent implements OnInit {
             this.current = this.current - 1;
             this.sumup = this.sumups[this.current];
         }
-
     }
 
     hasNext() {
