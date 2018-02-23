@@ -60,4 +60,22 @@ class UserRepositoryTest {
         Assert.assertEquals("admin@daycare.com", educator2.username)
 
     }
+
+    @Test
+    fun findByUsername() {
+        var user = userRepository.findByUsername("parent@daycare.com")
+        Assert.assertNotNull(user)
+        Assert.assertEquals(3L, user.id)
+        Assert.assertEquals("Par", user.firstName)
+        Assert.assertEquals("Ent", user.lastName)
+    }
+
+    @Test
+    fun findOneByIdByDaycare() {
+        var user = userRepository.findOneByIdByDaycare(3L, 1L)
+        Assert.assertNotNull(user)
+        Assert.assertEquals(3L, user.id)
+        Assert.assertEquals("Par", user.firstName)
+        Assert.assertEquals("Ent", user.lastName)
+    }
 }
