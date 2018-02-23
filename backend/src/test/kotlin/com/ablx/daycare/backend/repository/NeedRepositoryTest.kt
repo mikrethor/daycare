@@ -16,8 +16,8 @@ class NeedRepositoryTest {
 
     @Test
     fun findOne() {
-        val daycare=repository.findOne(1L)
+        val need = repository.findOne(1L)
         Assertions.assertThat("TEST")
-                .isEqualTo(daycare.code)
+                .isEqualTo(need.code)
     }
 }
