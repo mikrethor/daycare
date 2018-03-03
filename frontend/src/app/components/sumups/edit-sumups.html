@@ -22,7 +22,8 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !comment.valid }">
                 <label for="comment">Comment : </label>
-                <input type="text" class="form-control" name="comment" [(ngModel)]="sumup.comment" #comment="ngModel" required />
+                <textarea type="text" class="form-control" name="comment" [(ngModel)]="sumup.comment" #comment="ngModel"
+                          required cols="40" rows="5"></textarea>
                 <div *ngIf="f.submitted && !comment.valid" class="help-block">Comment is required</div>
             </div>
         </div>
