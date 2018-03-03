@@ -115,7 +115,6 @@ export class ParentComponent implements OnInit {
         );
     }
 
-
     previous() {
         this.logger.info("ParentComponent::previous");
         if (this.current < this.sumups.length - 1) {
@@ -141,6 +140,4 @@ export class ParentComponent implements OnInit {
         this.logger.debug("ParentComponent::hasPrevious", this.current, this.sumups.length - 1, this.current < (this.sumups.length - 1));
         return this.current < (this.sumups.length - 1);
     }
-
-
 }
