@@ -1,8 +1,8 @@
-import { DaycareFrontendPage } from './app.po';
+import {DaycareFrontendPage} from './app.po';
+
 
 describe('daycare-frontend App', function() {
   let page: DaycareFrontendPage;
-
   beforeEach(() => {
     page = new DaycareFrontendPage();
   });

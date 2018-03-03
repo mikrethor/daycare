@@ -32,11 +32,6 @@ export class UnderNavbarComponent implements OnInit{
             },
             (error)=>this.userService.errorSubscribe(error),
             ()=>this.userService.completed('UserService::getUser'));
-
-
-
-
-
     }
 
 }
