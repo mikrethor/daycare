@@ -16,7 +16,6 @@
 	<name>Daycare Ws</name>
 	<description>Webservices to be used by the daycare app</description>
 
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
