@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -44,6 +43,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder?) {
+        //TODO migrate http://info.michael-simons.eu/2018/01/13/spring-security-5-new-password-storage-format/
         auth!!.userDetailsService<UserDetailsService>(userDetailsService)
                 .passwordEncoder(ShaPasswordEncoder(encodingStrength!!))
     }

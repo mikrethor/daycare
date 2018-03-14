@@ -12,7 +12,7 @@ import org.springframework.web.filter.CorsFilter
 class AdditionnalWebConfig {
 
     @Bean
-    fun simpleCorsFilter(): FilterRegistrationBean {
+    fun simpleCorsFilter(): FilterRegistrationBean<CorsFilter> {
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
         config.allowCredentials = true
