@@ -33,7 +33,9 @@ internal class UserController{
     @PostMapping("/daycares/{idDaycare}/users")
     fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody user: User) : User {
         if (user.id > 0) {
-            var userFromDatabase=userRepository.findOne(user.id)
+            var optionalUserFromDatabase = userRepository.findById(user.id)
+
+            var userFromDatabase = optionalUserFromDatabase.get()
             user.password=userFromDatabase.password
             userFromDatabase=userRepository.save(user)
             userFromDatabase.password=""
@@ -45,7 +47,7 @@ internal class UserController{
     @DeleteMapping("/daycares/{idDaycare}/users/{idUser}")
     fun delete(@PathVariable(value="idDaycare")idDaycare: Long,
                @PathVariable(value="idUser")idUser: Long) :Boolean{
-        userRepository.delete(idUser)
+        userRepository.deleteById(idUser)
         return true
     }
 

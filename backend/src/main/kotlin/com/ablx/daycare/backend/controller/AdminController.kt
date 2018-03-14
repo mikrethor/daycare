@@ -21,5 +21,5 @@ internal class AdminController {
 
     @DeleteMapping("/daycares/{idDaycare}/admins/{id}")
     fun delete(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="id")id: Long) =
-            userRepository.delete(id)
+            userRepository.deleteById(id)
 }

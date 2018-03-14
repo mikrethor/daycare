@@ -1,6 +1,5 @@
 package com.ablx.daycare.backend.controller
 
-import com.ablx.daycare.backend.entity.Educator
 import com.ablx.daycare.backend.entity.User
 import com.ablx.daycare.backend.enum.Role
 import com.ablx.daycare.backend.repository.UserRepository
@@ -25,7 +24,7 @@ internal class EducatorController {
 
     @DeleteMapping("/daycares/{idDaycare}/educators/{id}")
     fun delete(@PathVariable(value = "idDaycare") idDaycare: Long, @PathVariable(value = "id") id: Long):Boolean {
-        userRepository.delete(id)
+        userRepository.deleteById(id)
         return true
     }
 

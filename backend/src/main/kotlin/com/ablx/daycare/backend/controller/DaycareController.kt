@@ -1,7 +1,6 @@
 package com.ablx.daycare.backend.controller
 
 import com.ablx.daycare.backend.repository.DaycareRepository
-import com.ablx.daycare.backend.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -16,7 +15,7 @@ internal class DaycareController {
 
     @GetMapping("/daycares/{id}")
     fun findById(@PathVariable(value="id")id: Long) =
-            daycareRepository.findOne(id)
+            daycareRepository.findById(id)
 
     @GetMapping("/daycares")
     fun findAll() =

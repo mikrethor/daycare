@@ -18,7 +18,7 @@ internal class ChildController {
 
     @GetMapping("/children/{id}")
     fun findById(@PathVariable(value="id")id: Long) =
-            childrenRepository.findOne(id)
+            childrenRepository.findById(id)
 
     @GetMapping("/children")
     fun findAll() =
@@ -39,13 +39,13 @@ internal class ChildController {
 
     @DeleteMapping("/daycares/{idDaycare}/childs/{id}")
     fun delete(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="idDaycare")idParent: Long,@PathVariable(value="id")id: Long) :Boolean{
-        childrenRepository.delete(id)
+        childrenRepository.deleteById(id)
         return true}
 
     @PostMapping("/daycares/{idDaycare}/childs")
     fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody  child: Child):Child {
 
-        child.daycare=daycareRepository.findOne(idDaycare)
+        child.daycare = daycareRepository.findById(idDaycare).get()
 
         return   childrenRepository.save(child)
     }
