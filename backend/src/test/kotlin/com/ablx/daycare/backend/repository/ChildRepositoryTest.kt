@@ -17,7 +17,7 @@ class ChildRepositoryTest {
 
     @Test
     fun findOne() {
-        val child= repository.findOne(1L)
+        val child = repository.findById(1L).get()
         Assertions.assertThat(child.firstname)
                 .isEqualTo("Arthur")
         Assertions.assertThat(child.lastname)

@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
-import org.springframework.security.crypto.password.MessageDigestPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices
 import org.springframework.security.oauth2.provider.token.TokenStore
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
@@ -48,11 +48,10 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder?) {
         //TODO migrate http://info.michael-simons.eu/2018/01/13/spring-security-5-new-password-storage-format/
 
-        val passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
-        passwordEncoder.setDefaultPasswordEncoderForMatches(MessageDigestPasswordEncoder("SHA-256"))
+        val passwordEncoder: PasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
 
         auth!!.userDetailsService<UserDetailsService>(userDetailsService)
-                .passwordEncoder(ShaPasswordEncoder(encodingStrength!!))
+                .passwordEncoder(passwordEncoder)
     }
 
     @Throws(Exception::class)

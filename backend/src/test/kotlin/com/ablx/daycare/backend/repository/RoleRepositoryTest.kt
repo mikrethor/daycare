@@ -17,7 +17,7 @@ class RoleRepositoryTest {
 
     @Test
     fun findOne() {
-        val role = repository.findOne(1L)
+        val role = repository.findById(1L).get()
         Assertions.assertThat(1L).isEqualTo(role.id)
         Assertions.assertThat(Role.EDUCATOR.name).isEqualTo(role.name)
         Assertions.assertThat("Daycare educator").isEqualTo(role.description)

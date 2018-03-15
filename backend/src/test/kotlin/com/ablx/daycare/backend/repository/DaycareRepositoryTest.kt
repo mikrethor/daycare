@@ -17,7 +17,7 @@ class DaycareRepositoryTest{
 
     @Test
     fun findOne() {
-        val daycare=daycareRepository.findOne(1L)
+        val daycare = daycareRepository.findById(1L).get()
         assertThat("Ma garderie")
                 .isEqualTo(daycare.name)
     }

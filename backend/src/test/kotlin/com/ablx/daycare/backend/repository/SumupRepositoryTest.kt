@@ -21,14 +21,14 @@ class SumupRepositoryTest {
 
     @Test
     fun findOne() {
-        val sumup=sumupRepository.findOne(1L)
+        val sumup = sumupRepository.findById(1L).get()
         Assertions.assertThat("comment 1 a")
                 .isEqualTo(sumup.comment)
     }
 
     @Test
     fun findAllByOrderByDayDesc() {
-        val child=childRepository.findOne(1L)
+        val child = childRepository.findById(1L).get()
         val sumups=sumupRepository.findAllByChildOrderByDayDesc(child)
         Assertions.assertThat(sumups.size)
                 .isEqualTo(10)

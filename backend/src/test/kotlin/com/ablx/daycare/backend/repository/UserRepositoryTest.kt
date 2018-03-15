@@ -17,7 +17,7 @@ class UserRepositoryTest {
 
     @Test
     fun findOne() {
-        val user=userRepository.findOne(1L)
+        val user = userRepository.findById(1L).get()
         Assertions.assertThat(1L)
                 .isEqualTo(user.daycare.id)
     }
