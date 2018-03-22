@@ -1,7 +1,6 @@
 import {Router, Routes} from "@angular/router";
 import {fakeAsync, TestBed, tick} from "@angular/core/testing";
 import {RouterTestingModule} from "@angular/router/testing";
-import {AppComponent} from "./app.component";
 import {EditSumupsComponent} from "../sumups/edit-sumups.component";
 import {UserComponent} from "../user/user.component";
 import {EducatorComponent} from "../educator/educator.component";
@@ -26,7 +25,7 @@ import {DateService} from "../../services/date-service";
 import {SumupService, SumupServiceImpl} from "../../services/sumup-service";
 import {ChildService, ChildServiceImpl} from "../../services/child-service";
 import {ParentService, ParentServiceImpl} from "../../services/parent-service";
-import {LOCALE_ID} from "@angular/core";
+import {Component, LOCALE_ID} from "@angular/core";
 import {EducatorService, EducatorServiceImpl} from "../../services/educator-service";
 import {LoginService} from "../../services/login-service";
 import {UserService} from "../../services/user-service";
@@ -57,6 +56,13 @@ const routes: Routes = [
         ]
     },
 ];
+
+@Component({
+    template: `
+        <router-outlet></router-outlet>`
+})
+export class AppComponent {
+}
 
 describe('Router: App', () => {
 
@@ -103,13 +109,25 @@ describe('Router: App', () => {
         router = TestBed.get(Router);
         location = TestBed.get(Location);
 
-        fixture = TestBed.createComponent(AppComponent);
+        //  fixture = TestBed.createComponent(AppComponent);
         router.initialNavigation();
     });
 
     it('navigate to "" redirects you to /login', fakeAsync(() => {
         router.navigate(['']);
         tick();
+        console.log(location);
+        console.log(router.url);
         expect(location.path()).toBe('');
     }));
+    it('navigate to "/login" redirects you to /login', fakeAsync(() => {
+        router.navigate(['/login']).then(() => {
+            console.log("succes")
+        }).catch(() => {
+            console.log("erreur")
+        });
+        tick();
+        expect(location.forward.toString).toBe('');
+    }));
+
 });

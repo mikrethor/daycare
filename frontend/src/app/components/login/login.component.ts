@@ -18,8 +18,9 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private loginService: LoginService,
         private logger: NGXLogger,
-        private zone: NgZone,
-    ) { }
+        private zone: NgZone,) {
+        this.logger.debug("LoginComponent::constructor");
+    }
 
     ngOnInit() {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
