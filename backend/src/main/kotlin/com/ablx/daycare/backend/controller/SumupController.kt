@@ -32,7 +32,7 @@ internal class SumupController {
         catch (e:Exception){
             System.err.println(e)
             var sumup=Sumup()
-            sumup.child=childRepository.findOne(idChild)
+            sumup.child=childRepository.getOne(idChild)
             sumup.day=GregorianCalendar()
             sumup.mood= Level.BAD
             sumup.appetite= Level.BAD
@@ -43,7 +43,7 @@ internal class SumupController {
     @GetMapping("/daycares/{idDaycare}/childs/{idChild}/sumups")
     fun findAll(@PathVariable(value="idDaycare")idDaycare: Long,
                 @PathVariable(value="idChild")idChild: Long) =
-            sumupRepository.findAllByChildOrderByDayDesc(childRepository.findOne(idChild))
+            sumupRepository.findAllByChildOrderByDayDesc(childRepository.getOne(idChild))
 
     @PostMapping("/daycares/{idDaycare}/childs/{idChild}/sumups")
     fun create(@PathVariable(value="idDaycare")idDaycare:Long,

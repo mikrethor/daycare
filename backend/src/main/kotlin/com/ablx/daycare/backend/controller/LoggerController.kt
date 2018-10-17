@@ -9,15 +9,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 internal class LoggerController {
 
-
-
     @PostMapping("/api/logs")
     fun create( @RequestBody loglevel: LogLevel) :Boolean {
         System.out.println(loglevel)
-
-
-
-        return true;
+        return true
     }
 
 }

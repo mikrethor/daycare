@@ -50,6 +50,7 @@ class DaycareRestTest{
         Assert.assertEquals( Daycare(1L,"Ma garderie"),result.body)
     }
 
+    @Ignore
     @Test
     fun getAllDaycares() {
         mockMvc!!.perform(get("/daycares"))

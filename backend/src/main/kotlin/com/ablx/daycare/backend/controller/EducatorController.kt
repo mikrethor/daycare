@@ -25,7 +25,7 @@ internal class EducatorController {
 
     @DeleteMapping("/daycares/{idDaycare}/educators/{id}")
     fun delete(@PathVariable(value = "idDaycare") idDaycare: Long, @PathVariable(value = "id") id: Long):Boolean {
-        userRepository.delete(id)
+        userRepository.deleteById(id)
         return true
     }
 

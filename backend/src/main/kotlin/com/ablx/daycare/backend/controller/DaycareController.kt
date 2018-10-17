@@ -16,7 +16,7 @@ internal class DaycareController {
 
     @GetMapping("/daycares/{id}")
     fun findById(@PathVariable(value="id")id: Long) =
-            daycareRepository.findOne(id)
+            daycareRepository.getOne(id)
 
     @GetMapping("/daycares")
     fun findAll() =
