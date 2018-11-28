@@ -15,12 +15,12 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.hibernate" level="OFF" />
-	<logger name="org.hibernate.type" level="OFF" />
-	<logger name="org.springframework" level="OFF" />
+    <!--<logger name="org.hibernate" level="DEBUG" />
+    <logger name="org.hibernate.type" level="DEBUG" />
+    <logger name="org.springframework" level="DEBUG" />-->
 
-	<root level="OFF">
+    <root level="INFO">
 		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="FILE" />
+        <!--	<appender-ref ref="FILE" />-->
 	</root>
 </configuration>

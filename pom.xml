@@ -17,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <kotlin.version>1.2.71</kotlin.version>
-        <spring.boot.version>2.0.6.RELEASE</spring.boot.version>
+        <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
     </properties>
 
     <modules>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-clean-plugin</artifactId>
-            <version>3.0.0</version>
+            <version>3.1.0</version>
         </dependency>
 
     </dependencies>
