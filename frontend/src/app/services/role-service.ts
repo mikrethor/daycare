@@ -12,10 +12,10 @@ import {NGXLogger} from "ngx-logger";
 export class RoleService extends ServiceImpl{
 
     constructor(
-        private http: HttpClient,
-        private constantService: ConstantsService,
-        private loginService: LoginService,
-        protected logger: NGXLogger
+        readonly http: HttpClient,
+        readonly constantService: ConstantsService,
+        readonly loginService: LoginService,
+        readonly logger: NGXLogger
     ) {super(logger);}
 
     getRoles():Observable<Role[]>{

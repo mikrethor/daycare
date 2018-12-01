@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
-import {Educator, Role, User} from '../pojo/pojo';
+import {Role, User} from '../pojo/pojo';
 import {LoginService} from "./login-service";
 import {ConstantsService} from "./constants-service";
 import {NGXLogger} from "ngx-logger";
@@ -70,7 +70,7 @@ export class UserService extends ServiceImpl{
     delete(idDaycare:number,idUser:number):Observable<Boolean>{
         this.logger.debug("UserService::delete",idDaycare,idUser);
         let url: string = this.constantService.API_ENDPOINT + "/daycares/"+idDaycare+"/users/"+ idUser;
-        return this.http.delete(url,this.loginService.getBearerToken())
+        return this.http.delete<Boolean>(url, this.loginService.getBearerToken())
             .catch((error: any) =>  Observable.throw(error.error || 'Server error'));
     }
 

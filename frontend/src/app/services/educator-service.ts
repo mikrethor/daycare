@@ -12,10 +12,10 @@ import {Service, ServiceImpl} from "./service";
 export class EducatorServiceImpl extends ServiceImpl implements EducatorService{
 
     constructor(
-        private http: HttpClient,
-        private constantService: ConstantsService,
-        private loginService: LoginService,
-        protected logger: NGXLogger
+        readonly http: HttpClient,
+        readonly constantService: ConstantsService,
+        readonly loginService: LoginService,
+        readonly logger: NGXLogger
 
     ) {super(logger);}
 
@@ -27,7 +27,7 @@ export class EducatorServiceImpl extends ServiceImpl implements EducatorService{
 
     getOneById(idDaycare: number, idEducator: number): Observable<Educator> {
         this.logger.debug("getEducator : " ,idDaycare,idEducator);
-        return this.http.get(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator,this.loginService.getBearerToken())
+        return this.http.get<Educator>(this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator, this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
@@ -41,7 +41,7 @@ export class EducatorServiceImpl extends ServiceImpl implements EducatorService{
     delete(idDaycare: number, idEducator: number):Observable<Boolean>{
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/educators/" + idEducator;
         this.logger.debug("delete url : ",url);
-        return this.http.delete(url,this.loginService.getBearerToken())
+        return this.http.delete<Boolean>(url, this.loginService.getBearerToken())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 

@@ -21,10 +21,10 @@ export class LoginService {
     private myUsername:string;
 
     constructor(
-        private http: HttpClient,
-        private constantService: ConstantsService,
-        private router: Router,
-        private logger: NGXLogger
+        readonly http: HttpClient,
+        readonly constantService: ConstantsService,
+        readonly router: Router,
+        readonly logger: NGXLogger
     ) {}
 
     getBasicAuthorization():string{

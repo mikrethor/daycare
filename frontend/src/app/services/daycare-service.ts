@@ -12,10 +12,10 @@ import {Service, ServiceImpl} from "./service";
 export class DaycareServiceImpl extends ServiceImpl implements DaycareService{
     private daycare:Daycare;
     constructor(
-        private http: HttpClient,
-        private constantService: ConstantsService,
-        private loginService: LoginService,
-        protected logger: NGXLogger
+        readonly http: HttpClient,
+        readonly constantService: ConstantsService,
+        readonly loginService: LoginService,
+        readonly logger: NGXLogger
     ) {super(logger);}
 
     getDaycare(id: number): Observable<Daycare> {

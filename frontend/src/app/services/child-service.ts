@@ -12,11 +12,10 @@ import {NGXLogger} from "ngx-logger";
 export class ChildServiceImpl extends ServiceImpl implements ChildService{
 
     constructor(
-
-        private http: HttpClient,
-        private constantService: ConstantsService,
-        private loginService: LoginService,
-        protected logger: NGXLogger
+        readonly http: HttpClient,
+        readonly constantService: ConstantsService,
+        readonly loginService: LoginService,
+        readonly logger: NGXLogger
     ) {super(logger);}
 
     getAllByDaycareId(id: number): Observable<Child[]> {
@@ -55,7 +54,7 @@ export class ChildServiceImpl extends ServiceImpl implements ChildService{
 
     delete(idDaycare: number, idChild: number): Observable<Boolean> {
         let url: string = this.constantService.API_ENDPOINT + "/daycares/" + idDaycare + "/childs/" + idChild;
-        return this.http.delete(url,this.loginService.getBearerToken())
+        return this.http.delete<Boolean>(url, this.loginService.getBearerToken())
             .catch((error: any) =>  Observable.throw(error.error || 'Server error'));
     }
 
