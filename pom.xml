@@ -15,8 +15,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <kotlin.version>1.2.71</kotlin.version>
-        <spring.boot.version>2.1.1.RELEASE</spring.boot.version>
+        <kotlin.version>1.3.21</kotlin.version>
+        <spring.boot.version>2.1.3.RELEASE</spring.boot.version>
+        <surefire.version>2.22.1</surefire.version>
+        <failsafe.version>2.22.1</failsafe.version>
     </properties>
 
     <modules>

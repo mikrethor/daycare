@@ -1,14 +1,14 @@
 package com.ablx.daycare.backend.repository
 
 import org.assertj.core.api.Assertions
-import org.junit.Assert
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@RunWith(SpringJUnit4ClassRunner::class)
+@ExtendWith(SpringExtension::class)
 @DataJpaTest
 class SumupRepositoryTest {
 
@@ -35,9 +35,9 @@ class SumupRepositoryTest {
 
 
         val sumup1=sumups.toTypedArray()[0]
-        Assert.assertEquals("comment 1 a",sumup1.comment)
+        assertEquals("comment 1 a", sumup1.comment)
 
         val sumup10=sumups.toTypedArray()[9]
-        Assert.assertEquals("comment 10",sumup10.comment)
+        assertEquals("comment 10", sumup10.comment)
     }
 }

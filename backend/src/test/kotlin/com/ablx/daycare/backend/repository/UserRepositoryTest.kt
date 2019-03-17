@@ -1,14 +1,15 @@
 package com.ablx.daycare.backend.repository
 
 import org.assertj.core.api.Assertions
-import org.junit.Assert
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@RunWith(SpringJUnit4ClassRunner::class)
+@ExtendWith(SpringExtension::class)
 @DataJpaTest
 class UserRepositoryTest {
 
@@ -25,57 +26,57 @@ class UserRepositoryTest {
     @Test
     fun findByDaycareId() {
         val users=userRepository.findAllByDaycare(1L)
-        Assert.assertNotNull(users)
-        Assert.assertEquals(4, users.size)
+        assertNotNull(users)
+        assertEquals(4, users.size)
 
         val educator=users.toTypedArray()[0]
-        Assert.assertEquals("johndoe@daycare.com", educator.username)
+        assertEquals("johndoe@daycare.com", educator.username)
 
         val admin=users.toTypedArray()[1]
-        Assert.assertEquals("admin@daycare.com", admin.username)
+        assertEquals("admin@daycare.com", admin.username)
 
         val parent=users.toTypedArray()[2]
-        Assert.assertEquals("parent@daycare.com", parent.username)
+        assertEquals("parent@daycare.com", parent.username)
     }
 
 
     @Test
     fun findAllByDaycareAndRole() {
         var users=userRepository.findAllByDaycareAndRole(1L,3L)
-        Assert.assertNotNull(users)
-        Assert.assertEquals(1,users.size)
+        assertNotNull(users)
+        assertEquals(1, users.size)
 
         val parent=users.toTypedArray()[0]
-        Assert.assertEquals("parent@daycare.com", parent.username)
+        assertEquals("parent@daycare.com", parent.username)
 
         users=userRepository.findAllByDaycareAndRole(1L,1L)
-        Assert.assertNotNull(users)
-        Assert.assertEquals(2,users.size)
+        assertNotNull(users)
+        assertEquals(2, users.size)
 
 
         val educator1=users.toTypedArray()[0]
-        Assert.assertEquals("johndoe@daycare.com", educator1.username)
+        assertEquals("johndoe@daycare.com", educator1.username)
 
         val educator2=users.toTypedArray()[1]
-        Assert.assertEquals("admin@daycare.com", educator2.username)
+        assertEquals("admin@daycare.com", educator2.username)
 
     }
 
     @Test
     fun findByUsername() {
         var user = userRepository.findByUsername("parent@daycare.com")
-        Assert.assertNotNull(user)
-        Assert.assertEquals(3L, user.id)
-        Assert.assertEquals("Par", user.firstName)
-        Assert.assertEquals("Ent", user.lastName)
+        assertNotNull(user)
+        assertEquals(3L, user.id)
+        assertEquals("Par", user.firstName)
+        assertEquals("Ent", user.lastName)
     }
 
     @Test
     fun findOneByIdByDaycare() {
         var user = userRepository.findOneByIdByDaycare(3L, 1L)
-        Assert.assertNotNull(user)
-        Assert.assertEquals(3L, user.id)
-        Assert.assertEquals("Par", user.firstName)
-        Assert.assertEquals("Ent", user.lastName)
+        assertNotNull(user)
+        assertEquals(3L, user.id)
+        assertEquals("Par", user.firstName)
+        assertEquals("Ent", user.lastName)
     }
 }

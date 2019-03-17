@@ -1,14 +1,14 @@
 package com.ablx.daycare.backend.repository
 
 import org.assertj.core.api.Assertions
-import org.junit.Assert
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@RunWith(SpringJUnit4ClassRunner::class)
+@ExtendWith(SpringExtension::class)
 @DataJpaTest
 class ChildRepositoryTest {
 
@@ -33,11 +33,11 @@ class ChildRepositoryTest {
                 .isEqualTo(2)
 
         val child1=childs.toTypedArray()[0]
-        Assert.assertEquals("Arthur",child1.firstname)
-        Assert.assertEquals("B",child1.lastname)
+        assertEquals("Arthur", child1.firstname)
+        assertEquals("B", child1.lastname)
 
         val child2=childs.toTypedArray()[1]
-        Assert.assertEquals("Louis",child2.firstname)
-        Assert.assertEquals("B",child2.lastname)
+        assertEquals("Louis", child2.firstname)
+        assertEquals("B", child2.lastname)
     }
 }

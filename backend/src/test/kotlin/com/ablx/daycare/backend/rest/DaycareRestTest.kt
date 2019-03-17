@@ -3,24 +3,24 @@ package com.ablx.daycare.backend.rest
 import com.ablx.daycare.backend.entity.Daycare
 import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.hasSize
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Ignore
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class DaycareRestTest{
     @Autowired
@@ -35,22 +35,20 @@ class DaycareRestTest{
     @Autowired
     lateinit var testRestTemplate: TestRestTemplate
 
-    @Before
+    @BeforeEach
     fun setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build()
     }
 
-    @Ignore
     @Test
     fun getOneDaycare() {
         val result = testRestTemplate.getForEntity("/daycares/1", Daycare::class.java)
-        Assert.assertNotNull(result)
-        Assert.assertEquals( HttpStatus.OK,result.statusCode)
-        Assert.assertEquals( contentType,result.headers.contentType)
-        Assert.assertEquals( Daycare(1L,"Ma garderie"),result.body)
+        assertNotNull(result)
+        assertEquals(HttpStatus.OK, result.statusCode)
+        assertEquals(contentType, result.headers.contentType)
+        assertEquals(Daycare(1L, "Ma garderie"), result.body)
     }
 
-    @Ignore
     @Test
     fun getAllDaycares() {
         mockMvc!!.perform(get("/daycares"))

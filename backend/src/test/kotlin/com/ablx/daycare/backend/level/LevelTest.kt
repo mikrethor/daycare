@@ -1,8 +1,8 @@
 package com.ablx.daycare.backend.level
 
 import com.ablx.daycare.backend.objects.Level
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class LevelTest{
 
@@ -11,22 +11,22 @@ class LevelTest{
         try {
             Level.fromCode(89)
         }catch (e:Error){
-            Assert.assertEquals("Invalid level 89",e.message)
+            assertEquals("Invalid level 89", e.message)
         }
     }
 
     @Test
     fun level0IntValueToBad() {
-        Assert.assertEquals(Level.BAD, Level.fromCode(0))
+        assertEquals(Level.BAD, Level.fromCode(0))
     }
 
     @Test
     fun level5IntValueToMedium() {
-        Assert.assertEquals(Level.MEDIUM, Level.fromCode(5))
+        assertEquals(Level.MEDIUM, Level.fromCode(5))
     }
 
     @Test
     fun level10IntValueToGood() {
-        Assert.assertEquals(Level.GOOD, Level.fromCode(10))
+        assertEquals(Level.GOOD, Level.fromCode(10))
     }
 }
