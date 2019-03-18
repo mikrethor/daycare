@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @DataJpaTest
@@ -17,7 +18,7 @@ class ChildRepositoryTest {
 
     @Test
     fun findOne() {
-        val child= repository.getOne(1L)
+        val child = repository.getOne(UUID.fromString("uuid-daycare-uuid-1"))
         Assertions.assertThat(child.firstname)
                 .isEqualTo("Arthur")
         Assertions.assertThat(child.lastname)
@@ -28,7 +29,7 @@ class ChildRepositoryTest {
 
     @Test
     fun findAllByDaycare() {
-        val childs= repository.findAllByDaycare(1L)
+        val childs = repository.findAllByDaycare(UUID.fromString("uuid-daycare-uuid-1"))
         Assertions.assertThat(childs.size)
                 .isEqualTo(2)
 

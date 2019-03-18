@@ -26,35 +26,35 @@ internal class SumupController {
     lateinit var childRepository: ChildRepository
 
     @GetMapping("/daycares/{idDaycare}/childs/{idChild}/sumups/day/{day}")
-    fun findOne(@PathVariable(value="idDaycare")idDaycare: Long,
-                @PathVariable(value="idChild")idChild: Long,
+    fun findOne(@PathVariable(value = "idDaycare") idDaycare: UUID,
+                @PathVariable(value = "idChild") idChild: UUID,
                 @DateTimeFormat(pattern = "yyyy-MM-dd")
-                @PathVariable(value="day")day: Calendar):Sumup {
+                @PathVariable(value = "day") day: Calendar): Sumup {
 
         //TODO refactoring deport creation in front
-        try{
+        try {
             return sumupRepository.findOneByChildAndDay(idChild, day)
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             System.err.println(e)
-            var sumup = Sumup(child = Child(daycare = Daycare(id = UUID.randomUUID())))
-            sumup.child=childRepository.getOne(idChild)
-            sumup.day=GregorianCalendar()
-            sumup.mood= Level.BAD
-            sumup.appetite= Level.BAD
-            sumup.sleep= Level.BAD
+            var sumup = Sumup(id = UUID.randomUUID(), child = Child(id = UUID.randomUUID(), daycare = Daycare(id = UUID.randomUUID())))
+            sumup.child = childRepository.getOne(idChild)
+            sumup.day = GregorianCalendar()
+            sumup.mood = Level.BAD
+            sumup.appetite = Level.BAD
+            sumup.sleep = Level.BAD
             return sumup
-        }}
+        }
+    }
 
     @GetMapping("/daycares/{idDaycare}/childs/{idChild}/sumups")
-    fun findAll(@PathVariable(value="idDaycare")idDaycare: Long,
-                @PathVariable(value="idChild")idChild: Long) =
+    fun findAll(@PathVariable(value = "idDaycare") idDaycare: UUID,
+                @PathVariable(value = "idChild") idChild: UUID) =
             sumupRepository.findAllByChildOrderByDayDesc(childRepository.getOne(idChild))
 
     @PostMapping("/daycares/{idDaycare}/childs/{idChild}/sumups")
-    fun create(@PathVariable(value="idDaycare")idDaycare:Long,
-               @PathVariable(value="idChild")idChild:Long,
-               @RequestBody sumup: Sumup) : Sumup {
+    fun create(@PathVariable(value = "idDaycare") idDaycare: UUID,
+               @PathVariable(value = "idChild") idChild: UUID,
+               @RequestBody sumup: Sumup): Sumup {
         return sumupRepository.save(sumup)
     }
 }

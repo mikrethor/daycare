@@ -18,7 +18,7 @@ class DaycareRepositoryTest{
 
     @Test
     fun findOne() {
-        val daycare = daycareRepository.getOne(UUID.fromString("e3a842ac-5560-4256-9f5b-eaf6fa41712e"))
+        val daycare = daycareRepository.getOne(UUID.fromString("uuid-daycare-uuid-1"))
         assertThat("Ma garderie")
                 .isEqualTo(daycare.name)
     }

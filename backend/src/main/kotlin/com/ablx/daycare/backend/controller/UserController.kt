@@ -3,52 +3,51 @@ package com.ablx.daycare.backend.controller
 import com.ablx.daycare.backend.entity.User
 import com.ablx.daycare.backend.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 
 @RestController
-internal class UserController{
+internal class UserController {
 
     @Autowired
-    lateinit var userRepository:UserRepository
+    lateinit var userRepository: UserRepository
 
     //Name can't contain .
     @GetMapping("/users/{name:.+}")
-    fun findByName(@PathVariable(value="name")name: String) =
+    fun findByName(@PathVariable(value = "name") name: String) =
             userRepository.findByUsername(name)
 
     @GetMapping("/users/role/{idRole}/daycares/{idDaycare}")
-    fun findAllByDaycareAndRole(@PathVariable(value="idDaycare")idDaycare: Long,@PathVariable(value="idRole")idRole: Long) =
-            userRepository.findAllByDaycareAndRole(idDaycare,idRole)
+    fun findAllByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: UUID, @PathVariable(value = "idRole") idRole: Long) =
+            userRepository.findAllByDaycareAndRole(idDaycare, idRole)
 
     @GetMapping("/daycares/{idDaycare}/users")
-    fun findAllByDaycare(@PathVariable(value="idDaycare")idDaycare: Long) =
+    fun findAllByDaycare(@PathVariable(value = "idDaycare") idDaycare: UUID) =
             userRepository.findAllByDaycare(idDaycare)
 
     @GetMapping("/daycares/{idDaycare}/users/{idUser}")
-    fun findOneByDaycareAndIdUser(@PathVariable(value="idDaycare")idDaycare: Long,
-                                  @PathVariable(value="idUser")idUser: Long) =
-            userRepository.findOneByIdByDaycare(idUser,idDaycare)
+    fun findOneByDaycareAndIdUser(@PathVariable(value = "idDaycare") idDaycare: UUID,
+                                  @PathVariable(value = "idUser") idUser: UUID) =
+            userRepository.findOneByIdByDaycare(idUser, idDaycare)
 
     @PostMapping("/daycares/{idDaycare}/users")
-    fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody user: User) : User {
-        if (user.id > 0) {
-            var userFromDatabase=userRepository.getOne(user.id)
-            user.password=userFromDatabase.password
-            userFromDatabase=userRepository.save(user)
-            userFromDatabase.password=""
-            return userFromDatabase
-        }
+    fun create(@PathVariable(value = "idDaycare") idDaycare: UUID, @RequestBody user: User): User {
+        user.id = UUID.randomUUID()
         return userRepository.save(user)
     }
 
     @DeleteMapping("/daycares/{idDaycare}/users/{idUser}")
-    fun delete(@PathVariable(value="idDaycare")idDaycare: Long,
-               @PathVariable(value="idUser")idUser: Long) :Boolean{
+    fun delete(@PathVariable(value = "idDaycare") idDaycare: UUID,
+               @PathVariable(value = "idUser") idUser: UUID): Boolean {
         userRepository.deleteById(idUser)
         return true
     }
-
 
 
 }

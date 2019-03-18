@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import java.util.*
 
-internal interface SumupRepository : JpaRepository<Sumup, Long> {
+internal interface SumupRepository : JpaRepository<Sumup, UUID> {
 
-    fun findAllByChildOrderByDayDesc(child:Child): List<Sumup>
+    fun findAllByChildOrderByDayDesc(child: Child): List<Sumup>
 
     @Query("select s from Sumup s where s.day=:day and s.child.id=:idChild")
-    fun findOneByChildAndDay(@Param("idChild")idChild:Long,@Param("day") day: Calendar):Sumup
+    fun findOneByChildAndDay(@Param("idChild") idChild: UUID, @Param("day") day: Calendar): Sumup
 }

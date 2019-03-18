@@ -13,8 +13,8 @@ import javax.validation.constraints.NotNull
 @Entity
 internal data class Daycare(
         @Id
-        @NotNull @NotEmpty val id: UUID, //Primary Key
-        @NotNull @NotEmpty val name: String = "", //Column
+        @NotNull @NotEmpty val id: UUID,
+        @NotNull @NotEmpty val name: String = "",
         @get:JsonIgnore
         @OneToMany(mappedBy = "daycare", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
         var educators: List<Educator> = emptyList(),

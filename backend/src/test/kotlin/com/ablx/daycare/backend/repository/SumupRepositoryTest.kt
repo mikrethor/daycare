@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @DataJpaTest
@@ -21,14 +22,14 @@ class SumupRepositoryTest {
 
     @Test
     fun findOne() {
-        val sumup=sumupRepository.getOne(1L)
+        val sumup = sumupRepository.getOne(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735aaa"))
         Assertions.assertThat("comment 1 a")
                 .isEqualTo(sumup.comment)
     }
 
     @Test
     fun findAllByOrderByDayDesc() {
-        val child=childRepository.getOne(1L)
+        val child = childRepository.getOne(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735aaa"))
         val sumups=sumupRepository.findAllByChildOrderByDayDesc(child)
         Assertions.assertThat(sumups.size)
                 .isEqualTo(10)

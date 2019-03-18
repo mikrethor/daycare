@@ -1,10 +1,12 @@
 package com.ablx.daycare.backend.entity
 
-import javax.persistence.*
+import java.util.*
+import javax.persistence.Entity
+import javax.persistence.Id
 
 @Entity
 internal data class Need(
-        @field: Id @field: GeneratedValue var id: Long = 0, //Primary Key
+        @Id var id: UUID, //Primary Key
         var code: String = ""
 //TODO find a way to have description multilingual
 )

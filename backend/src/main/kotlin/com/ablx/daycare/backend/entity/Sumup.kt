@@ -6,7 +6,6 @@ import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
 import javax.persistence.FetchType
-import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
@@ -15,7 +14,7 @@ import javax.persistence.TemporalType
 
 @Entity
 internal data class Sumup(
-        @field: Id @field: GeneratedValue var id : Long = 0, //Primary Key
+        @Id var id: UUID, //Primary Key
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "ID_CHILD", referencedColumnName = "ID")
         var child: Child,
