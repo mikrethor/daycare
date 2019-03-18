@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
+import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(controllers = [DaycareController::class], secure = false)
@@ -40,29 +41,29 @@ class DaycareRestTest {
 
     @Test
     fun getOneDaycare() {
-        val id = 1L
+        val id = UUID.randomUUID()
         val name = "Ma garderie"
         every {
-            daycareRepository.getOne(1L)
+            daycareRepository.getOne(id)
         } returns Daycare(id, name)
 
-        mockMvc!!.perform(get("/api/v1/daycares/1")).andExpect(status().isOk)
-                .andExpect(jsonPath("$.id").value(id))
+        mockMvc!!.perform(get("/api/v1/daycares/${id}")).andExpect(status().isOk)
+                .andExpect(jsonPath("$.id").value(id.toString()))
                 .andExpect(jsonPath("$.name").value(name))
                 .andReturn()
     }
 
     @Test
     fun getAllDaycares() {
-        val id = 1L
+        val id = UUID.randomUUID()
         val name = "Ma garderie"
-        every { daycareRepository.findAll() } returns listOf<Daycare>(Daycare(id, name))
+        every { daycareRepository.findAll() } returns listOf(Daycare(id, name))
 
         mockMvc!!.perform(get("/api/v1/daycares"))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize<Any>(1)))
-                .andExpect(jsonPath("$[0].name", equalTo("Ma garderie")))
-                .andExpect(jsonPath("$[0].id", equalTo(1)))
+                .andExpect(jsonPath("$[0].name", equalTo(name)))
+                .andExpect(jsonPath("$[0].id", equalTo(id.toString())))
     }
 }

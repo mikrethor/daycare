@@ -1,7 +1,14 @@
 package com.ablx.daycare.backend.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import javax.persistence.*
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 
 @Entity
 internal data class Child(
@@ -10,7 +17,7 @@ internal data class Child(
         var lastname: String = "",
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "daycare")
-        var daycare: Daycare = Daycare(),
+        var daycare: Daycare,
         @get:JsonIgnore
         @OneToMany(mappedBy = "child", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
         var sumups: List<Sumup> = emptyList()

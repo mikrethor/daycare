@@ -1,12 +1,18 @@
 package com.ablx.daycare.backend.controller
 
+import com.ablx.daycare.backend.entity.Child
+import com.ablx.daycare.backend.entity.Daycare
 import com.ablx.daycare.backend.entity.Sumup
 import com.ablx.daycare.backend.objects.Level
 import com.ablx.daycare.backend.repository.ChildRepository
 import com.ablx.daycare.backend.repository.SumupRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 
@@ -31,7 +37,7 @@ internal class SumupController {
         }
         catch (e:Exception){
             System.err.println(e)
-            var sumup=Sumup()
+            var sumup = Sumup(child = Child(daycare = Daycare(id = UUID.randomUUID())))
             sumup.child=childRepository.getOne(idChild)
             sumup.day=GregorianCalendar()
             sumup.mood= Level.BAD

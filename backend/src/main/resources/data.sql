@@ -1,4 +1,4 @@
-INSERT INTO DAYCARE("ID", "NAME") VALUES (1, 'Ma garderie');
+INSERT INTO DAYCARE("ID", "NAME") VALUES ('e3a842ac-5560-4256-9f5b-eaf6fa41712e', 'Ma garderie');
 
 INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES
 (1, 'EDUCATOR', 'Daycare educator'),
@@ -8,10 +8,10 @@ INSERT INTO ROLE ("ID", "NAME", "DESCRIPTION") VALUES
 -- USER
 -- non-encrypted password: jwtpass
 INSERT INTO USER ("ID", "FIRST_NAME", "LAST_NAME", "PASSWORD", "USERNAME", "DAYCARE") VALUES
-(1, 'John', 'Doe', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'johndoe@daycare.com',1),
-(2, 'Admin', 'Admin', '$2a$10$ZTl3Ct8F54qweI8ZBxJ7ce9wuE0u5ldgOvGpVBODphiCrT1ezl/9O', 'admin@daycare.com',1),
-(3, 'Par', 'Ent', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'parent@daycare.com',1),
-(4, 'Test', 'Test', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'test.test@test.com',1);
+(1, 'John', 'Doe', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'johndoe@daycare.com','e3a842ac-5560-4256-9f5b-eaf6fa41712e'),
+(2, 'Admin', 'Admin', '$2a$10$ZTl3Ct8F54qweI8ZBxJ7ce9wuE0u5ldgOvGpVBODphiCrT1ezl/9O', 'admin@daycare.com','e3a842ac-5560-4256-9f5b-eaf6fa41712e'),
+(3, 'Par', 'Ent', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'parent@daycare.com','e3a842ac-5560-4256-9f5b-eaf6fa41712e'),
+(4, 'Test', 'Test', '821f498d827d4edad2ed0960408a98edceb661d9f34287ceda2962417881231a', 'test.test@test.com','e3a842ac-5560-4256-9f5b-eaf6fa41712e');
 
 INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES
 (1,1),
@@ -21,8 +21,8 @@ INSERT INTO USER_ROLE("USER_ID", "ROLE_ID") VALUES
 (4,2);
 
 INSERT INTO CHILD("ID", "FIRSTNAME", "LASTNAME", "DAYCARE") VALUES
-(1, 'Arthur','B',1),
-(2, 'Louis','B',1);
+(1, 'Arthur','B','e3a842ac-5560-4256-9f5b-eaf6fa41712e'),
+(2, 'Louis','B','e3a842ac-5560-4256-9f5b-eaf6fa41712e');
 
 --Child 1
 INSERT INTO SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") VALUES
