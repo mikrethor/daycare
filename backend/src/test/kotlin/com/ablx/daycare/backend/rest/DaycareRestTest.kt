@@ -1,17 +1,18 @@
 package com.ablx.daycare.backend.rest
 
+import com.ablx.daycare.backend.controller.DaycareController
 import com.ablx.daycare.backend.entity.Daycare
+import com.ablx.daycare.backend.repository.DaycareRepository
 import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.hasSize
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.ArgumentMatchers.any
+import org.mockito.BDDMockito.given
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.HttpStatus
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
@@ -21,10 +22,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 
 @ExtendWith(SpringExtension::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebMvcTest(controllers = [DaycareController::class], secure = false)
 class DaycareRestTest{
     @Autowired
     lateinit var ctx: WebApplicationContext
+
+    @MockBean
+    internal lateinit var daycareRepository: DaycareRepository
 
     private var mockMvc: MockMvc? = null
 
@@ -32,8 +36,8 @@ class DaycareRestTest{
 
     private val contentTypeHal = MediaType("application", "hal+json", Charsets.UTF_8)
 
-    @Autowired
-    lateinit var testRestTemplate: TestRestTemplate
+    // @Autowired
+    //lateinit var testRestTemplate: TestRestTemplate
 
     @BeforeEach
     fun setUp() {
@@ -42,15 +46,21 @@ class DaycareRestTest{
 
     @Test
     fun getOneDaycare() {
-        val result = testRestTemplate.getForEntity("/daycares/1", Daycare::class.java)
-        assertNotNull(result)
-        assertEquals(HttpStatus.OK, result.statusCode)
-        assertEquals(contentType, result.headers.contentType)
-        assertEquals(Daycare(1L, "Ma garderie"), result.body)
+        val id = 1L
+        val name = "Ma garderie"
+        given(daycareRepository.getOne(any(Long::class.java))).willReturn(Daycare(id, name))
+        mockMvc!!.perform(get("/daycares/1")).andExpect(status().isOk)
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.name").value(name))
+                .andReturn()
     }
 
     @Test
     fun getAllDaycares() {
+        val id = 1L
+        val name = "Ma garderie"
+        given(daycareRepository.findAll()).willReturn(listOf<Daycare>(Daycare(id, name)))
+
         mockMvc!!.perform(get("/daycares"))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(contentType))
