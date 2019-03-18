@@ -34,11 +34,6 @@ class DaycareRestTest{
 
     private val contentType = MediaType("application", "json", Charsets.UTF_8)
 
-    private val contentTypeHal = MediaType("application", "hal+json", Charsets.UTF_8)
-
-    // @Autowired
-    //lateinit var testRestTemplate: TestRestTemplate
-
     @BeforeEach
     fun setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build()
@@ -49,7 +44,7 @@ class DaycareRestTest{
         val id = 1L
         val name = "Ma garderie"
         given(daycareRepository.getOne(any(Long::class.java))).willReturn(Daycare(id, name))
-        mockMvc!!.perform(get("/daycares/1")).andExpect(status().isOk)
+        mockMvc!!.perform(get("/api/v1/daycares/1")).andExpect(status().isOk)
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
                 .andReturn()
@@ -61,7 +56,7 @@ class DaycareRestTest{
         val name = "Ma garderie"
         given(daycareRepository.findAll()).willReturn(listOf<Daycare>(Daycare(id, name)))
 
-        mockMvc!!.perform(get("/daycares"))
+        mockMvc!!.perform(get("/api/v1/daycares"))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize<Any>(1)))
