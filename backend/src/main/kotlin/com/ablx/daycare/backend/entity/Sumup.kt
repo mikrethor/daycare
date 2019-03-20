@@ -9,18 +9,20 @@ import javax.persistence.FetchType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
+import javax.persistence.Table
 import javax.persistence.Temporal
 import javax.persistence.TemporalType
 
 @Entity
+@Table(name = "sumup", schema = "daycare")
 internal data class Sumup(
-        @Id var id: UUID, //Primary Key
+        @Id var id: UUID = UUID.randomUUID(), //Primary Key
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "ID_CHILD", referencedColumnName = "ID")
-        var child: Child,
-        var comment:String="",
+        var child: Child = Child(),
+        var comment: String = "",
         @Temporal(TemporalType.DATE)
-        var day:Calendar=GregorianCalendar(),
+        var day: Calendar = GregorianCalendar(),
         @Enumerated(EnumType.STRING)
         var mood: Level = Level.BAD,
         @Enumerated(EnumType.STRING)

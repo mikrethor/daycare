@@ -10,8 +10,10 @@ import javax.persistence.JoinColumn
 import javax.persistence.JoinTable
 import javax.persistence.ManyToMany
 import javax.persistence.ManyToOne
+import javax.persistence.Table
 
 @Entity
+@Table(name = "user", schema = "daycare")
 internal data class User (
         @Id
         var id: UUID,

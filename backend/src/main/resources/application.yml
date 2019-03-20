@@ -1,6 +1,14 @@
+schema:
+  name: daycare
 spring:
-  datasource:
-    url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE
+  jpa:
+    hibernate:
+      ddl-auto: none
+      generate-ddl: false
+  flyway:
+    schemas: ${schema.name}
+    locations: classpath:db/migration/common, classpath:db/migration/h2
+    table: flyway_history
   h2:
     console:
       enabled: true

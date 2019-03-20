@@ -26,7 +26,7 @@ class UserRepositoryTest {
 
     @Test
     fun findByDaycareId() {
-        val users = userRepository.findAllByDaycare(UUID.fromString("uuid-daycare-uuid-1"))
+        val users = userRepository.findAllByDaycare(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"))
         assertNotNull(users)
         assertEquals(4, users.size)
 
@@ -43,14 +43,14 @@ class UserRepositoryTest {
 
     @Test
     fun findAllByDaycareAndRole() {
-        var users = userRepository.findAllByDaycareAndRole(UUID.fromString("uuid-daycare-uuid-1"), 3L)
+        var users = userRepository.findAllByDaycareAndRole(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"), 3L)
         assertNotNull(users)
         assertEquals(1, users.size)
 
         val parent=users.toTypedArray()[0]
         assertEquals("parent@daycare.com", parent.username)
 
-        users = userRepository.findAllByDaycareAndRole(UUID.fromString("uuid-daycare-uuid-1"), 1L)
+        users = userRepository.findAllByDaycareAndRole(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"), 1L)
         assertNotNull(users)
         assertEquals(2, users.size)
 
@@ -75,7 +75,7 @@ class UserRepositoryTest {
     @Test
     fun findOneByIdByDaycare() {
         val id = UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735a4a")
-        val user = userRepository.findOneByIdByDaycare(id, UUID.fromString("uuid-daycare-uuid-1"))
+        val user = userRepository.findOneByIdByDaycare(id, UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"))
         assertNotNull(user)
         assertEquals(id, user.id)
         assertEquals("Par", user.firstName)

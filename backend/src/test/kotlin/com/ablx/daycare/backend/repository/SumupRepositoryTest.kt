@@ -22,7 +22,7 @@ class SumupRepositoryTest {
 
     @Test
     fun findOne() {
-        val sumup = sumupRepository.getOne(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735aaa"))
+        val sumup = sumupRepository.getOne(UUID.fromString("89033907-13b0-46b9-8f5d-67e6e7b1facd"))
         Assertions.assertThat("comment 1 a")
                 .isEqualTo(sumup.comment)
     }
