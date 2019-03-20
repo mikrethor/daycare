@@ -27,7 +27,7 @@ INSERT INTO daycare.CHILD("ID", "FIRSTNAME", "LASTNAME", "DAYCARE") VALUES
 --Child 1
 INSERT INTO daycare.SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") VALUES
 ('89033907-13b0-46b9-8f5d-67e6e7b1facd', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 1 a','BAD','MEDIUM','GOOD',CURRENT_DATE),
-(2, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 2','GOOD','MEDIUM','BAD',  TO_TIMESTAMP ( '25/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
+('89033907-13b0-46b9-8f5d-67e6e7b1face', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 2','GOOD','MEDIUM','BAD',  TO_TIMESTAMP ( '25/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
 (3, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 3','MEDIUM','MEDIUM','MEDIUM', TO_TIMESTAMP ( '24/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
 (4, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 4','BAD','BAD','BAD',TO_TIMESTAMP ( '23/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
 (5, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 5','GOOD','GOOD','GOOD',TO_TIMESTAMP ( '22/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),

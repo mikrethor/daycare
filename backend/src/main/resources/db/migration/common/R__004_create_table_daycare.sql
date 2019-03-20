@@ -16,7 +16,7 @@ CREATE TABLE daycare.daycare (
 
 CREATE TABLE daycare.role (
 
-    ID                            UUID        NOT NULL,
+    ID                            INTEGER        NOT NULL,
     NAME                          VARCHAR(10) NOT NULL,
     DESCRIPTION                   VARCHAR(30) NOT NULL,
 
@@ -36,24 +36,25 @@ CREATE TABLE daycare.user (
     FOREIGN KEY (DAYCARE) REFERENCES daycare.daycare(ID)
 );
 
-CREATE TABLE daycare.user_role (
+CREATE TABLE daycare.USER_ROLE (
 
     USER_ID                       UUID,
-    ROLE_ID                       UUID
+    ROLE_ID                       INTEGER,
+    FOREIGN KEY (USER_ID) REFERENCES daycare.user(ID),
+    FOREIGN KEY (ROLE_ID) REFERENCES daycare.role(ID)
 );
 
 CREATE TABLE daycare.child (
 
     ID                            UUID        NOT NULL,
-    FIRSTNAME                    VARCHAR(30) NOT NULL,
-    LASTNAME                     VARCHAR(30) NOT NULL,
+    FIRSTNAME                     VARCHAR(30) NOT NULL,
+    LASTNAME                      VARCHAR(30) NOT NULL,
     DAYCARE                       UUID        NOT NULL,
 
     PRIMARY KEY (ID),
     FOREIGN KEY (DAYCARE) REFERENCES daycare.daycare(ID)
 );
 
---"ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY"
 CREATE TABLE daycare.sumup (
 
     ID                            UUID        NOT NULL,

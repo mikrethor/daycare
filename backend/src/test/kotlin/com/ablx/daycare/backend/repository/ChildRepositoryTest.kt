@@ -18,13 +18,13 @@ class ChildRepositoryTest {
 
     @Test
     fun findOne() {
-        val child = repository.getOne(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"))
+        val child = repository.getOne(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735aaa"))
         Assertions.assertThat(child.firstname)
                 .isEqualTo("Arthur")
         Assertions.assertThat(child.lastname)
                 .isEqualTo("B")
         Assertions.assertThat(child.daycare.id)
-                .isEqualTo(1L)
+                .isEqualTo(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"))
     }
 
     @Test

@@ -10,13 +10,11 @@ import javax.persistence.JoinColumn
 import javax.persistence.JoinTable
 import javax.persistence.ManyToMany
 import javax.persistence.ManyToOne
-import javax.persistence.Table
 
 @Entity
-@Table(name = "user", schema = "daycare")
-internal data class User (
+internal data class User(
         @Id
-        var id: UUID,
+        var id: UUID = UUID.randomUUID(),
 
         var username: String = "",
 
@@ -38,6 +36,6 @@ internal data class User (
 
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "daycare")
-        var daycare: Daycare
+        var daycare: Daycare = Daycare()
 
 )

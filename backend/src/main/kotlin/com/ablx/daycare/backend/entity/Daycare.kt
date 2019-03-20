@@ -7,12 +7,10 @@ import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.Id
 import javax.persistence.OneToMany
-import javax.persistence.Table
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
 @Entity
-@Table(name = "daycare", schema = "daycare")
 internal data class Daycare(
         @Id
         @NotNull @NotEmpty val id: UUID = UUID.randomUUID(),

@@ -9,10 +9,8 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
-import javax.persistence.Table
 
 @Entity
-@Table(name = "child", schema = "daycare")
 internal data class Child(
         @Id var id: UUID = UUID.randomUUID(), //Primary Key
         var firstname: String = "",

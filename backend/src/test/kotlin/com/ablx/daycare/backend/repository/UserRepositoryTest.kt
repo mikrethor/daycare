@@ -20,7 +20,7 @@ class UserRepositoryTest {
     @Test
     fun findOne() {
         val user = userRepository.getOne(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735a2a"))
-        Assertions.assertThat(1L)
+        Assertions.assertThat(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"))
                 .isEqualTo(user.daycare.id)
     }
 

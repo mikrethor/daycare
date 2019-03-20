@@ -1,7 +1,12 @@
 schema:
   name: daycare
 spring:
+  #  spring.jpa.properties.hibernate.default_schema=schema
   jpa:
+    properties:
+      hibernate:
+        default_schema:
+          ${schema.name}
     hibernate:
       ddl-auto: none
       generate-ddl: false

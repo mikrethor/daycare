@@ -9,12 +9,10 @@ import javax.persistence.FetchType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import javax.persistence.Table
 import javax.persistence.Temporal
 import javax.persistence.TemporalType
 
 @Entity
-@Table(name = "sumup", schema = "daycare")
 internal data class Sumup(
         @Id var id: UUID = UUID.randomUUID(), //Primary Key
         @ManyToOne(fetch = FetchType.LAZY)
