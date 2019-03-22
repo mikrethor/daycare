@@ -27,27 +27,27 @@ INSERT INTO daycare.CHILD("ID", "FIRSTNAME", "LASTNAME", "DAYCARE") VALUES
 --Child 1
 INSERT INTO daycare.SUMUP("ID", "ID_CHILD", "COMMENT", "MOOD", "APPETITE", "SLEEP", "DAY") VALUES
 ('89033907-13b0-46b9-8f5d-67e6e7b1facd', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 1 a','BAD','MEDIUM','GOOD',CURRENT_DATE),
-('89033907-13b0-46b9-8f5d-67e6e7b1face', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 2','GOOD','MEDIUM','BAD',  TO_TIMESTAMP ( '25/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(3, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 3','MEDIUM','MEDIUM','MEDIUM', TO_TIMESTAMP ( '24/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(4, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 4','BAD','BAD','BAD',TO_TIMESTAMP ( '23/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(5, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 5','GOOD','GOOD','GOOD',TO_TIMESTAMP ( '22/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(6, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 6','MEDIUM','BAD','GOOD',TO_TIMESTAMP ( '21/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(7, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 7','BAD','MEDIUM','GOOD',TO_TIMESTAMP ( '20/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(8, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 7','GOOD','BAD','GOOD',TO_TIMESTAMP ( '19/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(9, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 9','BAD','GOOD','GOOD',TO_TIMESTAMP ( '18/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(10, 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 10','BAD','GOOD','GOOD',TO_TIMESTAMP ( '17/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
+('89033907-13b0-46b9-8f5d-67e6e7b1face', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 2','GOOD','MEDIUM','BAD', CURRENT_DATE),
+('89033907-13b0-46b9-8f5d-67e6e7b1facf', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 3','MEDIUM','MEDIUM','MEDIUM', CURRENT_DATE),
+('fbac3528-e733-44fb-a43a-8a10a3dae4e5', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 4','BAD','BAD','BAD',CURRENT_DATE),
+('e12fab6c-4afb-11e9-8646-d663bd873d93', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 5','GOOD','GOOD','GOOD',CURRENT_DATE),
+('e12fb026-4afb-11e9-8646-d663bd873d93', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 6','MEDIUM','BAD','GOOD',CURRENT_DATE),
+('e12fb314-4afb-11e9-8646-d663bd873d93', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 7','BAD','MEDIUM','GOOD',CURRENT_DATE),
+('e12fb5c6-4afb-11e9-8646-d663bd873d93', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 7','GOOD','BAD','GOOD',CURRENT_DATE),
+('e12fbbc0-4afb-11e9-8646-d663bd873d93', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 9','BAD','GOOD','GOOD',CURRENT_DATE),
+('e12fbed6-4afb-11e9-8646-d663bd873d93', 'f13be1c0-9027-421f-8cf3-c3fdfa735aaa','comment 10','BAD','GOOD','GOOD',CURRENT_DATE),
 
 --Child 2
-(11, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 1 l','BAD','MEDIUM','GOOD',CURRENT_DATE),
-(12, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 2','GOOD','MEDIUM','GOOD',TO_TIMESTAMP ( '25/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(13, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 3','GOOD','MEDIUM','GOOD',TO_TIMESTAMP ( '24/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(14, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 4','BAD','BAD','GOOD',TO_TIMESTAMP ( '23/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(15, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 5','BAD','MEDIUM','BAD',TO_TIMESTAMP ( '22/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(16, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 6','BAD','MEDIUM','GOOD',TO_TIMESTAMP ( '21/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(17, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 7','BAD','GOOD','BAD',TO_TIMESTAMP ( '20/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(18, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 8','BAD','MEDIUM','GOOD',TO_TIMESTAMP ( '19/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(19, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 9','GOOD','MEDIUM','GOOD',TO_TIMESTAMP ( '18/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' )),
-(20, '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 10','BAD','MEDIUM','GOOD',TO_TIMESTAMP ( '17/12/2017 00:00:00.00', 'dd-MM-yyyy hh:mm:ss.SS' ));
+('f5d1b278-c48e-405d-8e14-d1e2a987a021', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 1 l','BAD','MEDIUM','GOOD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a022', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 2','GOOD','MEDIUM','GOOD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a023', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 3','GOOD','MEDIUM','GOOD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a024', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 4','BAD','BAD','GOOD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a025', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 5','BAD','MEDIUM','BAD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a026', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 6','BAD','MEDIUM','GOOD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a027', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 7','BAD','GOOD','BAD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a028', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 8','BAD','MEDIUM','GOOD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a029', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 9','GOOD','MEDIUM','GOOD',CURRENT_DATE),
+('f5d1b278-c48e-405d-8e14-d1e2a987a030', '7654fe79-5b38-4738-a899-6c49a2a69d3c','comment 10','BAD','MEDIUM','GOOD',CURRENT_DATE);
 
 
 INSERT INTO daycare.NEED("ID","CODE") VALUES ('6ad2ef8b-f5d0-40e4-80ab-e6c0888c46cd','TEST');

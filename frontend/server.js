@@ -6,13 +6,13 @@ const app = express();
 
 app.set('port', port);
 
-app.use(express.static(path.join(__dirname, 'dist/')));
+app.use(express.static(path.join(__dirname, 'dist/daycare-frontend')));
 
 app.get('/', (req, res) = > {
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'dist/daycare-frontend/index.html'));
 })
 app.get('/**', (req, res) = > {
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'dist/daycare-frontend/index.html'));
 })
 const server = http.createServer(app);
 
