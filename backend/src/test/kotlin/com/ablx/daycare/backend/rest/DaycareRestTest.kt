@@ -30,14 +30,7 @@ class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
     @MockkBean
     internal lateinit var daycareRepository: DaycareRepository
 
-    // private var mockMvc: MockMvc? = null
-
     private val contentType = MediaType("application", "json", Charsets.UTF_8)
-
-//    @BeforeEach
-//    fun setUp() {
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build()
-//    }
 
     @WithMockUser(value = "spring")
     @Test
@@ -52,8 +45,10 @@ class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
                 .mutateWith(mockUser("spring"))
                 .get().uri("/api/v1/daycares/$id")
                 ?.exchange()
+                ?.expectHeader()?.contentType(contentType)
                 ?.expectStatus()
                 ?.isOk?.expectBody()
+
                 ?.jsonPath("$.id")?.isEqualTo(id.toString())
                 ?.jsonPath("$.name")?.isEqualTo(name)
     }
