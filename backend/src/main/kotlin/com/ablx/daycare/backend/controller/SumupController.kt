@@ -6,24 +6,14 @@ import com.ablx.daycare.backend.entity.Sumup
 import com.ablx.daycare.backend.objects.Level
 import com.ablx.daycare.backend.repository.ChildRepository
 import com.ablx.daycare.backend.repository.SumupRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 
 @RestController
-internal class SumupController {
-
-    @Autowired
-    lateinit var sumupRepository: SumupRepository
-
-    @Autowired
-    lateinit var childRepository: ChildRepository
+internal class SumupController(val sumupRepository: SumupRepository,
+                               val childRepository: ChildRepository) {
 
     @GetMapping("/daycares/{idDaycare}/childs/{idChild}/sumups/day/{day}")
     fun findOne(@PathVariable(value = "idDaycare") idDaycare: UUID,

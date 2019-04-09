@@ -3,21 +3,14 @@ package com.ablx.daycare.backend.controller
 import com.ablx.daycare.backend.entity.User
 import com.ablx.daycare.backend.enum.Role
 import com.ablx.daycare.backend.repository.UserRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 
 @RestController
-internal class EducatorController {
+internal class EducatorController(val userRepository: UserRepository) {
 
-    @Autowired
-    lateinit var userRepository: UserRepository
+
 
     @GetMapping("/daycares/{idDaycare}/educators")
     fun findByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: UUID) =

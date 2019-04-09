@@ -10,11 +10,8 @@ import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @DataJpaTest
-class NeedRepositoryTest {
-
-    @Autowired
-    private lateinit var repository: NeedRepository
-
+class NeedRepositoryTest internal constructor(@Autowired
+                                              private val repository: NeedRepository) {
     @Test
     fun findOne() {
         val need = repository.getOne(UUID.fromString("6ad2ef8b-f5d0-40e4-80ab-e6c0888c46cd"))

@@ -10,11 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @DataJpaTest
-class RoleRepositoryTest {
-
-    @Autowired
-    private lateinit var repository: RoleRepository
-
+class RoleRepositoryTest internal constructor(@Autowired
+                                              private val repository: RoleRepository) {
     @Test
     fun findOne() {
         val role = repository.getOne(1L)

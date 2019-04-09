@@ -11,11 +11,8 @@ import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @DataJpaTest
-class DaycareRepositoryTest{
-
-    @Autowired
-    private lateinit var daycareRepository:DaycareRepository
-
+class DaycareRepositoryTest internal constructor(@Autowired
+                                                 private val daycareRepository: DaycareRepository) {
     @Test
     fun findOne() {
         val daycare = daycareRepository.getOne(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"))

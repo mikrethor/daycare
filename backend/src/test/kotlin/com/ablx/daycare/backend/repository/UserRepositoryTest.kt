@@ -12,11 +12,8 @@ import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @DataJpaTest
-class UserRepositoryTest {
-
-    @Autowired
-    private lateinit var userRepository: UserRepository
-
+class UserRepositoryTest internal constructor(@Autowired
+                                              private val userRepository: UserRepository) {
     @Test
     fun findOne() {
         val user = userRepository.getOne(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735a2a"))
@@ -30,13 +27,13 @@ class UserRepositoryTest {
         assertNotNull(users)
         assertEquals(4, users.size)
 
-        val educator=users.toTypedArray()[0]
+        val educator = users.toTypedArray()[0]
         assertEquals("johndoe@daycare.com", educator.username)
 
-        val admin=users.toTypedArray()[1]
+        val admin = users.toTypedArray()[1]
         assertEquals("admin@daycare.com", admin.username)
 
-        val parent=users.toTypedArray()[2]
+        val parent = users.toTypedArray()[2]
         assertEquals("parent@daycare.com", parent.username)
     }
 
@@ -47,7 +44,7 @@ class UserRepositoryTest {
         assertNotNull(users)
         assertEquals(1, users.size)
 
-        val parent=users.toTypedArray()[0]
+        val parent = users.toTypedArray()[0]
         assertEquals("parent@daycare.com", parent.username)
 
         users = userRepository.findAllByDaycareAndRole(UUID.fromString("2b958205-848b-4376-9c9d-5bfa39c70ee0"), 1L)
@@ -55,10 +52,10 @@ class UserRepositoryTest {
         assertEquals(2, users.size)
 
 
-        val educator1=users.toTypedArray()[0]
+        val educator1 = users.toTypedArray()[0]
         assertEquals("johndoe@daycare.com", educator1.username)
 
-        val educator2=users.toTypedArray()[1]
+        val educator2 = users.toTypedArray()[1]
         assertEquals("admin@daycare.com", educator2.username)
 
     }

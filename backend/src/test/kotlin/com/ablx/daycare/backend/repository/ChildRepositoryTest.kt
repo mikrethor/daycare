@@ -11,10 +11,7 @@ import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @DataJpaTest
-class ChildRepositoryTest {
-
-    @Autowired
-    private lateinit var repository: ChildRepository
+class ChildRepositoryTest internal constructor(@Autowired private val repository: ChildRepository) {
 
     @Test
     fun findOne() {
