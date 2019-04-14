@@ -15,17 +15,14 @@ import org.springframework.security.test.web.reactive.server.SecurityMockServerC
 import org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockUser
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.test.web.reactive.server.expectBodyList
 import java.util.*
 
 
 @ExtendWith(SpringExtension::class)
-//@WebMvcTest(controllers = [DaycareController::class], secure = false)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
-
-//    @Autowired
-//    lateinit var ctx: WebApplicationContext
 
     @MockkBean
     internal lateinit var daycareRepository: DaycareRepository
@@ -48,22 +45,24 @@ class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
                 ?.expectHeader()?.contentType(contentType)
                 ?.expectStatus()
                 ?.isOk?.expectBody()
-
                 ?.jsonPath("$.id")?.isEqualTo(id.toString())
                 ?.jsonPath("$.name")?.isEqualTo(name)
     }
 
-//    @Test
-//    fun getAllDaycares() {
-//        val id = UUID.randomUUID()
-//        val name = "Ma garderie"
-//        every { daycareRepository.findAll() } returns listOf(Daycare(id, name))
-//
-//        mockMvc!!.perform(get("/api/v1/daycares"))
-//                .andExpect(status().isOk)
-//                .andExpect(content().contentType(contentType))
-//                .andExpect(jsonPath("$", hasSize<Any>(1)))
-//                .andExpect(jsonPath("$[0].name", equalTo(name)))
-//                .andExpect(jsonPath("$[0].id", equalTo(id.toString())))
-//    }
+    @WithMockUser(value = "spring")
+    @Test
+    fun getAllDaycares() {
+        val id = UUID.randomUUID()
+        val name = "Ma garderie"
+        every { daycareRepository.findAll() } returns listOf(Daycare(id, name))
+
+        this.webTestClient.mutateWith(csrf())
+                .mutateWith(mockUser("spring"))
+                .get().uri("/api/v1/daycares")
+                ?.exchange()
+                ?.expectHeader()?.contentType(contentType)
+                ?.expectStatus()
+                ?.isOk?.expectBodyList<Daycare>()
+                ?.hasSize(1)?.contains(Daycare(id, name))
+    }
 }
