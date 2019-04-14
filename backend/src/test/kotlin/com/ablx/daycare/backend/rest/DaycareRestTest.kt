@@ -41,12 +41,12 @@ class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
         this.webTestClient.mutateWith(csrf())
                 .mutateWith(mockUser("spring"))
                 .get().uri("/api/v1/daycares/$id")
-                ?.exchange()
-                ?.expectHeader()?.contentType(contentType)
-                ?.expectStatus()
-                ?.isOk?.expectBody()
-                ?.jsonPath("$.id")?.isEqualTo(id.toString())
-                ?.jsonPath("$.name")?.isEqualTo(name)
+                .exchange()
+                .expectHeader().contentType(contentType)
+                .expectStatus().isOk
+                .expectBody()
+                .jsonPath("$.id").isEqualTo(id.toString())
+                .jsonPath("$.name").isEqualTo(name)
     }
 
     @WithMockUser(value = "spring")
@@ -59,10 +59,12 @@ class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
         this.webTestClient.mutateWith(csrf())
                 .mutateWith(mockUser("spring"))
                 .get().uri("/api/v1/daycares")
-                ?.exchange()
-                ?.expectHeader()?.contentType(contentType)
-                ?.expectStatus()
-                ?.isOk?.expectBodyList<Daycare>()
-                ?.hasSize(1)?.contains(Daycare(id, name))
+                .exchange()
+                .expectHeader()
+                .contentType(contentType)
+                .expectStatus().isOk
+                .expectBodyList<Daycare>()
+                .hasSize(1)
+                .contains(Daycare(id, name))
     }
 }
