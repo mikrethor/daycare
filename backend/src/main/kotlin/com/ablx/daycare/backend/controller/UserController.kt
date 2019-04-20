@@ -9,8 +9,6 @@ import java.util.*
 @RestController
 internal class UserController(val userRepository: UserRepository) {
 
-
-
     //Name can't contain .
     @GetMapping("/users/{name:.+}")
     fun findByName(@PathVariable(value = "name") name: String) =

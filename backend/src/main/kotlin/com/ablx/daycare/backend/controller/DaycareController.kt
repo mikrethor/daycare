@@ -15,8 +15,5 @@ internal class DaycareController(private val daycareRepository: DaycareRepositor
     fun findById(@PathVariable(value = "id") id: UUID = UUID.randomUUID()) = daycareRepository.getOne(id)
 
     @GetMapping("/daycares")
-    fun findAll() =
-            daycareRepository.findAll()
-
-
+    fun findAll() = daycareRepository.findAll()
 }

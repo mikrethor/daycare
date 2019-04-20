@@ -24,5 +24,4 @@ internal class ParentController(val userRepository: UserRepository) {
     @DeleteMapping("/daycares/{idDaycare}/parents/{id}")
     fun delete(@PathVariable(value = "idDaycare") idDaycare: Long, @PathVariable(value = "id") id: UUID) =
             userRepository.deleteById(id)
-
 }

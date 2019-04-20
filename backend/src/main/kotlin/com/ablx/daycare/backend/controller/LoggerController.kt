@@ -14,5 +14,4 @@ internal class LoggerController {
         System.out.println(loglevel)
         return true
     }
-
 }

@@ -12,7 +12,6 @@ import java.util.*
 @RestController
 internal class AdminController(val userRepository: UserRepository) {
 
-
     @GetMapping("/daycare/{idDaycare}/admins")
     fun findByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: UUID) =
             userRepository.findAllByDaycareAndRole(idDaycare, Role.ADMIN.value)

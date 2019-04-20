@@ -10,12 +10,9 @@ import java.util.*
 @RestController
 internal class EducatorController(val userRepository: UserRepository) {
 
-
-
     @GetMapping("/daycares/{idDaycare}/educators")
     fun findByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: UUID) =
             userRepository.findAllByDaycareAndRole(idDaycare, Role.EDUCATOR.value)
-
 
     @GetMapping("/daycares/{idDaycare}/educators/{id}")
     fun findByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: UUID, @PathVariable(value = "id") id: UUID) =
@@ -31,6 +28,4 @@ internal class EducatorController(val userRepository: UserRepository) {
     fun create(@PathVariable(value="idDaycare")idDaycare:Long, @RequestBody educator: User) :User {
         return userRepository.save(educator)
     }
-
-
 }

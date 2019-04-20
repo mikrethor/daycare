@@ -9,9 +9,5 @@ import org.springframework.web.bind.annotation.RestController
 internal class RoleController(val roleRepository: RoleRepository) {
 
     @GetMapping("/roles")
-    fun findAll() =
-            roleRepository.findAll()
-
-
-
+    fun findAll() = roleRepository.findAll()
 }

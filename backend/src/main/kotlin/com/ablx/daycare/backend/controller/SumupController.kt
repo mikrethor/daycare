@@ -1,7 +1,5 @@
 package com.ablx.daycare.backend.controller
 
-import com.ablx.daycare.backend.entity.Child
-import com.ablx.daycare.backend.entity.Daycare
 import com.ablx.daycare.backend.entity.Sumup
 import com.ablx.daycare.backend.objects.Level
 import com.ablx.daycare.backend.repository.ChildRepository
@@ -22,17 +20,15 @@ internal class SumupController(val sumupRepository: SumupRepository,
                 @PathVariable(value = "day") day: Calendar): Sumup {
 
         //TODO refactoring deport creation in front
-        try {
-            return sumupRepository.findOneByChildAndDay(idChild, day)
+        return try {
+            sumupRepository.findOneByChildAndDay(idChild, day)
         } catch (e: Exception) {
             System.err.println(e)
-            var sumup = Sumup(id = UUID.randomUUID(), child = Child(id = UUID.randomUUID(), daycare = Daycare(id = UUID.randomUUID())))
-            sumup.child = childRepository.getOne(idChild)
-            sumup.day = GregorianCalendar()
-            sumup.mood = Level.BAD
-            sumup.appetite = Level.BAD
-            sumup.sleep = Level.BAD
-            return sumup
+            Sumup(id = UUID.randomUUID(),
+                    child = childRepository.getOne(idChild),
+                    mood = Level.BAD,
+                    appetite = Level.BAD,
+                    sleep = Level.BAD)
         }
     }
 
@@ -44,7 +40,5 @@ internal class SumupController(val sumupRepository: SumupRepository,
     @PostMapping("/daycares/{idDaycare}/childs/{idChild}/sumups")
     fun create(@PathVariable(value = "idDaycare") idDaycare: UUID,
                @PathVariable(value = "idChild") idChild: UUID,
-               @RequestBody sumup: Sumup): Sumup {
-        return sumupRepository.save(sumup)
-    }
+               @RequestBody sumup: Sumup) = sumupRepository.save(sumup)
 }

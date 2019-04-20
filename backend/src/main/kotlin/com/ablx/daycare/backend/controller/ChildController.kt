@@ -3,17 +3,12 @@ package com.ablx.daycare.backend.controller
 import com.ablx.daycare.backend.entity.Child
 import com.ablx.daycare.backend.repository.ChildRepository
 import com.ablx.daycare.backend.repository.DaycareRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 
 @RestController
-internal class ChildController(val childrenRepository: ChildRepository) {
-
-
-    @Autowired
-    lateinit var daycareRepository: DaycareRepository
+internal class ChildController(val childrenRepository: ChildRepository, val daycareRepository: DaycareRepository) {
 
     @GetMapping("/children/{id}")
     fun findById(@PathVariable(value = "id") id: UUID) =
