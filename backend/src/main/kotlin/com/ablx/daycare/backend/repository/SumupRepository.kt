@@ -1,16 +1,16 @@
 package com.ablx.daycare.backend.repository
 
-import com.ablx.daycare.backend.entity.Child
 import com.ablx.daycare.backend.entity.Sumup
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
+import org.springframework.data.mongodb.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import reactor.core.publisher.Flux
 import java.util.*
 
-internal interface SumupRepository : JpaRepository<Sumup, UUID> {
+internal interface SumupRepository : ReactiveCrudRepository<Sumup, UUID> {
 
-    fun findAllByChildOrderByDayDesc(child: Child): List<Sumup>
+    fun findAllByChildIdOrderByDayDesc(child_id: UUID): Flux<Sumup>
 
-    @Query("select s from Sumup s where s.day=:day and s.child.id=:idChild")
+    @Query("{'day' : ?1, 'child_id' : ?0 }")
     fun findOneByChildAndDay(@Param("idChild") idChild: UUID, @Param("day") day: Calendar): Sumup
 }

@@ -3,6 +3,7 @@ package com.ablx.daycare.backend.controller
 import com.ablx.daycare.backend.entity.User
 import com.ablx.daycare.backend.repository.UserRepository
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Mono
 import java.util.*
 
 
@@ -14,9 +15,9 @@ internal class UserController(val userRepository: UserRepository) {
     fun findByName(@PathVariable(value = "name") name: String) =
             userRepository.findByUsername(name)
 
-    @GetMapping("/users/role/{idRole}/daycares/{idDaycare}")
-    fun findAllByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: UUID, @PathVariable(value = "idRole") idRole: Long) =
-            userRepository.findAllByDaycareAndRole(idDaycare, idRole)
+//    @GetMapping("/users/role/{idRole}/daycares/{idDaycare}")
+//    fun findAllByDaycareAndRole(@PathVariable(value = "idDaycare") idDaycare: UUID, @PathVariable(value = "idRole") idRole: Long) =
+//            userRepository.findAllByDaycareAndRole(idDaycare, idRole)
 
     @GetMapping("/daycares/{idDaycare}/users")
     fun findAllByDaycare(@PathVariable(value = "idDaycare") idDaycare: UUID) =
@@ -28,7 +29,7 @@ internal class UserController(val userRepository: UserRepository) {
             userRepository.findOneByIdByDaycare(idUser, idDaycare)
 
     @PostMapping("/daycares/{idDaycare}/users")
-    fun create(@PathVariable(value = "idDaycare") idDaycare: UUID, @RequestBody user: User): User {
+    fun create(@PathVariable(value = "idDaycare") idDaycare: UUID, @RequestBody user: User): Mono<User> {
         user.id = UUID.randomUUID()
         return userRepository.save(user)
     }

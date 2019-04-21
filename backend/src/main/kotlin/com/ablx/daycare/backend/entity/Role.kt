@@ -1,11 +1,12 @@
 package com.ablx.daycare.backend.entity
 
-import javax.persistence.*
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
+@Document
 internal data class Role (
+        //https://www.baeldung.com/spring-boot-mongodb-auto-generated-field
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long = 0,
         var name: String = "",
         var description: String = ""

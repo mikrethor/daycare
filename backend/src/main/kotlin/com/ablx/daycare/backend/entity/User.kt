@@ -1,17 +1,13 @@
 package com.ablx.daycare.backend.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.DBRef
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.FetchType
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.JoinTable
-import javax.persistence.ManyToMany
-import javax.persistence.ManyToOne
 
-@Entity
+@Document
 internal data class User(
         @Id
         var id: UUID = UUID.randomUUID(),
@@ -21,21 +17,20 @@ internal data class User(
         @JsonIgnore
         var password: String = "",
 
-        @Column(name = "first_name")
+        @Field("first_name")
         var firstName: String = "",
 
-        @Column(name = "last_name")
+        @Field("last_name")
         var lastName: String = "",
         /**
          * Roles are being eagerly loaded here because
          * they are a fairly small collection of items for this example.
          */
-        @ManyToMany(fetch = FetchType.EAGER)
-        @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")], inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")])
+        @Field("roles_ids")
+        @DBRef
         var roles: List<Role> = emptyList(),
 
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name = "daycare")
-        var daycare: Daycare = Daycare()
+        @Field("daycare_id")
+        var daycareId: UUID
 
 )

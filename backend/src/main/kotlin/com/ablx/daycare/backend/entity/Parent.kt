@@ -1,15 +1,16 @@
 package com.ablx.daycare.backend.entity
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
 import java.util.*
-import javax.persistence.*
 
-@Entity
+@Document
 internal data class Parent(
         //Primary Key
         @Id var id: UUID,
         var firstname:String = "",
         var lastname:String = "",
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "daycare")
-        var daycare: Daycare
+        @Field("daycare_id")
+        var daycareId: UUID
 )

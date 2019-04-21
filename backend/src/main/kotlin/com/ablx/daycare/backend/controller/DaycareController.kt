@@ -12,7 +12,7 @@ import java.util.*
 internal class DaycareController(private val daycareRepository: DaycareRepository) {
 
     @GetMapping("/daycares/{id}")
-    fun findById(@PathVariable(value = "id") id: UUID = UUID.randomUUID()) = daycareRepository.getOne(id)
+    fun findById(@PathVariable(value = "id") id: UUID = UUID.randomUUID()) = daycareRepository.findById(id)
 
     @GetMapping("/daycares")
     fun findAll() = daycareRepository.findAll()

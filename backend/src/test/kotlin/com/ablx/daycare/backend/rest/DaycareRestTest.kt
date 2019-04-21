@@ -16,6 +16,8 @@ import org.springframework.security.test.web.reactive.server.SecurityMockServerC
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBodyList
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import java.util.*
 
 
@@ -35,8 +37,8 @@ class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
         val id = UUID.randomUUID()
         val name = "Ma garderie"
         every {
-            daycareRepository.getOne(id)
-        } returns Daycare(id, name)
+            daycareRepository.findById(id)
+        } returns Mono.just(Daycare(id, name))
 
         this.webTestClient.mutateWith(csrf())
                 .mutateWith(mockUser("spring"))
@@ -54,7 +56,7 @@ class DaycareRestTest(@Autowired val webTestClient: WebTestClient) {
     fun getAllDaycares() {
         val id = UUID.randomUUID()
         val name = "Ma garderie"
-        every { daycareRepository.findAll() } returns listOf(Daycare(id, name))
+        every { daycareRepository.findAll() } returns Flux.just(Daycare(id, name))
 
         this.webTestClient.mutateWith(csrf())
                 .mutateWith(mockUser("spring"))

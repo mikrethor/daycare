@@ -1,16 +1,17 @@
 package com.ablx.daycare.backend.repository
 
 import com.ablx.daycare.backend.entity.Child
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
+import org.springframework.data.mongodb.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import reactor.core.publisher.Flux
 import java.util.*
 
-internal interface ChildRepository : JpaRepository<Child, UUID> {
+internal interface ChildRepository : ReactiveCrudRepository<Child, UUID> {
 
-    @Query("select c from Child c where c.daycare.id=:idDaycare")
-    fun findAllByDaycare(@Param("idDaycare") id: UUID): MutableList<Child>
+    @Query("{'daycare_id' : ?0 }")
+    fun findAllByDaycare(@Param("idDaycare") id: UUID): Flux<Child>
 
-    @Query("select c from Child c where c.id=:id and c.daycare.id=:idDaycare")
-    fun findOneByIdByDaycare(@Param("id") id: UUID, @Param("idDaycare") idDaycare: UUID): Child
+    @Query("{'id' : ?0, 'daycare_id' : ?1 }")
+    fun findOneByIdByDaycare(@Param("id") id: UUID, @Param("idDaycare") idDaycare: UUID): Flux<Child>
 }

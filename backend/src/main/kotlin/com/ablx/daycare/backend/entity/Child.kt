@@ -1,23 +1,25 @@
 package com.ablx.daycare.backend.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.DBRef
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
 import java.util.*
-import javax.persistence.*
 
-@Entity
+@Document
 internal data class Child(
         //Primary Key
         @Id var id: UUID = UUID.randomUUID(),
         var firstname: String = "",
         var lastname: String = "",
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name = "daycare")
-        var daycare: Daycare = Daycare(),
+        @Field("daycare_id")
+        var daycareId: UUID,
         @get:JsonIgnore
-        @OneToMany(mappedBy = "child", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+        @DBRef
         var sumups: List<Sumup> = emptyList()
 ) {
     override fun toString(): String {
-        return "Child(id=$id, firstname='$firstname', lastname='$lastname', daycare=$daycare)"
+        return "Child(id=$id, firstname='$firstname', lastname='$lastname')"
     }
 }

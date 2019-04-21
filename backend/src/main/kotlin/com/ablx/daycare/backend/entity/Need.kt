@@ -1,10 +1,10 @@
 package com.ablx.daycare.backend.entity
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
 
-@Entity
+@Document
 internal data class Need(
         @Id var id: UUID = UUID.randomUUID(), //Primary Key
         var code: String = ""

@@ -1,26 +1,16 @@
 package com.ablx.daycare.backend.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
-import javax.persistence.CascadeType
-import javax.persistence.Entity
-import javax.persistence.FetchType
-import javax.persistence.Id
-import javax.persistence.OneToMany
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
-@Entity
+@Document
 internal data class Daycare(
         @Id
         @NotNull @NotEmpty val id: UUID = UUID.randomUUID(),
-        @NotNull @NotEmpty val name: String = "",
-        @get:JsonIgnore
-        @OneToMany(mappedBy = "daycare", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-        var educators: List<Educator> = emptyList(),
-        @get:JsonIgnore
-        @OneToMany(mappedBy = "daycare", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-        var children: List<Child> = emptyList()
+        @NotNull @NotEmpty val name: String = ""
 ) {
 
     override fun toString(): String {

@@ -4,6 +4,7 @@ import com.ablx.daycare.backend.entity.Child
 import com.ablx.daycare.backend.repository.ChildRepository
 import com.ablx.daycare.backend.repository.DaycareRepository
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Mono
 import java.util.*
 
 
@@ -12,7 +13,7 @@ internal class ChildController(val childrenRepository: ChildRepository, val dayc
 
     @GetMapping("/children/{id}")
     fun findById(@PathVariable(value = "id") id: UUID) =
-            childrenRepository.getOne(id)
+            childrenRepository.findById(id)
 
     @GetMapping("/children")
     fun findAll() =
@@ -38,9 +39,9 @@ internal class ChildController(val childrenRepository: ChildRepository, val dayc
     }
 
     @PostMapping("/daycares/{idDaycare}/childs")
-    fun create(@PathVariable(value = "idDaycare") idDaycare: UUID, @RequestBody child: Child): Child {
+    fun create(@PathVariable(value = "idDaycare") idDaycare: UUID, @RequestBody child: Child): Mono<Child> {
 
-        child.daycare = daycareRepository.getOne(idDaycare)
+        child.daycareId = idDaycare
 
         return childrenRepository.save(child)
     }
