@@ -13,19 +13,15 @@ import java.util.*
 @ExtendWith(SpringExtension::class)
 @DataMongoTest
 class SumupRepositoryTest internal constructor(@Autowired
-                                               val sumupRepository: SumupRepository,
-                                               @Autowired
-                                               val childRepository: ChildRepository) {
+                                               private val sumupRepository: SumupRepository) {
     @Test
     fun findOne() {
-        val sumup = sumupRepository.findById(UUID.fromString("89033907-13b0-46b9-8f5d-67e6e7b1facd"))
 
-
-        StepVerifier.create(sumup)
-                .assertNext { s ->
+        StepVerifier.create(sumupRepository.findById(UUID.fromString("89033907-13b0-46b9-8f5d-67e6e7b1facd")))
+                .assertNext { sumup ->
                     run {
 
-                        Assertions.assertThat("comment 1 a").isEqualTo(s.comment)
+                        Assertions.assertThat("comment 1 a").isEqualTo(sumup.comment)
                     }
                 }
                 .expectComplete()
@@ -34,59 +30,57 @@ class SumupRepositoryTest internal constructor(@Autowired
 
     @Test
     fun findAllByOrderByDayDesc() {
-        val sumups = sumupRepository.findAllByChildIdOrderByDayDesc(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735aaa"))
 
-
-        StepVerifier.create(sumups)
+        StepVerifier.create(sumupRepository.findAllByChildIdOrderByDayDesc(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735aaa")))
                 .expectNextCount(10)
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 1 a", s.comment)
+                        assertEquals("comment 1 a", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { sumup ->
                     run {
-                        assertEquals("comment 2", s.comment)
+                        assertEquals("comment 2", sumup.comment)
                     }
                 }
                 .expectComplete()

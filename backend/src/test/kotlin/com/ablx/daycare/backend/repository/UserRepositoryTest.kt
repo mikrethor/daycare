@@ -15,6 +15,7 @@ import java.util.*
 @DataMongoTest
 class UserRepositoryTest internal constructor(@Autowired
                                               private val userRepository: UserRepository) {
+   // https://www.baeldung.com/spring-boot-embedded-mongodb
     @Test
     fun findOne() {
         val user = userRepository.findById(UUID.fromString("f13be1c0-9027-421f-8cf3-c3fdfa735a2a"))
@@ -42,14 +43,14 @@ class UserRepositoryTest internal constructor(@Autowired
                         assertEquals("johndoe@daycare.com", u.username)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { u ->
                     run {
-                        assertEquals("admin@daycare.com", s.username)
+                        assertEquals("admin@daycare.com", u.username)
                     }
                 }
-                .assertNext { s ->
+                .assertNext { u ->
                     run {
-                        assertEquals("parent@daycare.com", s.username)
+                        assertEquals("parent@daycare.com", u.username)
                     }
                 }
                 .expectComplete()
